@@ -1,4 +1,6 @@
 = Exercise 1
+:icons: font
+:source-highlighter: rouge
 
 In this exercise, we will be:
 
@@ -51,9 +53,44 @@ Toolbox, you will want to use the Docker Quickstart Terminal.
 
 [source, console]
 ----
-PS C:\Users\rxt1077> git clone https://github.com/rxt1077/IS601 <1>
+PS C:\Users\rxt1077> git clone https://github.com/rxt1077/IS601.git <1>
+Cloning into 'IS601'...
+remote: Enumerating objects: 43, done.
+remote: Counting objects: 100% (43/43), done.
+remote: Compressing objects: 100% (35/35), done.
+remote: Total 43 (delta 4), reused 43 (delta 4), pack-reused 0
+Unpacking objects: 100% (43/43), done.
 ----
 <1> Make sure you are in a directory that you have write permissions for. In
 Windows you can `cd C:\Users\<Username>` (where <Username> is your user name),
 in MacOS you should start in your home directory, but you can run `cd` just to
 be sure. `cd` with no directory defaults to home in MacOS / Linux.
+
+== Launching Django
+
+[source, console]
+----
+PS C:\Users\rxt1077> cd IS601/django-base
+PS C:\Users\rxt1077\IS601\django-base> docker-compose up
+Recreating django-base_web_1 ... done
+Attaching to django-base_web_1
+web_1  | Watching for file changes with StatReloader
+web_1  | Performing system checks...
+web_1  |
+web_1  | System check identified no issues (0 silenced).
+web_1  |
+web_1  | You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+web_1  | Run 'python manage.py migrate' to apply them.
+web_1  | May 20, 2020 - 17:30:47
+web_1  | Django version 3.0.6, using settings 'IS601.settings'
+web_1  | Starting development server at http://0.0.0.0:8000/
+web_1  | Quit the server with CONTROL-C.
+----
+
+Now visit http://localhost:8000 in a web browser and you should see a message
+stating, "The install worked successfully! Congratulations!" Take a screen shot
+and submit that as your work for this exercise.
+
+To shut everything down type `Ctrl+C` (hold Control and press C at the same
+time) in your terminal window. This will shutdown Docker Compose and stop
+serving the page.

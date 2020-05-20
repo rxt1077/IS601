@@ -24,7 +24,7 @@ task :slides => [:dirs] do
       to_dir: "#{outputdir}",
       backend: 'revealjs',
       safe: :unsafe,
-      attributes: "revealjs_theme=#{revealjs_theme} imagesdir=#{imagesdir}",
+      attributes: "revealjs_theme=#{revealjs_theme} imagesdir=#{imagesdir} source-highlighter=rouge",
     )
   end
 end
