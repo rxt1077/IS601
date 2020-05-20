@@ -1,0 +1,45 @@
+= Project Introduction
+
+== Goals
+
+image::laptop-coding.jpg[background]
+
+The project is designed to give you an as close to real-world experience as
+possible. You will be making a custom web application to meet a business need.
+It is highly recommended that you either pick something that would be useful
+at you current job or pick something that you are interested in. This will help
+you maintain focus and make sure that you have the domain specific knowledge
+needed.
+
+== Example 1
+
+I will design a web application for approving and keeping track of field trips.
+Educators will have a view where they can submit a field trip, administrators
+will have a view where they can approve field trips, and there will be a public
+view that shows what field trips are coming up and where they are going.
+
+== Example 2
+
+I will design a web application for keeping track of student discipline
+referrals. It will have a teacher view for submitting the referral, it will
+have a disciplinarian view for viewing the referral and adding a disposition,
+and it will have a report generator for creating monthly discipline reports for
+school board meetings.
+
+== Project Proposal
+
+* An agreement as to the requirements of the project
+* Once you have submitted an idea, it will be reviewed and deliverables will be
+  assigned.
+* Your initial proposal may be walked-back if it is too ambitious for the time
+  frame or deliverables may be added if it is too basic.
+* The proposal itself is ungraded.
+
+== Timeline
+
+* Your project is due on the day of the final
+* _Do not_ fall behind!
+* We will be covering the topics needed to complete your project and the topics
+  we cover may shift depending on peoples' Project Proposals.
+* I will try to take class time to periodically check in, but feel free to
+  bring it up in class or reach out during office hours.

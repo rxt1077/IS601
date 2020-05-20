@@ -1,0 +1,203 @@
+= Tools Used in Modern Web Development
+
+== Text Editor Requirements
+
+* Translate tab keystrokes into spaces.
+* Adjust tab spacing.
+* Increase/decrease the indentation level of a block
+* Cut/Copy/Paste
+* Convert between DOS/UNIX line endings.
+** *UNIX: lines end with '\n'*
+** DOS: lines end with '\r\n'
+
+=== link:https://www.vim.org/download.php[vim]/link:https://neovim.io/[neovim]/link:http://ex-vi.sourceforge.net/[vi]
+
+* vi is almost always installed on any *NIX/BSD system.
+* You can also find versions for Windows.
+* It runs in the terminal
+* https://twitter.com/iamdevloper/status/435555976687923200[
+The learning curve is steep].
+
+=== https://code.visualstudio.com/[Visual Studio Code]
+
+* vscode is more akin to a modern IDE
+* rapidly gaining more adoption and is certainly worth checking out
+
+=== https://notepad-plus-plus.org/downloads/[Notepad{plus}{plus}]
+
+* popular Windows GUI text editor
+* starts quickly, and many things work right out of the box.
+* if you want something like notepad, but a little more versatile, then this is
+  for you.
+
+=== https://macromates.com/[TextMate]
+
+* popular MacOS GUI text editor
+* simple to get started, but offers the advanced features you may need as you
+  progress.
+
+== Version Control
+
+* Version control tracks changes to a group of files.
+* Teams can use version control to cooperatively change a group of files and
+  revert to a previous state if needed.
+
+=== Version Control: Example 1
+
+You are working on a project for your CS101 class and you need to write a
+Python program that plays tic-tac-toe. It must support player-vs-computer
+_and_ player-vs-player. It's due in two days. On the first day you write the
+initial code and implement player-vs-player. It works great and you fall asleep
+knowing tomorrow you will finish it and turn it in on time. The next morning
+you update it to support player-vs-computer and _everything_ stops working.
+What do you do now? 
+
+=== Version Control: Example 2
+
+You are working working with a team of people to implement a complex system
+that utilizes several files in several different directories. How do you make
+sure everyone has the most up-to-date version of the files? What happens if two
+people work on the same file at the same time?
+
+[.columns]
+=== git
+
+.*Windows*
+[.column]
+* https://gitforwindows.org/[git for windows]: Installs git, git BASH, and a
+GUI. The git command can then be run from PowerShell, CMD, or the BASH shell
+(which it installs).
+
+.*Mac*
+[.column]
+* https://sourceforge.net/projects/git-osx-installer/files/[git for Mac Installer]:
+  Provides an easy installer for git on MacOS. 
+* https://developer.apple.com/xcode/[Xcode]: Xcode installs a command line git
+  and you may have it installed already. 
+
+== https://www.djangoproject.com/[Django]
+
+* The most popular modern web framework
+* Uses Python
+* Combines front end and back end development to meet the needs of most
+  moderately sized web applications
+* Includes a bunch of things designed to make your life easier
+
+=== https://djangobook.com/mdj2-django-admin/[Django Features: Built-in Admin Inteface]
+
+* Databases need to be populated with data
+* User information needs to be stored and edited
+* These types of interfaces are usually only used by one or two people and
+  are typically the developers last thought
+* Django ships with a default one that works pretty well
+
+[.columns]
+=== https://www.geeksforgeeks.org/for-loop-django-template-tags/[Django Features: Templates]
+
+[.column]
+[source, html]
+----
+<ul>
+    <li>Michael Jordon</li>
+    <li>Larry Bird</li>
+    <li>Magic Johnson</li>
+    <li>Charles Barkley</li>
+    <li>LeBron James</li>
+    <li>Shaquille O&#39;Neal</li>
+</ul>
+----
+
+[.column]
+[source, html]
+----
+<ul> 
+{% for athlete in athlete_list %} 
+    <li>{{ athlete.name }}</li> 
+{% endfor %} 
+</ul> 
+----
+
+=== https://tutorial.djangogirls.org/en/django_orm/[Django Features: ORM]
+
+* Translating from database responses to useful objects is sometimes an odious
+  task
+* Object Relational Mappings (ORM) do this automatically
+* You still need to know how to formulate queries and make a database
+* You can still see the SQL behind it all
+
+== Docker
+
+image::docker.png[width=25%]
+
+* Web servers usually run Linux
+* Web frameworks are usually made for Linux
+* https://hostingtribunal.com/blog/operating-systems-market-share/[Linux is used
+  on 1.63% of Desktops]
+* How do we create a Linux environment on our desktop? Containers.
+
+=== What is a Container? (Briefly)
+
+[plantuml, container]
+....
+@startuml
+rectangle host [
+    <b>Host OS
+    ---
+    Windows
+    MacOS
+]
+rectangle vm [
+    <b>Virtual Machine Running Linux
+    ---
+    Hyper-V
+    VirtualBox
+    HyperKit
+]
+rectangle docker as "Docker"
+rectangle container1 as "Container 1"
+rectangle container2 as "Container 2"
+rectangle container3 as "Container 3"
+
+host --> vm
+vm --> docker
+docker --> container1
+docker --> container2
+docker --> container3
+@enduml
+....
+
+[.columns]
+=== Docker Options
+
+.*Docker Toolbox*
+[.column]
+* legacy solution
+* uses VirtualBox
+* comes with its own terminal: Docker Quickstart Terminal
+* runs on everything
+
+.*Docker Desktop*
+[.column]
+* modern solution
+* uses native virtualization
+* uses native terminal: PowerShell or Terminal
+* runs on most modern OS
+
+=== Common Docker Problems
+Windows Home doesn't have HyperV by default::
+    https://ist.njit.edu/software-available-download/#w[Upgrade to Windows 10
+    Education]
+VT-x isn't enabled or BIOS support isn't enabled::
+    Boot into the BIOS and enable VT-x (usually under virtualization)
+It says I don't have privileges::
+    Run as admin
+
+=== Common Docker Problems
+Where is Docker?::
+    The docker command should be run from a terminal
+It worked yesterday, but now my containers aren't behaving::
+    Restart Docker (typically from the task bar)
+
+== Putting it all together
+
+Let's try Exercise 1!

@@ -1,0 +1,54 @@
+= Course Introduction
+
+== Course Information
+
+[horizontal]
+Instructor:: Ryan Tolboom
+Meeting Dates:: Wednesday 5:45PM - 9:30PM
+Office Hours:: Friday 5:00PM - 7:00PM
+
+== What is a web system?
+
+.A Basic Web System Architecture
+[plantuml, web-system, svg, width=75%]
+....
+@startuml
+
+actor User
+rectangle frontend as "Front End" {
+    node server as "Web Server"
+}
+rectangle backend as "Back End" {
+    database db as "Database"
+}
+User <-> server : HTTP
+server <-> db : SQL
+
+@enduml
+....
+
+== Why are they so popular?
+
+* It is significantly easier to ask someone to go to a website instead of
+  installing an application.
+* It is easier to update a web application.
+* Web applications lend themselves readily to Software as a Service (SaaS)
+* Web applications can do _almost_ anything; modern web browsers are more
+  complex than modern operating systems.
+
+[.columns]
+== What will we be learning?
+
+[.column]
+image::django.svg[]
+
+[.column]
+* How to design views for users and present them as HTML
+* How to design models for our data and store them in a database
+* How to accept user input from forms and act on it
+
+== How does this apply to Data Science?
+
+* Web systems store a lot of data that can be mined but often isn't
+* Web systems are a great way to collect data
+* Web systems are a great way to present data
