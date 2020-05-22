@@ -1,0 +1,30 @@
+require 'asciidoctor'
+require 'asciidoctor-diagram'
+
+outputdir = '../output/exercises'
+imagesdir = 'images'
+
+desc 'Cleans and sets up output directory'
+task :dirs do
+  rm_rf outputdir
+  mkdir_p outputdir
+  cp_r imagesdir, outputdir
+end
+
+desc 'Converts all adoc files into a HTML5 files'
+task :exercises => [:dirs] do
+  files = FileList['*.adoc']
+  files.each do |file|
+    puts "Converting #{file}..."
+    Asciidoctor.convert_file(
+      file,
+      to_dir: "#{outputdir}",
+      backend: 'html5',
+      safe: :unsafe,
+      attributes: "imagesdir=#{imagesdir} icons=font source-highlighter=rouge",
+    )
+  end
+end
+
+desc 'Builds all exercises'
+task :default => [:exercises]
