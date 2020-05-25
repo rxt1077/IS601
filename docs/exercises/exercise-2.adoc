@@ -1,0 +1,128 @@
+= Exercise 2
+
+In this exercise you will be:
+
+. Creating a new app named `example`
+. Creating a function named `index` in `example/views.py`
+. Creating the file `example/urls.py` to route URLs for your new app
+. Editing the file `IS601/urls.py` to include the URLs from `example/urls.py`
+. Testing your view and creating a screen shot
+
+== Creating a New App
+
+From within your `django-base` directory, run the following commands:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example <1>
+PS C:\Users\rxt1077\IS601\django-base> ls <2>
+
+
+    Directory: C:\Users\rxt1077\IS601\django-base
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        5/24/2020   1:01 PM                example <3>
+d-----        5/20/2020  12:49 PM                IS601
+-a----        5/22/2020  10:33 AM         131072 db.sqlite3
+-a----        5/20/2020  12:47 PM            197 docker-compose.yml
+-a----        5/20/2020  12:25 PM            153 Dockerfile
+-a----        5/20/2020  12:36 PM            625 manage.py
+-a----        5/20/2020  12:28 PM             15 requirements.txt
+
+----
+<1> Here is what each part of this command means:
+* `docker-compose run web` - run the following command on the web container
+* `python manage.py` - use Python (on the container) to execute the manage.py
+  script
+* `startapp example` - use the `startapp` command from `manage.py` to make a
+  new app named `example`
+<2> If the command succeeds, there is no output. We use `ls` to _list_ the files
+so we can see if our `example` directory was created.
+<3> The directory was created, so it worked.
+
+WARNING: If you are using the Docker Quickstart Terminal (part of Docker
+Toolbox) your output may look slightly different from mine. You should still be
+able to see the outcome despite minor formating differences and the effect will
+be the same.
+
+== Creating a New View
+
+=== Creating a View Function
+
+Edit `django-base/example/views.py` to look like the following:
+
+.django-base/example/views.py
+[source, python]
+----
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world!")
+----
+
+NOTE: You will need to know where you cloned the class git repository in order
+to load this file in your text editor. For most Windows users it should be
+`C:\Users\<username>\IS601` (where <username> is your user name) for most Mac
+users it should be `IS601` in your home directory.
+
+NOTE: View functions don't have to be named `index`. They can be named anything
+that helps you keep track of what they are doing.
+
+=== Routing URLs
+
+Create / edit the following files:
+
+.django-base/example/urls.py
+[source, python]
+----
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+----
+
+.django-base/IS601/urls.py
+[source, python]
+----
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('example/', include('example.urls')),
+    path('admin/', admin.site.urls),
+]
+----
+
+NOTE: You can keep the comments at the top of `django-base/IS601/urls.py` if you
+like. They provide basic directions for how to add a URL
+
+== Testing Your View
+
+Lets bring the development server up so we can see if it works. From within the
+`django-base` directory run the following:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose up
+Starting django-base_web_1 ... done
+Attaching to django-base_web_1
+web_1  | Watching for file changes with StatReloader
+web_1  | Performing system checks...
+web_1  |
+web_1  | System check identified no issues (0 silenced).
+web_1  | May 24, 2020 - 17:30:59
+web_1  | Django version 3.0.6, using settings 'IS601.settings'
+web_1  | Starting development server at http://0.0.0.0:8000/
+web_1  | Quit the server with CONTROL-C.
+----
+
+Assuming everything started, leave the development server running and visit
+http://localhost:8000/example (or if you are running Docker Toolbox:
+http://<docker-ip>:8000/example where <docker-ip> is your Docker IP address).
+You should see the text "Hello, world!". Take a screen shot and submit that for
+your assignment. You can stop the development server by typing Ctrl+C.

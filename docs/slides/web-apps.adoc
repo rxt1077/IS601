@@ -1,0 +1,265 @@
+= Web Applications
+
+== What does a web app do?
+
+[plantuml, web-app, svg, width=85%]
+....
+@startuml
+actor user as "User"
+node webserver [
+  <b>Web Server
+  ====
+  Listens on port 80 (8000 in our case)
+  Serves static pages OR uses an
+  application to serve dynamic content
+]
+node php #gray [
+  <b>PHP
+  ====
+  A php application and returns the
+  result as HTML
+]
+node django [
+  <b>Django
+  ====
+  A Python application running Django
+  returns the result as HTML
+]
+node db [
+  <b>Relational Database Management System
+  ====
+  Get queries / inserts and return results
+]
+
+user -> webserver : HTTP
+webserver --> php : mod_php
+webserver --> django : WSGI
+php --> db : SQL
+django --> db : SQL
+@enduml
+....
+
+=== HTTP
+
+* Hypertext transfer protocol
+* Developed at the same time as HTML, FTP, and SMTP
+* HTTP is broken into _requests_ and _responses_
+* URL - uniform resource locator: https://web.njit.edu/~rxt1077/web_systems/slides/course-intro.html
+
+=== Requests have a _method_ that describes an _action_
+
+* GET: gets a resource, can use query parameters ie. "GET /users?id=10"
+* POST: submits parameters to a resource, usually from a form
+
+[.columns]
+=== Responses have a _status code_ and a _status message_
+
+[.column]
+* 100-199: Information
+* 200-299: Successful
+* 300-399: Redirect
+
+[.column]
+* 400-499: Client error (https://www.ietf.org/rfc/rfc2324.txt[418 I'm a teapot])
+* 500-599: Server error
+
+=== Headers
+
+* Headers are included with requests and responses
+* They are used to provide additional information.
+* They are also used to store snippets of information on the client: cookies.
+* Cookies can be used to keep track of state since HTTP itself is stateless.
+
+=== Example Request
+
+[source, plaintext]
+----
+GET /~rxt1077/web_systems/slides/course-intro.html HTTP/1.1 <1>
+Host: web.njit.edu <2>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+DNT: 1
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+----
+<1> GET request using HTTP/1.1
+<2> From here down are HTTP headers
+
+=== Example Response
+
+[source, http]
+----
+HTTP/1.1 200 OK <1>
+Date: Sat, 23 May 2020 18:26:27 GMT <2>
+Server: Apache/2.4.39 (Unix) OpenSSL/1.0.1e-fips PHP/5.6.40 mod_jk/1.2.41
+Last-Modified: Wed, 20 May 2020 18:08:35 GMT
+ETag: "48bd-5a61848d68ec0"
+Accept-Ranges: bytes
+Content-Length: 18621
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+<3>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">... <4>
+----
+<1> Status code 200
+<2> Headers from here until the blank line
+<3> A blank line marks the end of headers and start of content
+<4> Content
+
+=== Additional Resources
+
+* https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview[HTTP]
+* https://www.w3schools.com/sql[SQL]
+
+== What does Django do?
+
+[plantuml, django-sequence, svg]
+....
+@startuml
+actor User
+User -> "Web Server": GET /users HTTP/1.1
+box "Django"
+"Web Server" -> "WSGI": GET /users
+"WSGI" -> "URL Dispatcher": GET /users
+"URL Dispatcher" -> "Views": Python function:\nget_all_users()
+"Views" -> "ORM": Python method:\nUsers.objects.all()
+endbox
+database Database
+"ORM" -> "Database": SQL:\nSELECT * FROM users;
+"ORM" <-- "Database": result rows
+"Views" <-- "ORM": results as objects
+"WSGI" <-- "Views": HTML user list
+"Web Server" <-- "WSGI": HTML user list
+"User" <-- "Web Server": HTTP/1.1 200 OK\nHTML user list
+@enduml
+....
+
+=== Django Organization 
+
+[plantuml, django-org, svg, width=100%]
+....
+@startuml
+rectangle project as "Project: Bakery Website" {
+  rectangle app1 as "App: Point of Sale" {
+    rectangle views1 [
+      <b>Views
+      ===
+      Place Order
+      ---
+      Order Status
+      ---
+      Shift Change
+      ---
+      . . .
+    ]
+  }
+  rectangle app2 as "App: Management Portal" {
+    rectangle views2 [
+      <b>Views
+      ===
+      Monthly Order Report
+      ---
+      Monthly Expense Report
+      ---
+      Employee Management
+      ---
+      . . .
+    ]
+  }
+  rectangle app3 as "App: Baker's Interface" {
+    rectangle views3 [
+      <b>Views
+      ---
+      Pending Orders
+      ---
+      Shift Change
+      ---
+      Inventory Management
+      ---
+      . . .
+    ]
+  }
+}
+@enduml
+....
+
+=== How do you create a project?
+
+--
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web django-admin startproject IS601
+----
+
+WARNING: This was already done for you. We have a project named `IS601` in the
+`django-base` directory.
+--
+
+=== How do you create an app?
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example
+----
+
+[.shrink]
+`docker-compose run web`:: run this on the web container
+`python manage.py`:: run the manage.py script in Python
+`startapp example`:: run the `startapp` Django command which takes your app's
+  name as an argument (ours is `example`)
+
+=== How do you create a view?
+
+Part 1: Creating the view function
+
+.example/views.py
+[source, python]
+----
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world!")
+----
+
+=== How do you create a view?
+
+Part 2: Routing the URL within `example`
+
+.example/urls.py
+[source, python]
+----
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+----
+
+=== How do you create view?
+
+Part 3: Routing the URL from the project
+
+.IS601/urls.py
+[source, python]
+----
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('example/', include('example.urls')),
+    path('admin/', admin.site.urls), <1>
+]
+----
+<1> more on this later!
+
+=== Additional Resources
+
+* https://docs.djangoproject.com/en/3.0/intro/tutorial01/[Writing your first Django app, part 1]
+* https://docs.djangoproject.com/en/3.0/topics/http/urls/[Django URL dispatcher]
+
+== Now let's try Exercise 2!

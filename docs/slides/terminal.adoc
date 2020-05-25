@@ -1,0 +1,53 @@
+= Terminal Tips and Tricks
+
+image::https://upload.wikimedia.org/wikipedia/commons/9/99/DEC_VT100_terminal.jpg[link=https://en.wikipedia.org/wiki/VT100, width=33%]
+
+== Terminal Environments
+
+* MacOS Terminal (Command+Space Terminal)
+* Windows PowerShell (WindowsKey, then type "powershell")
+* Docker Quickstart Terminal (WindowsKey, then type "quickstart")
+
+[.columns]
+== Common Commands / Options
+
+[.column]
+[horizontal]
+cd:: change directory
+pwd:: print working directory
+ls:: list files
+<up>:: previous command
+
+[.column]
+[horizontal]
+<tab>:: complete a command
+.:: the current directory
+..:: the parent directory
+
+== PowerShell
+
+image:https://upload.wikimedia.org/wikipedia/commons/2/2f/PowerShell_5.0_icon.png[width=10%]
+
+* Has aliases for most BASH (Linux) commands
+* Needs to be run as admin to use some Hyper-V things
+* Both slashes are supported, but it prefers DOS style: C:\Users\rxt1077
+* Prompt starts with 'PS' and ends with '>'
+
+== Docker Quickstart Terminal
+
+image::docker-quickstart.png[width=10%]
+
+* Uses BASH (like Linux)
+* Uses the backslash: `/c/Users/rxt1077`
+* Mounts the `C:\` in `/c`
+* Prompt ends with `$`, `user@host MINGW64 <current directory>` is on line above
+* `~` refers to your home directory
+
+== MacOS Terminal
+
+image::https://upload.wikimedia.org/wikipedia/commons/b/b3/Terminalicon2.png[width=10%]
+
+* Uses BASH (like Linux)
+* Uses the backslash: `/Users/rxt1077`
+* `~` refers to your home directory
+* can use `sudo` to execute as root

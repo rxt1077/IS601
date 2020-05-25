@@ -30,7 +30,8 @@ task :slides => [:slidesdirs] do
                   "revealjs_theme=#{revealjs_theme} " +
                   "imagesdir=#{imagesdir} " +
                   "source-highlighter=rouge " +
-                  "customcss=#{revealjs_customcss}",
+                  "customcss=#{revealjs_customcss} " +
+                  "icons=font",
     )
   end
 end
