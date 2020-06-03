@@ -1,0 +1,47 @@
+= The Django Admin Interface
+
+== Why use an admin site?
+
+* During the development process you will be testing things out and rapidly
+  adding / removing things from the database
+* Very few people like doing this from the command line
+* https://www.phpmyadmin.net/[phpmyadmin] / https://www.adminer.org/[Adminer]:
+  common solutions to this problem, but they require separate installation and
+  aren't tightly coupled to the web framework
+* With a admin site native to the web framework, a lot more can be done in a
+  user-friendly way
+
+== Create an Admin User
+
+* The `docker-compose run web python manage.py createsuperuser` command will
+  prompt you for a username, email, and password.
+* The `changepassword` command will let you change it. For our purposes the
+  password does not have to be something super intricate as these sites won't
+  be making it off our machines.
+
+== Add an App
+
+The Django admin interface needs to be turned on for each model you want it to
+manage. These settings are in the `admin.py` file in the app directory.
+
+.example/admin.py
+[source, python]
+----
+from django.contrib import admin
+
+from .models import BakedGood
+
+admin.site.register(BakedGood)
+----
+
+== Testing it Out
+
+* Now we can run the development server `docker-compose up`
+* If you visit http://localhost:8000/admin/ you should see the admin interface
+  as long as the development server is running.
+
+== Resources
+
+* https://docs.djangoproject.com/en/3.0/intro/tutorial02/[Writing your first Django app, part 2]
+* https://docs.djangoproject.com/en/3.0/ref/django-admin/[django-admin and manage.py]
+* https://docs.djangoproject.com/en/3.0/ref/contrib/admin/[The Django admin site]

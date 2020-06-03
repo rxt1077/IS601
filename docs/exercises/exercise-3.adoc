@@ -1,0 +1,92 @@
+= Exercise 3
+
+In this exercise we will be:
+
+. Adding a new model to our app
+. Adding our app to INSTALLED_APPS
+. Creating a new superuser
+. Adding our model to the list of models managed by the admin interface
+. Adding information to the database with the admin interface
+
+== Adding a New Model
+
+Model information is stored in the app directory change
+`IS601/django-base/example/models.py` to look like the following:
+
+.example/models.py
+[source, python]
+----
+from django.db import models
+
+class BakedGood(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+    good_type = models.TextChoices('type', 'BAGEL BREAD COOKIE CAKE PRETZEL') 
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    recipe = models.TextField()
+----
+
+== Add our App to INSTALLED_APPS
+
+Migrations will only be created for apps in the INSTALLED_APPS list. Add our
+example app to the list in `IS601/django-base/IS601/settings.py`:
+
+.IS601/settings.py (excerpted)
+[source, python]
+----
+...
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'example.apps.ExampleConfig',
+]
+...
+----
+
+== Creating a New Superuser
+
+From within the IS601/django-base directory, run the following command:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: example@example.com
+Password:
+Password (again):
+The password is too similar to the username.
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+----
+
+NOTE: Feel free to make the user name/email/password anything you can remember.
+You may be prompted to bypass the in-built security checks, as seen above, if it
+is too simple.
+
+== Add a Model to the Admin Interface
+
+Change the IS601/django-base/example/admin.py file to look like the following:
+
+.example/admin.py
+[source, python]
+----
+from django.contrib import admin
+
+from .models import BakedGood
+
+admin.site.register(BakedGood)
+----
+
+== Adding Information to the Database
+
+Now you should be able to run `docker-compose up` in the `IS601/django-base`
+directory and open http://localhost:8000/admin in a web browser. Sign in with
+the user name/password you created and take a moment to explore the interface.
+Add three BakedGoods to the database (choose whatever options you like) and
+then take a screen shot showing that there are three items in the table.

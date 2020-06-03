@@ -6,7 +6,7 @@
 
 /* Shrink callout text */
 .reveal .colist td {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 /* Shrink admonitions and give them a border */
@@ -31,4 +31,10 @@
 /* Horizontal description lists should have the term centered */
 .reveal td.hdlist1 {
     vertical-align: middle;
+}
+
+/* Block titles need to be smaller than h2s and red to stand out */
+.reveal div.title {
+    font-size:1.5rem;
+    color: #d14;
 }

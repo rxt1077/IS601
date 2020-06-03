@@ -1,0 +1,133 @@
+= Migrations
+
+== What are migrations?
+
+[plantuml, migration, svg]
+....
+@startuml
+database db1 as "Database v1" {
+  rectangle table1 [
+    <b>example_bakedgood
+    ===
+    id: integer
+    ---
+    name: varchar(32)
+    ---
+    price: decimal
+  ]
+}
+
+actor dev as "Developer"
+node python as "Python Script"
+node sql as "SQL Script"
+
+database db2 as "Database v2" {
+  rectangle table2 [
+    <b>example_bakedgood
+    ===
+    id: integer
+    ---
+    name: varchar(64)
+    ---
+    desc: varchar(256)
+    ---
+    price: decimal
+    ---
+    recipe: text
+  ]
+}
+
+table1 --> dev
+table1 --> python
+table1 --> sql
+dev --> table2
+python --> table2
+sql --> table2
+@enduml
+....
+
+== Why use migrations?
+
+[shrink]
+* Maintaining a relational database while developing can be a pain
+* What happens if you want to add a column?
+* What happens if you want to change a name?
+* You can write your own migrations in SQL, but it's prone to errors, tough to
+  reverse and people often forget what they did.
+* You also have the option to rebuild the DB each time (which may not be a bad
+  idea).
+
+[.columns]
+== Activating Apps
+
+[.column.is-one-third]
+[.shrink]
+* Django will _not_ make migrations for apps it doesn't know about
+* You need to edit project settings
+
+[.column]
+--
+.IS601/settings.py (excerpted)
+[source, python]
+----
+...
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'example.apps.ExampleConfig',<1>
+]
+...
+----
+<1> Django will automatically make a config object for your app using this
+https://kite.com/python/docs/string.capwords[CapWords] convention.
+--
+
+=== Warning!
+
+WARNING: Not adding your app is a _very_ common mistake with non-obvious
+results.
+
+== Make Migrations
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py makemigrations
+Migrations for 'example':
+  example/migrations/0001_initial.py
+    - Create model BakedGood
+----
+
+== SQL Migrate
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py sqlmigrate example 0001
+BEGIN; <1>
+--
+-- Create model BakedGood
+--
+CREATE TABLE "example_bakedgood" (
+    "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" varchar(64) NOT NULL,
+    "desc" varchar(256) NOT NULL,
+    "price" decimal NOT NULL,
+    "recipe" text NOT NULL);
+COMMIT;
+----
+<1> formatted for readability
+
+== Putting it all together: migrate
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, example, sessions <1>
+Running migrations:
+  Applying example.0001_initial... OK
+----
+<1> Notice there is a lot more here than just our app.

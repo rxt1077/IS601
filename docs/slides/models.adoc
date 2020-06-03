@@ -1,0 +1,86 @@
+= Models
+
+== What is a model?
+
+[quote, Django Documentation]
+A model is the single, definitive source of information about your data. It
+contains the essential fields and behaviors of the data you're storing.
+Generally, each model maps to a single database table.
+
+== Why use models?
+
+Django handles the heavy lifting.
+
+[.horizontal]
+migrations:: What if you want to change your database?
+object mapping:: You can access database rows as Python objects
+queries:: What if we want to programatically perform a query?
+
+=== Programmatic Access
+
+.Make Three Groups of Deliveries to Ship Today
+[source, python]
+----
+truck_a = []
+truck_b = []
+truck_c = []
+
+truck_a_capacity = 100
+truck_b_capacity = 50
+truck_c capacity = 25
+
+for delivery in Deliveries(due=datetime.date.today()):
+    if delivery.zone == "A":
+        if truck_a.len() < truck_a_capacity:
+            truck_a.append(delivery)
+        elif truck_b.len() < truck_b_capacity:
+            truck_b.append(delivery)
+        elif truck_c.len() < truck_c_capacity:
+            truck_c.append(delivery)
+        else
+            print(f"Can't fit {delivery} on a truck!")
+    elif delivery.zone == "B":
+        if truck_b.len() < truck_b_capacity:
+...
+----
+
+[.columns]
+== Common Types
+
+[.column]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#charfield[CharField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#textfield[TextField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#emailfield[EmailField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#integerfield[IntegerField]
+
+[.column]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#decimalfield[DecimalField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#datefield[DateField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#datetimefield[DateTimeField]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#enumeration-types[TextChoices]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields/#enumeration-types[IntegerChoices]
+
+== Model Example
+
+.example/models.py
+[source, python]
+----
+from django.db import models <1>
+
+class BakedGood(models.Model): <2>
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+    good_type = models.TextChoices('type', 'BAGEL BREAD COOKIE CAKE PRETZEL') 
+    price = models.DecimalField(max_digits=6, decimal_places=2) <3>
+    recipe = models.TextField()
+----
+<1> A single `models.py` file holds multiple models. It is found in the app
+directory.
+<2> A model is just a Python class
+<3> Dream big
+
+== Resources
+
+* https://docs.djangoproject.com/en/3.0/topics/db/models/[Django Documentation on Models]
+* https://docs.djangoproject.com/en/3.0/ref/models/fields[Model field reference]
+* https://docs.djangoproject.com/en/3.0/intro/tutorial02/[Writing your first Django app, part 2]
