@@ -1,0 +1,257 @@
+= Templates
+
+== HTML
+
+[.shrink]
+* HTML5 is supported by all browsers and makes it easier to build dynamic
+  content.
+* A document is made up of elements enclosed in tags.
+* Tags open and close an element: `<div>Example</div>`
+* Elements have attributes that define their id, style, etc.: `<div id=example>Example</div>`
+* Not all tags are closed!
+* Browsers build a Document Object Model (DOM) from HTML
+
+=== Example
+
+[source, html]
+----
+<!doctype html><1>
+
+<html lang="en"><2>
+<head><3>
+    <meta charset="utf-8">
+    <title>Example</title>
+</head>
+<body><4>
+    <p>This is a paragraph.</p><5>
+</body>
+</html>
+----
+<1> Tells the browser what it should expect to read
+<2> Language is not necessary, but can be helpful. From here on we're HTML
+<3> Head can be used for metadata, style sheets, and scripts
+<4> This is the main part of the page
+<5> Content goes here
+
+=== <div> and <span>
+
+[.shrink]
+* Often, things need to be further divided so they can be styled
+* <div> is for block content, things that should be within their own paragraph
+* <span> is for inline content, usually small snippets
+
+[source, html]
+----
+<div>
+    Your total cost is <span>$35.00</span>.
+</div>
+----
+
+=== Links
+
+* The <a> elements stand for anchor, even though nobody calls it that anymore.
+* It _links_ to another location using a URL.
+
+[source, html]
+----
+<a href="templates.html>Templates Presentation</a>
+----
+
+=== Images
+
+[source, html]
+----
+<img src="squirrel.gif">
+----
+
+image::squirrel.gif[]
+
+[.columns]
+=== Unordered Lists
+
+[.column]
+[source, html]
+----
+<ul>
+    <li>item</li>
+    <li>item</li>
+    <li>item</li>
+</ul>
+----
+
+[.column]
+* item 1
+* item 2
+* item 3
+
+[.columns]
+=== Ordered Lists
+
+[.column]
+[source, html]
+----
+<ol>
+    <li>item</li>
+    <li>item</li>
+    <li>item</li>
+</ol>
+----
+
+[.column]
+. item
+. item
+. item
+
+[.columns]
+=== Description List
+
+[.column]
+[source, html]
+----
+<dl>
+    <dt>item 1</dt>
+    <dd>description 1</dd>
+    <dt>item 2</dt>
+    <dd>description 2</dd>
+    <dt>item 3</dt>
+    <dd>description 3</dd>
+</dl>
+----
+
+[.column]
+item 1:: description 1
+item 2:: description 2
+item 3:: description 3
+
+== Context
+
+[plantuml, context, svg, width=80%]
+....
+@startuml
+rectangle python as "Python Environment (variables, etc.)"
+rectangle template as "Template Environment (HTML with programmatic features)"
+rectangle html as "HTML Output"
+
+python --> template: Context passed via render()
+template --> html: Templating Engine (what render() does)
+@enduml
+....
+
+=== Passing Context
+
+[source, python]
+----
+from django.shortcuts import render <1>
+
+from .models import BakedGood
+
+def index(request):
+    baked_goods = BakedGood.objects.all() <2>
+    context = {'baked_goods': baked_goods} <3>
+    return render(request, 'example/index.html', context) <4>
+----
+<1> Very helpful shortcut, don't forget to import it
+<2> We will talk more about queries next class
+<3> The context is a dict (hash, associative array)
+<4> Pass context, specify template, and render all-in-one
+
+== Templating Language
+
+What can you do with Django templates that you can't do with just HTML?
+
+[.shrink]
+BTW, https://jinja.palletsprojects.com/en/2.11.x/[Django's templating language
+can be used outside of Django.]
+
+[.columns]
+=== Template Extending
+
+[.column]
+.example/templates/example/base.html
+[source, jinja]
+----
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+----
+
+[.column]
+.example/templates/example/extend.html
+[source, jinja]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+<p>Welcome to my Awesome Bakery!</p>
+{% endblock %}
+----
+
+=== for
+
+.example/for.html
+[source, jinja]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}For Example{% endblock %}
+
+{% block content %}
+<h2>Menu</h2>
+<ul>
+{% for baked_good in baked_goods %}<1>
+    <li>${{ baked_good.price }} - {{ baked_good.name }}: {{ baked_good.desc }}</li><2>
+{% endfor %}
+</ul>
+{% endblock %}
+----
+<1> Pull out of the `baked_goods` list (passed in context) one-at-a-time and
+assign it to `baked_good` in the loop.
+<2> You can access different parts of `baked_good`
+
+[.shrink]
+Curious about how variables are displayed? Check out
+https://docs.djangoproject.com/en/3.0/ref/templates/language/#filters[filters].
+
+=== if
+
+.example/if.html
+[source, jinja]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}If Example{% endblock %}
+
+{% block content %}
+<h2>Value Menu</h2>
+<ul>
+{% for baked_good in baked_goods %}
+    {% if baked_good.price < 2.00 %} <1>
+        <li>${{ baked_good.price }} - {{ baked_good.name }}: {{ baked_good.desc }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endblock %}
+----
+<1> Is this the best place to do this?
+
+== Resources
+
+* https://www.tutorialrepublic.com/html-tutorial/html-lists.php[HTML Lists]
+* https://docs.djangoproject.com/en/3.0/topics/templates/[Django Templates]
+* https://docs.djangoproject.com/en/3.0/topics/db/queries/#retrieving-all-objects[Making queries: Retrieving all objects]
+* https://docs.djangoproject.com/en/3.0/intro/tutorial03/[Writing your first Django app, part 3]
+* https://tutorial.djangogirls.org/en/template_extending/[Template extending]

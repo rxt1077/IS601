@@ -120,7 +120,7 @@ COMMIT;
 ----
 <1> formatted for readability
 
-== Putting it all together: migrate
+== Applying Migrations
 
 [source, console]
 ----
@@ -131,3 +131,8 @@ Running migrations:
   Applying example.0001_initial... OK
 ----
 <1> Notice there is a lot more here than just our app.
+
+=== Common Usage
+
+Typically you will be running the `makemigrations` command followed by
+`migrate`

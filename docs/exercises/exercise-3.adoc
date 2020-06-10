@@ -4,6 +4,7 @@ In this exercise we will be:
 
 . Adding a new model to our app
 . Adding our app to INSTALLED_APPS
+. Migrating our database
 . Creating a new superuser
 . Adding our model to the list of models managed by the admin interface
 . Adding information to the database with the admin interface
@@ -28,8 +29,11 @@ class BakedGood(models.Model):
 
 == Add our App to INSTALLED_APPS
 
-Migrations will only be created for apps in the INSTALLED_APPS list. Add our
+Migrations will only be created for apps in the INSTALLED_APPS list. _Add_ our
 example app to the list in `IS601/django-base/IS601/settings.py`:
+
+WARNING: Do not edit/delete the entire file, you're changing a _section_ of
+this file as specified below.
 
 .IS601/settings.py (excerpted)
 [source, python]
@@ -47,7 +51,22 @@ INSTALLED_APPS = [
 ...
 ----
 
+== Migrating
+
+Now we need to create a migration and migrate, you can do that with the
+following commands:
+
+[source, console]
+----
+docker-compose run web python manage.py makemigrations
+docker-compose run web python manage.py migrate
+----
+
 == Creating a New Superuser
+
+WARNING: Before you run this, clear make sure you've cleared up any pending
+migrations for your site. You can run
+`docker-compose run web python manage.py migrate` to be sure.
 
 From within the IS601/django-base directory, run the following command:
 
@@ -64,6 +83,9 @@ This password is too common.
 Bypass password validation and create user anyway? [y/N]: y
 Superuser created successfully.
 ----
+
+WARNING: You're characters won't be echoed as you create the password. Don't be
+alarmed, they are still recorded.
 
 NOTE: Feel free to make the user name/email/password anything you can remember.
 You may be prompted to bypass the in-built security checks, as seen above, if it

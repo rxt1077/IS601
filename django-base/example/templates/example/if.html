@@ -1,0 +1,14 @@
+{% extends 'example/base.html' %}
+
+{% block title %}If Example{% endblock %}
+
+{% block content %}
+<h2>Value Menu</h2>
+<ul>
+{% for baked_good in baked_goods %}
+    {% if baked_good.price < 2.00 %}
+        <li>${{ baked_good.price }} - {{ baked_good.name }}: {{ baked_good.desc }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endblock %}
