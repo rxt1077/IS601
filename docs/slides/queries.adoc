@@ -1,0 +1,145 @@
+= Queries in Django
+
+== Retrieving objects
+
+[.shrink]
+* every model has a `Manager` available via the objects attribute
+* a `Manager` can be used to construct a `QuerySet`
+* a `Queryset` is _lazy_
+
+[source, python]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py shell <1>
+Python 3.8.3 (default, Jun  9 2020, 17:39:39)
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from example.models import BakedGood
+>>> BakedGood.objects
+<django.db.models.manager.Manager object at 0x7fb63374e700>
+>>> BakedGood.objects.all()
+<QuerySet [<BakedGood: BakedGood object (2)>, <BakedGood: BakedGood object (3)>, <BakedGood: BakedGood object (4)>, <BakedGood: BakedGood object (5)>]>
+----
+<1> Django has an interactive shell for this type of poking around
+
+=== Warning
+
+WARNING: It is a _very_ common mistake to try to try to access `objects`
+directly, forgetting to build a `QuerySet`.
+
+=== Retrieving all objects
+
+[.shrink]
+* the all() method of a `QuerySet` retrieves all of the objects
+* a `QuerySet` is an iterator and they can then be pared down / used with with
+  plain old Python:
+
+[source, python]
+----
+>>> yummies = BakedGood.objects.all()
+>>> yummies[:2]
+<QuerySet [<BakedGood: BakedGood object (2)>, <BakedGood: BakedGood object (3)>]>
+>>> for yummy in yummies[:2]:
+...     print(yummy.name)
+...
+Chocolate Chip Cookie
+Bagel
+----
+
+=== Filters
+
+[.shrink]
+* while you can filter with Python, it is much faster in SQL
+* the `.filter()` method lets you do just that with field lookups
+* arguments follow the `__` (double underscore)
+* filters are chainable: `.filter(name="test").filter(desc="test")...`
+
+[source, python]
+----
+>>> BakedGood.objects.filter(name='Bagel')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+>>> BakedGood.objects.filter(name__iexact='BaGeL')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+>>> BakedGood.objects.filter(name__contains='gel')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+>>> BakedGood.objects.filter(name__icontains='GeL')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+>>> BakedGood.objects.filter(name__startswith='Bag')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+>>> BakedGood.objects.filter(name__endswith='gel')
+<QuerySet [<BakedGood: BakedGood object (3)>]>
+----
+
+=== Spanning Relationships
+
+[.shrink]
+A new model was created, the migrations were applied, and data was added via
+the admin interface:
+
+.example/models.py
+[source, python]
+----
+from django.db import models
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+
+class BakedGood(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+    type_choices = [
+        ('BA', 'Bagel'),
+        ('BR', 'Bread'),
+        ('CO', 'Cookie'),
+        ('CA', 'Cake'),
+        ('PR', 'Pretzel'),
+    ]
+    good_type = models.CharField(max_length=2, choices=type_choices)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    recipe = models.TextField()
+    ingredients = models.ManyToManyField(Ingredient)
+----
+
+=== Spanning Relationships (continued)
+
+.example/admin.py
+[source, python]
+----
+from django.contrib import admin
+
+from .models import BakedGood, Ingredient
+
+admin.site.register(BakedGood)
+admin.site.register(Ingredient)
+----
+
+.Trying it out...
+[source, python]
+----
+>>> for result in BakedGood.objects.filter(ingredients__name="Sugar"): <1>
+...     print(result.name)
+...
+Chocolate Chip Cookie
+----
+<1> Why do I need the for loop here?
+
+== When the ORM won't cut it
+
+[.shrink]
+* Your database is your database, you can still access it with traditional
+  libraries
+* You will need to make note of how Django names things
+* The DBMS _should_ resolve exclusivity issues
+* Django also does support raw SQL queries, but you need to be careful
+
+== Resources
+
+* https://docs.djangoproject.com/en/3.0/topics/db/queries/[Django Documentation:
+  Queries]
+* https://docs.djangoproject.com/en/3.0/topics/db/sql/[Django Documentation:
+  Performing raw SQL queries]
+* https://www.oreilly.com/content/how-do-i-use-the-slice-notation-in-python/[How
+  do I use the slice notation in Python?]
+* https://www.sqlalchemy.org/[SQLAlchemy]
+* https://docs.python.org/3/library/sqlite3.html[Python sqlite3]

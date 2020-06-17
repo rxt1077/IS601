@@ -33,8 +33,6 @@ scraper -> data: Beautiful Soup / Selenium
   most popular Python library for parsing HTML]
 * https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags[Don't
   parse HTML with regex, you will open a portal to hell]
-* Try to uncover as much of the underlying back-end as possible. While you may not
-  have access to an API, you may be able to reverse engineer one.
 
 === Selenium
 
@@ -59,11 +57,13 @@ scraper -> data: Beautiful Soup / Selenium
 * Use CSS selectors over XML or other methods. They're more useful in other
   contexts (JQuery, etc.).
 * Get comfortable with your browser's developer tools.
+* Try to uncover as much of the underlying back-end as possible. While you may not
+  have access to an API, you may be able to reverse engineer one.
 
 == Example
 
 * I've built and example of both methods running in a container that can be found
-  in the `scraper_demo` directory for the class repo.
+  in the `scraper_demo` directory of the class repo.
 * They include a container to run them that can be built with
   `docker build -t scraper .`
 * Then you can run them with `docker run scraper python requests_bs.py` or

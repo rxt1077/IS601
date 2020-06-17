@@ -139,6 +139,7 @@ template --> html: Templating Engine (what render() does)
 
 === Passing Context
 
+.example/views.py
 [source, python]
 ----
 from django.shortcuts import render <1>

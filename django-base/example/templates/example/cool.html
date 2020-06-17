@@ -1,0 +1,12 @@
+{% extends 'example/base.html' %}
+
+{% block title %}Cool View{% endblock %}
+
+{% block content %}
+<h2>Cool View</h2>
+<ul>
+{% for baked_good in baked_goods %}
+    <li>${{ baked_good.price }} - {{ baked_good.name }}: {{ baked_good.desc }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
