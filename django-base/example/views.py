@@ -1,12 +1,13 @@
 import random
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
-from .models import BakedGood
+from .models import BakedGood, BakedGoodForm
 
 def index(request):
-    return HttpResponse("Nothing to see here... yet.")
+    return HttpResponse("Welcome Back!")
     
 def extend(request):
     return render(request, 'example/extend.html')
@@ -31,4 +32,14 @@ def random_view(request):
     random_baked_good = random.choice(baked_goods)
     context = {'baked_good': random_baked_good}
     return render(request, 'example/random.html', context)
-    
+
+def bake(request):
+    if request.method == 'POST':
+        form = BakedGoodForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = BakedGoodForm()
+
+    return render(request, 'example/bake.html', {'form': form})

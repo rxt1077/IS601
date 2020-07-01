@@ -9,4 +9,5 @@ urlpatterns = [
     path('if', views.if_view, name='if'),
     path('cool', views.cool_view, name='cool'),
     path('random', views.random_view, name='random'),
+    path('bake', views.bake, name='bake'),
 ]

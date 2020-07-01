@@ -1,0 +1,212 @@
+= Forms
+
+Forms allow us to get input from the user as a POST request. Django has several
+tools for working with forms.
+
+== HTML
+
+[source, jinja]
+----
+<form action="/your-name/" method="post">
+    <label for="your_name">Your name: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form>
+----
+
+== Django Form
+
+* generate HTML code for you (with HTML5 client-side validation)
+* provide server-side validation methods 
+* prevent cross-site request forgery
+
+.forms.py
+[source, python]
+----
+from django import forms
+
+class NameForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)
+----
+
+=== Template
+
+.name.html
+[source, jinja]
+----
+<form action="/your-name/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+----
+
+* Other rendering options: `{{ form.as_table }}`, `{{ form.as_p }}`,
+  `{{ form.as_ul }}`
+
+=== View
+
+.views.py
+[source, python]
+----
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
+from .forms import NameForm
+
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, 'name.html', {'form': form})
+----
+
+== ModelForm
+
+* `Modelforms` allow you to quickly create forms from models
+* It uses the same code the admin interface uses
+
+=== Form (included in models.py)
+
+.django-base/example/models.py
+[source, python]
+----
+from django.db import models
+from django.forms import ModelForm
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+
+class BakedGood(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+    type_choices = [
+        ('BA', 'Bagel'),
+        ('BR', 'Bread'),
+        ('CO', 'Cookie'),
+        ('CA', 'Cake'),
+        ('PR', 'Pretzel'),
+    ]
+    good_type = models.CharField(max_length=2, choices=type_choices)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    recipe = models.TextField()
+    ingredients = models.ManyToManyField(Ingredient)
+
+class BakedGoodForm(ModelForm):
+    class Meta:
+        model = BakedGood
+        fields = ['name', 'desc', 'good_type', 'price', 'recipe', 'ingredients']
+----
+
+=== URLs
+
+.django-base/example/urls.py
+[source, python]
+----
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('bake', views.bake, name='bake'),
+]
+----
+
+=== View
+
+.django-base/example/views.py
+[source, python]
+----
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+
+from .models import BakedGood, BakedGoodForm
+
+def index(request):
+    return HttpResponse("Welcome Back!")
+    
+def bake(request):
+    if request.method == 'POST':
+        form = BakedGoodForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = BakedGoodForm()
+
+    return render(request, 'example/bake.html', {'form': form})
+----
+
+=== Template
+
+.django-base/example/bake.html
+[source, jinja]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}Bake Item{% endblock %}
+
+{% block content %}
+<p>Please use the following form to submit items that have been baked.</p>
+<form action="{% url 'bake' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+.django-base/example/templates/example/bake.html
+----
+
+== Rendering Fields Manually
+
+* This is non-optimal, but sometimes you may need it to work with a CSS
+  framework
+
+.Example Template
+[source, jinja]
+----
+{{ form.non_field_errors }}
+<div class="fieldWrapper">
+    {{ form.subject.errors }}
+    <label for="{{ form.subject.id_for_label }}">Email subject:</label>
+    {{ form.subject }}
+</div>
+<div class="fieldWrapper">
+    {{ form.message.errors }}
+    <label for="{{ form.message.id_for_label }}">Your message:</label>
+    {{ form.message }}
+</div>
+<div class="fieldWrapper">
+    {{ form.sender.errors }}
+     <label for="{{ form.sender.id_for_label }}">Your email address:</label>
+    {{ form.sender }}
+</div>
+<div class="fieldWrapper">
+    {{ form.cc_myself.errors }}
+    <label for="{{ form.cc_myself.id_for_label }}">CC yourself?</label>
+    {{ form.cc_myself }}
+</div>
+----
+
+== Resources
+
+* https://www.w3schools.com/html/html_forms.asp[HTML Forms]
+* https://docs.djangoproject.com/en/3.0/topics/forms/[Working with forms]
+* https://owasp.org/www-community/attacks/csrf[Cross Site Request Forgery]
+* https://docs.djangoproject.com/en/3.0/topics/forms/modelforms/[Creating forms from models]
+* https://docs.djangoproject.com/en/3.0/topics/forms/modelforms/#django.forms.ModelForm[ModelForm]

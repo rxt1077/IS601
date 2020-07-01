@@ -1,0 +1,106 @@
+= Routing
+
+Django routing allows you to create a _consistent_ and _expandable_ URL scheme.
+
+== include
+
+* use `include` in site-wide `urls.py` to dispatch certain urls to an app-specific `urls.py`
+* this gives the app full control over URLs that start with certain text
+
+.django-base/IS601/urls.py
+[source, python]
+----
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('example/', include('example.urls')),
+]
+----
+
+== Parameters in URLs
+
+[.shrink]
+* Angle brackets capture values: `<int:name>`
+* Default converters: `str`, `int`, `slug` (ASCII letters/number, '-', '_'), `uuid`, `path` (includes '/')
+* tested in order
+
+[source, python]
+----
+urlpatterns = [
+    path('articles/2003/', views.special_case_2003), <1>
+    path('articles/<int:year>/', views.year_archive),
+    path('articles/<int:year>/<int:month>/', views.month_archive), <2>
+    path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail), <4>
+]
+----
+<1> "/articles/2003/": views.special_case_2003(request)
+<1> "/articles/2003": doesn't match (needs a '/')
+<2> "/articles/2005/03": views.month_archive(request, year=2005, month=3)
+<3> "/articles/2003/03/building-a-django-site/": views.article_detail(request, year=2003, month=3, slug="building-a-django-site")
+
+== Getting URLs from parameters
+
+* You want to avoid hard-coding URLs in case something has to change (shoutout to Svetlana)
+* In templates the `url` tag will create URLs
+* In Python code the `reverse()` function will create URLs
+
+=== Example urls.py
+
+[source, python]
+----
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('articles/<int:year>/', views.year_archive, name='news-year-archive'),
+]
+----
+
+=== Create a URL in a Template
+
+[source, jinja]
+----
+<a href="{% url 'news-year-archive' 2012 %}">2012 Archive</a>
+{# Or with the year in a template context variable: #}
+<ul>
+{% for yearvar in year_list %}
+<li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }} Archive</a></li>
+{% endfor %}
+</ul>
+----
+
+=== Create a URL in Python
+
+[source, python]
+----
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+def redirect_to_year(request):
+    year = 2006
+    return HttpResponseRedirect(reverse('news-year-archive', args=(year,)))
+----
+
+== Namespaces
+
+* Notice our name in the example above. What if we want to reuse names?
+* Namespaced URLs use ':'
+* In general you can use the form `namespace:name`
+
+[source, jinja]
+----
+(% url 'example:index' %}
+----
+
+== Advanced 
+
+* You can use regular expressions for advanced matching.
+* You can create custom path converters, if you have some special types you want to pass as parameters.
+
+== Resources
+
+* https://docs.djangoproject.com/en/3.0/topics/http/urls/[URL dispatcher]
+* https://docs.djangoproject.com/en/3.0/ref/urls/[django.urls functions for use in URLconfs]
+
