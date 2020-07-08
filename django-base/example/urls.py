@@ -10,4 +10,5 @@ urlpatterns = [
     path('cool', views.cool_view, name='cool'),
     path('random', views.random_view, name='random'),
     path('bake', views.bake, name='bake'),
+    path('ingredient', views.ingredient, name='ingredient'),
 ]

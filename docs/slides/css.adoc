@@ -1,0 +1,134 @@
+= CSS
+
+image::CSS.png[]
+
+== Concepts
+
+* Style and content should be separate
+* Style can be applied to multiple pages
+* Styles can build off of one another
+* IMO: Somebody else can usually do it better
+
+https://www.w3schools.com/css/demo_default.htm[w3schools demo]
+
+== CSS Selectors
+
+[.shrink]
+CSS Selectors are not just used in CSS, so it pays double to understand them:
+
+[.shrink]
+|===
+| .class             | .intro     | Selects all elements with class="intro"
+| #id                | #firstname | Selects the element with id="firstname"
+| *                  | *          | Selects all elements
+| element            | p          | Selects all <p> elements
+| element,element,.. | div, p     | Selects all <div> elements and all <p> elements
+|===
+
+https://www.w3schools.com/css/css_selectors.asp[Source]
+
+== CSS Example
+
+[source, css]
+----
+/* style.css - a simple style sheet */
+body {
+    margin-left: 10%; margin-right: 10%;
+    color: black; background: white;
+}
+h1 {
+    font-size: 200%;
+}
+h2 {
+    font-size: 150%;
+}
+h3 {
+    font-size: 100%;
+}
+div.box {
+    border: solid;
+    border-width: thin;
+    width: 100%;
+}
+----
+
+https://www.w3.org/MarkUp/Guide/Style[Source]
+
+== Loading CSS
+
+* You use an external stylesheet by creating a link element in the head of your
+  document: `<link type="text/css" rel="stylesheet" href="style.css">`
+* In Django, you usually link to the CSS of a framework in your base template
+* You can link to multiple CSS pages and they _cascade_
+
+== CSS Frameworks
+
+* Fiddling with CSS gets old quickly. I highly recommend using a framework.
+* https://getbootstrap.com/docs/4.0/getting-started/introduction/[Bootstrap] is
+  _very_ popular and worth knowing 
+* https://bulma.io[Bulma] is meant to be a more lightweight option and it is
+  growing in popularity.
+
+== Adding Bootstrap to Our Django Project
+
+=== Add the framework to the base template
+
+.example/templates/example/base.html
+[source, html]
+----
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+----
+
+=== Use the framework in one of our view templates
+
+.example/templates/example/index.html
+[source, html]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col text-center">
+        <h2>Let's see what's for dessert!</h2>
+    </div>
+</div>
+{% for baked_good in baked_goods %}
+<div class="row">
+    <div class="col-2"><h4>${{ baked_good.price }}</h4></div>
+    <div class="col-4"><h4>{{ baked_good.name }}</h4></div>
+    <div class="col-6"><h4>{{ baked_good.desc }}</h4></div>
+</div>
+{% endfor %}
+
+{% endblock %}
+----
+
+== Resources
+
+* https://www.w3schools.com/css/css_intro.asp[CSS Introduction]
+* https://www.w3schools.com/css/css_selectors.asp[CSS Selectors]
+* https://www.w3.org/MarkUp/Guide/Style[Adding a touch of style]
+* https://getbootstrap.com/docs/4.3/getting-started/introduction/[Bootstrap
+  Getting Started]
+* https://getbootstrap.com/docs/4.3/layout/grid/[Bootstrap Grid System]

@@ -24,3 +24,8 @@ class BakedGoodForm(ModelForm):
     class Meta:
         model = BakedGood
         fields = ['name', 'desc', 'good_type', 'price', 'recipe', 'ingredients']
+        
+class IngredientForm(ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ['name', 'desc']

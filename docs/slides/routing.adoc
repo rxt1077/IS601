@@ -32,11 +32,10 @@ urlpatterns = [
     path('articles/2003/', views.special_case_2003), <1>
     path('articles/<int:year>/', views.year_archive),
     path('articles/<int:year>/<int:month>/', views.month_archive), <2>
-    path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail), <4>
+    path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail), <3>
 ]
 ----
-<1> "/articles/2003/": views.special_case_2003(request)
-<1> "/articles/2003": doesn't match (needs a '/')
+<1> "/articles/2003/": views.special_case_2003(request), "/articles/2003": doesn't match (needs a '/')
 <2> "/articles/2005/03": views.month_archive(request, year=2005, month=3)
 <3> "/articles/2003/03/building-a-django-site/": views.article_detail(request, year=2003, month=3, slug="building-a-django-site")
 

@@ -4,10 +4,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import BakedGood, BakedGoodForm
+from .models import BakedGood, BakedGoodForm, IngredientForm
 
 def index(request):
-    return HttpResponse("Welcome Back!")
+    baked_goods = BakedGood.objects.all()
+    context = {'baked_goods': baked_goods}
+    return render(request, 'example/index.html', context)
     
 def extend(request):
     return render(request, 'example/extend.html')
@@ -43,3 +45,14 @@ def bake(request):
         form = BakedGoodForm()
 
     return render(request, 'example/bake.html', {'form': form})
+    
+def ingredient(request):
+    if request.method == 'POST':
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = IngredientForm()
+        
+    return render(request, 'example/ingredient.html', {'form': form})
