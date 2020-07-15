@@ -1,6 +1,6 @@
 import random
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -56,3 +56,16 @@ def ingredient(request):
         form = IngredientForm()
         
     return render(request, 'example/ingredient.html', {'form': form})
+
+def ajax(request):
+    return render(request, 'example/ajax.html')
+
+def ajax_demo(request):
+    data = {
+        "this": 1,
+        "is": 2,
+        "JSON": 3,
+    }
+    
+    return JsonResponse(data)
+

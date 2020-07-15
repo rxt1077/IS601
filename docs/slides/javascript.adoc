@@ -1,0 +1,203 @@
+= JavaScript
+
+== Background
+
+* Designed to make pages more interactive
+* Famously created in 10 days
+* C/Java like syntax (actually has nothing to do with Java)
+* Can be included in HTML or loaded separately
+* Not all browsers support all features (see https://developer.mozilla.org/en-US/docs/Glossary/Polyfill[Polyfill])
+
+=== Example 1 Source
+
+[source, html]
+----
+<h2>Changing an Element</h2>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+----
+
+=== Example 1 Demo
+
+++++
+<h2>Changing an Element</h2>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+++++
+
+=== Example 2 (example-2.js)
+
+[source, javascript]
+----
+function myFunction() {
+    document.getElementById("demo").innerHTML="Paragraph changed.";
+}
+----
+
+=== Example 2 (example-2.html)
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>External JavaScript</h2>
+
+<p id="demo">A Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<p>(myFunction is stored in an external file called "myScript.js")</p>
+
+<script src="myScript.js"></script>
+
+</body>
+</html>
+----
+
+== JSON
+
+* JavaScript Object Notation
+* Collection of name/value pairs
+* _Very_ popular exchange format
+* JavaScript assumes everything is an object and _this_ is how you define them
+
+=== JSON Example
+
+[source, json]
+----
+{
+    "name": "John",
+    "age": 31,
+    "city": "New York"
+}
+----
+
+== jQuery
+
+* There are a lot of things in JavaScript that you will find yourself repeating
+* "write less, do more"
+* Extensive use of CSS selectors
+* Easy to tell if it's in use by the `$` object
+* jQuery objects build off of regular JS objects
+
+=== jQuery Example
+
+[source, javascript]
+----
+// jQuery
+$("p").hide() // hide all <p> elements
+
+// Vanilla JS
+elements = document.getElementsByTagName("P");
+for (i = 0; i < elements.length; i++) {
+    elements[i].style.display = "none";
+}
+----
+
+== AJAX
+
+* Asynchronous JavaScript And XML
+* XMLHttpRequest Object used to carry things to/from the web server
+* It's a _hack_, but a popular one. See
+  https://en.wikipedia.org/wiki/WebSocket[WebSockets] for a better idea.
+* As far as we are concerned, our JS can talk _directly_ to our API
+
+=== Example - Template
+
+.example/templates/example/ajax.html
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script>
+        function ajaxDemo() {
+            $.get("ajax-demo", function(data, status) {
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+<h2>AJAX With jQuery and Django</h2>
+
+<button type="button" onclick="ajaxDemo()">Perform an AJAX Request</button>
+
+</body>
+</html>
+----
+
+=== Example - Views
+
+.example/views.py
+[source, python]
+----
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+
+# ...
+
+def ajax(request):
+    return render(request, 'example/ajax.html')
+
+def ajax_demo(request):
+    data = {
+        "this": 1,
+        "is": 2,
+        "JSON": 3,
+    }
+    
+    return JsonResponse(data)
+----
+
+=== Example - URLs
+
+[source, python]
+----
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('extend', views.extend, name='extend'),
+    path('for', views.for_view, name='for'),
+    path('if', views.if_view, name='if'),
+    path('cool', views.cool_view, name='cool'),
+    path('random', views.random_view, name='random'),
+    path('bake', views.bake, name='bake'),
+    path('ingredient', views.ingredient, name='ingredient'),
+    path('ajax', views.ajax, name='ajax'),
+    path('ajax-demo', views.ajax_demo, name='ajax-demo'),
+]
+----
+
+== Further Topics
+
+* JavaScript rendering libraries: https://reactjs.org/[React], https://vuejs.org/[Vue.js], https://angularjs.org/[AngularJS]
+* Server-side JavaScript: https://nodejs.org/en/[Node.js]
+
+== Resources
+
+* https://www.checkmarx.com/blog/javascript-history-infographic/[JavaScript History Infographic]
+* https://www.w3schools.com/js/[w3schools JavaScript Tutorial]
+* https://www.json.org/json-en.html[Introducing JSON]
+* https://jquery.com/[jQuery]
+* https://www.w3schools.com/jquery/jquery_intro.asp[jQuery Introduction]
+* https://www.w3schools.com/jquery/jquery_examples.asp[jQuery Examples]
+* https://www.w3schools.com/xml/ajax_intro.asp[w3schools AJAX Introduction]
+* https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html[How to Return a JSON-Encoded Response in Django]
+

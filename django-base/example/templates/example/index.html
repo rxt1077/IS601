@@ -1,4 +1,5 @@
 {% extends 'example/base.html' %}
+{% load static %}
 
 {% block title %}Welcome!{% endblock %}
 
@@ -8,6 +9,11 @@
     <div class="col text-center">
         <h2>Let's see what's for dessert!</h2>
     </div>
+</div>
+<div class="row">
+	<div class="col">
+		<img class="django" src="{% static 'example/django.jpg' %}" alt="django">
+	</div>
 </div>
 {% for baked_good in baked_goods %}
 <div class="row">

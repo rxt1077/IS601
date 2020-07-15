@@ -11,4 +11,6 @@ urlpatterns = [
     path('random', views.random_view, name='random'),
     path('bake', views.bake, name='bake'),
     path('ingredient', views.ingredient, name='ingredient'),
+    path('ajax', views.ajax, name='ajax'),
+    path('ajax-demo', views.ajax_demo, name='ajax-demo'),
 ]
