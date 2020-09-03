@@ -4,7 +4,7 @@
 
 In this exercise, we will be:
 
-. Installing Docker (if you don't have it already)
+. Installing Docker Desktop (if you don't have it already)
 . Installing git (if you don't have it already)
 . Cloning https://github.com/rxt1077/IS601[the class git repository.]
 . Launching Django
@@ -12,21 +12,11 @@ In this exercise, we will be:
 == Installing Docker
 
 Follow https://docs.docker.com/desktop/[these instructions] to install Docker
-Desktop. If for some reason your personal machine is not capable of running
-Docker Desktop, you can follow
-https://docs.docker.com/toolbox/toolbox_install_windows/[these instructions] to
-install Docker Toolbox.
+Desktop.
 
-WARNING: If you have Windows 10 Home, you may want to consider
-https://docs.microsoft.com/en-us/education/windows/change-to-pro-education[
-upgrading to Windows 10 Education], which is available from
-https://ist.njit.edu/software-available-download/#w[IST].
-
-WARNING: They make it particularly tough to find the Docker Toolbox EXE (Windows)
-and PKG (MacOS) files. They are
-https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.exe[here]
-and https://github.com/docker/toolbox/releases/download/v19.03.1/DockerToolbox-19.03.1.pkg[here],
-respectively.
+WARNING: If you are running an old version of Windows, you may need to update
+to the latest build of Windows 10. You can do this from the start menu by
+typing in "Check for Updates."
 
 == Installing git
 
@@ -48,12 +38,11 @@ Yours should match what is show. The prompt will also usually show you what
 directory you are in.
 
 NOTE: In MacOS, you can use the Terminal application, in Windows you can use
-PowerShell as long as you are using Docker Desktop. If you are using Docker
-Toolbox, you will want to use the Docker Quickstart Terminal.
+Windows Terminal which can be installed for free from the Microsoft Store.
 
 [source, console]
 ----
-PS C:\Users\rxt1077> git clone https://github.com/rxt1077/IS601.git <1>
+PS C:\Users\rxt1077> git clone https://github.com/rxt1077/IS601.git
 Cloning into 'IS601'...
 remote: Enumerating objects: 43, done.
 remote: Counting objects: 100% (43/43), done.
@@ -61,28 +50,23 @@ remote: Compressing objects: 100% (35/35), done.
 remote: Total 43 (delta 4), reused 43 (delta 4), pack-reused 0
 Unpacking objects: 100% (43/43), done.
 ----
-<1> Make sure you are in a directory that you have write permissions for. In
-Windows you can `cd C:\Users\<Username>` (where <Username> is your user name),
-in MacOS you should start in your home directory, but you can run `cd` just to
-be sure. `cd` with no directory defaults to home in MacOS / Linux.
 
 == Launching Django
 
 [source, console]
 ----
-PS C:\Users\rxt1077> cd IS601/django-base
 PS C:\Users\rxt1077\IS601\django-base> docker-compose up
-Recreating django-base_web_1 ... done
+Starting django-base_web_1 ... done
 Attaching to django-base_web_1
 web_1  | Watching for file changes with StatReloader
 web_1  | Performing system checks...
 web_1  |
 web_1  | System check identified no issues (0 silenced).
 web_1  |
-web_1  | You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+web_1  | You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
 web_1  | Run 'python manage.py migrate' to apply them.
-web_1  | May 20, 2020 - 17:30:47
-web_1  | Django version 3.0.6, using settings 'IS601.settings'
+web_1  | September 03, 2020 - 19:33:20
+web_1  | Django version 3.1.1, using settings 'IS601.settings'
 web_1  | Starting development server at http://0.0.0.0:8000/
 web_1  | Quit the server with CONTROL-C.
 ----

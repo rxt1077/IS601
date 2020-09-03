@@ -149,8 +149,7 @@ rectangle host [
 rectangle vm [
     <b>Virtual Machine Running Linux
     ---
-    Hyper-V
-    VirtualBox
+    WSL2
     HyperKit
 ]
 rectangle docker as "Docker"
@@ -166,29 +165,11 @@ docker --> container3
 @enduml
 ....
 
-[.columns]
-=== Docker Options
-
-.*Docker Toolbox*
-[.column]
-* legacy solution
-* uses VirtualBox
-* comes with its own terminal: Docker Quickstart Terminal
-* runs on everything
-
-.*Docker Desktop*
-[.column]
-* modern solution
-* uses native virtualization
-* uses native terminal: PowerShell or Terminal
-* runs on most modern OS
-
 === Common Docker Problems
-Windows Home doesn't have HyperV by default::
-    https://ist.njit.edu/software-available-download/#w[Upgrade to Windows 10
-    Education]
 VT-x isn't enabled or BIOS support isn't enabled::
     Boot into the BIOS and enable VT-x (usually under virtualization)
+It says I need to install WSL2::
+    Click the link and install WSL2
 It says I don't have privileges::
     Run as admin
 

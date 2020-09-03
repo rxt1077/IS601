@@ -4,8 +4,8 @@
 
 [horizontal]
 Instructor:: Ryan Tolboom
-Meeting Dates:: Wednesday 5:45PM - 9:30PM
-Office Hours:: Friday 5:00PM - 7:00PM
+Meeting Dates:: Thursdays 6:00PM - 8:50PM
+Office Hours:: Thursdays 2:00PM - 5:00PM, Webex by appointment
 
 == What is a web system?
 
@@ -52,3 +52,9 @@ image::django.svg[]
 * Web systems store a lot of data that can be mined but often isn't
 * Web systems are a great way to collect data
 * Web systems are a great way to present data
+
+== How does this apply to Cybersecurity?
+
+* Due to their complexity, web systems are often a weak link
+* Due to the stateless nature of HTTP, web systems are often vulnerable to
+  session hijacking

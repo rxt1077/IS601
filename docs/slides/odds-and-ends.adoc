@@ -1,0 +1,81 @@
+= Odds and Ends
+
+== Svetlana's Awesome Links
+
+* https://www.youtube.com/watch?v=rAGjVuKesW0[Python Django Tutorial Part 12 |
+Live Editable Table Using Jquery Ajax]
+* https://www.youtube.com/watch?v=vYoGKtdl7dQ[easily make your html table
+content editable with jquery or JavaScript]
+* https://www.youtube.com/watch?v=KgnPSmrQrXI&feature=youtu.be[Form Submission
+in Django without Page Refresh using AJAX]
+
+== Alexa's https://docs.djangoproject.com/en/3.0/topics/forms/formsets/[Formset] Question
+
+Is there a way to show multiple forms for the same thing? Like if somone wanted
+to bake multiple items at the same time?
+
+=== views.py
+
+[source, python]
+----
+# ...
+from django.forms import modelformset_factory
+# ...
+def bake_formset(request):
+    BakedGoodFormSet = modelformset_factory(BakedGood, extra=5,
+            fields=['name', 'desc', 'good_type', 'price', 'recipe', 'ingredients'])
+    if request.method == 'POST':
+        formset = BakedGoodFormSet(request.POST)
+        if formset.is_valid():
+            formset.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        formset = BakedGoodFormSet(queryset=BakedGood.objects.none())
+
+    return render(request, 'example/bake_formset.html', {'formset': formset})
+----
+
+=== templates/example/bake_formset.html
+
+[source, python]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}Bake Items{% endblock %}
+
+{% block content %}
+<p>Please use the following forms to submit multiple items that have been baked.</p>
+<form action="{% url 'bake-multiple' %}" method="post">
+    {% csrf_token %}
+    <table>
+        {{ formset }}
+    </table>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
+----
+
+=== urls.py
+
+[source, python]
+----
+# ...
+    path('bake-multiple', views.bake_formset, name='bake-multiple'),
+# ...
+----
+
+== Maha's Prettier Object Names
+
+.example/models.py
+[source, python]
+----
+# ...
+class Ingredient(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+
+    def __str__(self): <1>
+        return self.name
+# ...
+----
+<1> Works in admin interface _and_ ModelForm
