@@ -1,128 +1,203 @@
 = Exercise 2
 
-In this exercise you will be:
+In this exercise we will be
 
-. Creating a new app named `example`
-. Creating a function named `index` in `example/views.py`
-. Creating the file `example/urls.py` to route URLs for your new app
-. Editing the file `IS601/urls.py` to include the URLs from `example/urls.py`
-. Testing your view and creating a screen shot
+* Using/Installing Windows/MacOS Terminal
+* Listing files
+* Printing the working directory
+* Making directories
+* Changing directories
+* Using tab completion
+* Removing files and directories
 
-== Creating a New App
+== Starting the Terminal
 
-From within your `django-base` directory, run the following commands:
+In MacOS you can start the terminal from spotlight by holding COMMAND, pressing
+the space bar, and typing `terminal`. Hit enter to run it.
 
-[source, console]
-----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example <1>
-PS C:\Users\rxt1077\IS601\django-base> ls <2>
+In Windows we will be using the new Microsoft Terminal. https://aka.ms/terminal[
+Click here to download it for free from the Microsoft Store.] Once you have it
+downloaded you can start it by pressing the Windows key and typing `terminal`.
 
+NOTE: The MacOS terminal will run BASH as its shell and the Microsoft Terminal
+will run PowerShell. If there are any differences in the commands that need to
+be run they will be addressed in this exercise.
 
-    Directory: C:\Users\rxt1077\IS601\django-base
-
-
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
-d-----        5/24/2020   1:01 PM                example <3>
-d-----        5/20/2020  12:49 PM                IS601
--a----        5/22/2020  10:33 AM         131072 db.sqlite3
--a----        5/20/2020  12:47 PM            197 docker-compose.yml
--a----        5/20/2020  12:25 PM            153 Dockerfile
--a----        5/20/2020  12:36 PM            625 manage.py
--a----        5/20/2020  12:28 PM             15 requirements.txt
-
-----
-<1> Here is what each part of this command means:
-* `docker-compose run web` - run the following command on the web container
-* `python manage.py` - use Python (on the container) to execute the manage.py
-  script
-* `startapp example` - use the `startapp` command from `manage.py` to make a
-  new app named `example`
-<2> If the command succeeds, there is no output. We use `ls` to _list_ the files
-so we can see if our `example` directory was created.
-<3> The directory was created, so it worked.
-
-WARNING: If you are using the Docker Quickstart Terminal (part of Docker
-Toolbox) your output may look slightly different from mine. You should still be
-able to see the outcome despite minor formating differences and the effect will
-be the same.
-
-== Creating a New View
-
-=== Creating a View Function
-
-Edit `django-base/example/views.py` to look like the following:
-
-.django-base/example/views.py
-[source, python]
-----
-from django.http import HttpResponse
-
-def index(request):
-    return HttpResponse("Hello, world!")
-----
-
-NOTE: You will need to know where you cloned the class git repository in order
-to load this file in your text editor. For most Windows users it should be
-`C:\Users\<username>\IS601` (where <username> is your user name) for most Mac
-users it should be `IS601` in your home directory.
-
-NOTE: View functions don't have to be named `index`. They can be named anything
-that helps you keep track of what they are doing.
-
-=== Routing URLs
-
-Create / edit the following files:
-
-.django-base/example/urls.py
-[source, python]
-----
-from django.urls import path
-
-from . import views
-
-urlpatterns = [
-    path('', views.index, name='index'),
-]
-----
-
-.django-base/IS601/urls.py
-[source, python]
-----
-from django.contrib import admin
-from django.urls import include, path
-
-urlpatterns = [
-    path('example/', include('example.urls')),
-    path('admin/', admin.site.urls),
-]
-----
-
-NOTE: You can keep the comments at the top of `django-base/IS601/urls.py` if you
-like. They provide basic directions for how to add a URL
-
-== Testing Your View
-
-Lets bring the development server up so we can see if it works. From within the
-`django-base` directory run the following:
+Once yous start the terminal you will be presented with a prompt. The prompt
+typically includes information about your current location in the file system:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose up
-Starting django-base_web_1 ... done
-Attaching to django-base_web_1
-web_1  | Watching for file changes with StatReloader
-web_1  | Performing system checks...
-web_1  |
-web_1  | System check identified no issues (0 silenced).
-web_1  | May 24, 2020 - 17:30:59
-web_1  | Django version 3.0.6, using settings 'IS601.settings'
-web_1  | Starting development server at http://0.0.0.0:8000/
-web_1  | Quit the server with CONTROL-C.
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\rxt1077\IS601\docs\exercises> <1>
+----
+<1> In this case I am in `C:\Users\rxt1077\IS601\docs\exercises\`
+
+NOTE: PowerShell defaults to showing directories with a forward slash (DOS
+style) and BASH shows directories with a back slash (UNIX style). We will use
+the backslash in our examples as PowerShell accepts it _and_ it will work with
+BASH.
+
+== Listing Files and Printing the Working Directory
+
+The most basic command you can run in the console shows you what files are in
+your _working directory_. That command is `ls`. Try running it now:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises> ls
+
+
+    Directory: C:\Users\rxt1077\IS601\docs\exercises
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         5/22/2020   2:18 PM                images
+-a----          9/4/2020   4:14 PM           3597 exercise-1.adoc
+-a----         9/10/2020  11:52 AM           1603 exercise-1a.adoc
+-a----         5/24/2020   4:48 PM           4374 exercise-2.adoc
+-a----          6/3/2020   7:41 PM           3480 exercise-3.adoc
+-a----         6/10/2020   9:11 AM           1144 exercise-4.adoc
+-a----          7/1/2020   6:40 PM            699 exercise-5.adoc
+-a----          7/8/2020   3:34 PM            326 exercise-6.adoc
+-a----         7/15/2020   4:57 PM            507 exercise-7.adoc
 ----
 
-Assuming everything started, leave the development server running and visit
-http://localhost:8000/example (or if you are running Docker Toolbox:
-http://<docker-ip>:8000/example where <docker-ip> is your Docker IP address).
-You should see the text "Hello, world!". Take a screen shot and submit that for
-your assignment. You can stop the development server by typing Ctrl+C.
+You are probably in your home directory and you may have a lot of files or no
+files. The above listing is showing the exercise directory that I am in as I
+create this document.
+
+If you want to find out what directory you are in _without_ looking at the
+prompt, you can use the `pwd` command. Try that now:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises> pwd
+
+Path
+---
+C:\Users\rxt1077\IS601\docs\exercises
+
+----
+
+NOTE: Your output may look different depending on if you are using BASH or
+PowerShell. The content, namely what the current directory is, will be the
+same.
+
+== Making Directories
+
+The command to change to create a directory is `mkdir`. Let's practice making
+a directory to experiment with. We will call this directory `practice`.
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises> mkdir practice
+
+
+    Directory: C:\Users\rxt1077\IS601\docs\exercises
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         9/10/2020  12:00 PM                practice
+----
+
+Notice how your directory is created _inside_ the directory you are currently
+working in. Nested directory structures are very common.
+
+== Changing Directories
+
+Now let's change into the directory we just created. You can use the `cd`
+command to do this:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises> cd practice
+PS C:\Users\rxt1077\IS601\docs\exercises\practice> <1>
+----
+<1> Notice how the prompt changes to show the new directory we are in
+
+If you want to `cd` out of a directory you can use the `..` destination. `..`
+is interpreted as the _parent_ directory.
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises\practice> cd ..
+PS C:\Users\rxt1077\IS601\docs\exercises>
+----
+
+If you ever get really confused and just want to go back to your home directory
+you can use `cd ~`. The `~` character is interpreted as your home directory.
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises> cd ~
+PS C:\Users\rxt1077>
+----
+
+== Tab Completion
+
+Sometimes typing out a full directory name can be tricky or time consuming. By
+hitting the TAB key, you will be able to autocomplete the name. Try using `cd`
+to get back into the `practice` directory, but instead of typing out `practice`
+just type the first few characters and hit TAB.
+
+NOTE: You will see PowerShell uses opposite direction slashes when tab
+completing. It will still accept slashes in either direction.
+
+== Removing Files and Directories
+
+The `rm` command can be used to remove files _and_ directories. In order to
+have something to remove, lets make a file. MacOS has the `touch` command which
+creates an empty file, but unfortunately there isn't a simple Windows
+equivalent. Follow the instructions for your particular OS:
+
+.MacOS
+[source, console]
+----
+$ touch example.txt
+----
+
+.Windows
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises\practice> $null > example.txt <1>
+----
+<1> Technically this means redirect null (nothing) to a file named
+    `example.txt`. The result is it creates an empty file.
+
+Now lets remove the file with the `rm` command and then run `ls` to see that
+it`s actually gone.
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\docs\exercises\practice> rm example.txt
+PS C:\Users\rxt1077\IS601\docs\exercises\practice> ls
+PS C:\Users\rxt1077\IS601\docs\exercises\practice>
+----
+
+Removing directories can be a little trickier. If they are empty you can use
+`rm` without any options. If they have nested directories inside them, you may
+need to use the recursive option, as in `rm -r`.
+
+WARNING: Be careful with the `rm` command. Files you delete may not be
+recoverable. Be especially careful when using the recursive option.
+
+== Assessment
+
+To show your work for this exercise, please:
+
+. Create a directory named `practice`
+. _Inside_ the `practice` directory create directories named `dir1`, `dir2`, and
+`dir3`
+. _Inside_ `dir3` create another directory named `nested`
+. Change your working directory to the `practice` directory (ls should show dir1, dir2, dir3)
+. In Windows run the `tree` command and in MacOS run the `find .` command
+
+Take a screenshot of the output of the command and submit the screenshot for this
+assignment.

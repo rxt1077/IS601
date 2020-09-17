@@ -51,6 +51,21 @@ remote: Total 43 (delta 4), reused 43 (delta 4), pack-reused 0
 Unpacking objects: 100% (43/43), done.
 ----
 
+== Changing Directories
+
+You will need to _change directory (cd)_ into the `IS601` directory you just
+cloned _and_ the `django-base` directory within that. You can do that by
+running two `cd` commands:
+
+[source, console]
+----
+PS C:\Users\rxt1077> cd IS601
+PS C:\Users\rxt1077\IS601> cd django-base <1>
+PS C:\Users\rxt1077\IS601\django-base>
+----
+<1> Notice how the prompt changes to show which directory you are in. Yours may
+    look different depending on which terminal you are using.
+
 == Launching Django
 
 [source, console]

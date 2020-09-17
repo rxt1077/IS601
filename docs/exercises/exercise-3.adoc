@@ -1,114 +1,128 @@
-= Exercise 3
+= Exercise 2
 
-In this exercise we will be:
+In this exercise you will be:
 
-. Adding a new model to our app
-. Adding our app to INSTALLED_APPS
-. Migrating our database
-. Creating a new superuser
-. Adding our model to the list of models managed by the admin interface
-. Adding information to the database with the admin interface
+. Creating a new app named `example`
+. Creating a function named `index` in `example/views.py`
+. Creating the file `example/urls.py` to route URLs for your new app
+. Editing the file `IS601/urls.py` to include the URLs from `example/urls.py`
+. Testing your view and creating a screen shot
 
-== Adding a New Model
+== Creating a New App
 
-Model information is stored in the app directory change
-`IS601/django-base/example/models.py` to look like the following:
+From within your `django-base` directory, run the following commands:
 
-.example/models.py
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example <1>
+PS C:\Users\rxt1077\IS601\django-base> ls <2>
+
+
+    Directory: C:\Users\rxt1077\IS601\django-base
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        5/24/2020   1:01 PM                example <3>
+d-----        5/20/2020  12:49 PM                IS601
+-a----        5/22/2020  10:33 AM         131072 db.sqlite3
+-a----        5/20/2020  12:47 PM            197 docker-compose.yml
+-a----        5/20/2020  12:25 PM            153 Dockerfile
+-a----        5/20/2020  12:36 PM            625 manage.py
+-a----        5/20/2020  12:28 PM             15 requirements.txt
+
+----
+<1> Here is what each part of this command means:
+* `docker-compose run web` - run the following command on the web container
+* `python manage.py` - use Python (on the container) to execute the manage.py
+  script
+* `startapp example` - use the `startapp` command from `manage.py` to make a
+  new app named `example`
+<2> If the command succeeds, there is no output. We use `ls` to _list_ the files
+so we can see if our `example` directory was created.
+<3> The directory was created, so it worked.
+
+WARNING: If you are using the Docker Quickstart Terminal (part of Docker
+Toolbox) your output may look slightly different from mine. You should still be
+able to see the outcome despite minor formating differences and the effect will
+be the same.
+
+== Creating a New View
+
+=== Creating a View Function
+
+Edit `django-base/example/views.py` to look like the following:
+
+.django-base/example/views.py
 [source, python]
 ----
-from django.db import models
+from django.http import HttpResponse
 
-class BakedGood(models.Model):
-    name = models.CharField(max_length=64)
-    desc = models.CharField(max_length=256)
-    good_type = models.TextChoices('type', 'BAGEL BREAD COOKIE CAKE PRETZEL') 
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    recipe = models.TextField()
+def index(request):
+    return HttpResponse("Hello, world!")
 ----
 
-== Add our App to INSTALLED_APPS
+NOTE: You will need to know where you cloned the class git repository in order
+to load this file in your text editor. For most Windows users it should be
+`C:\Users\<username>\IS601` (where <username> is your user name) for most Mac
+users it should be `IS601` in your home directory.
 
-Migrations will only be created for apps in the INSTALLED_APPS list. _Add_ our
-example app to the list in `IS601/django-base/IS601/settings.py`:
+NOTE: View functions don't have to be named `index`. They can be named anything
+that helps you keep track of what they are doing.
 
-WARNING: Do not edit/delete the entire file, you're changing a _section_ of
-this file as specified below.
+=== Routing URLs
 
-.IS601/settings.py (excerpted)
+Create / edit the following files:
+
+.django-base/example/urls.py
 [source, python]
 ----
-...
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'example.apps.ExampleConfig',
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
 ]
-...
 ----
 
-== Migrating
-
-Now we need to create a migration and migrate, you can do that with the
-following commands:
-
-[source, console]
-----
-docker-compose run web python manage.py makemigrations
-docker-compose run web python manage.py migrate
-----
-
-== Creating a New Superuser
-
-WARNING: Before you run this, clear make sure you've cleared up any pending
-migrations for your site. You can run
-`docker-compose run web python manage.py migrate` to be sure.
-
-From within the IS601/django-base directory, run the following command:
-
-[source, console]
-----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py createsuperuser
-Username (leave blank to use 'root'): admin
-Email address: example@example.com
-Password:
-Password (again):
-The password is too similar to the username.
-This password is too short. It must contain at least 8 characters.
-This password is too common.
-Bypass password validation and create user anyway? [y/N]: y
-Superuser created successfully.
-----
-
-WARNING: You're characters won't be echoed as you create the password. Don't be
-alarmed, they are still recorded.
-
-NOTE: Feel free to make the user name/email/password anything you can remember.
-You may be prompted to bypass the in-built security checks, as seen above, if it
-is too simple.
-
-== Add a Model to the Admin Interface
-
-Change the IS601/django-base/example/admin.py file to look like the following:
-
-.example/admin.py
+.django-base/IS601/urls.py
 [source, python]
 ----
 from django.contrib import admin
+from django.urls import include, path
 
-from .models import BakedGood
-
-admin.site.register(BakedGood)
+urlpatterns = [
+    path('example/', include('example.urls')),
+    path('admin/', admin.site.urls),
+]
 ----
 
-== Adding Information to the Database
+NOTE: You can keep the comments at the top of `django-base/IS601/urls.py` if you
+like. They provide basic directions for how to add a URL
 
-Now you should be able to run `docker-compose up` in the `IS601/django-base`
-directory and open http://localhost:8000/admin in a web browser. Sign in with
-the user name/password you created and take a moment to explore the interface.
-Add three BakedGoods to the database (choose whatever options you like) and
-then take a screen shot showing that there are three items in the table.
+== Testing Your View
+
+Lets bring the development server up so we can see if it works. From within the
+`django-base` directory run the following:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose up
+Starting django-base_web_1 ... done
+Attaching to django-base_web_1
+web_1  | Watching for file changes with StatReloader
+web_1  | Performing system checks...
+web_1  |
+web_1  | System check identified no issues (0 silenced).
+web_1  | May 24, 2020 - 17:30:59
+web_1  | Django version 3.0.6, using settings 'IS601.settings'
+web_1  | Starting development server at http://0.0.0.0:8000/
+web_1  | Quit the server with CONTROL-C.
+----
+
+Assuming everything started, leave the development server running and visit
+http://localhost:8000/example (or if you are running Docker Toolbox:
+http://<docker-ip>:8000/example where <docker-ip> is your Docker IP address).
+You should see the text "Hello, world!". Take a screen shot and submit that for
+your assignment. You can stop the development server by typing Ctrl+C.
