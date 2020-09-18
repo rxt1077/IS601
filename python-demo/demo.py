@@ -1,4 +1,4 @@
-print("Welcome to the Python Demo!")
+    print("Welcome to the Python Demo!")
 print("All the text you see generated was created in Python")
 print("We are using version 3 of Python running inside a container")
 

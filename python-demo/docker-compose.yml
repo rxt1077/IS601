@@ -7,3 +7,4 @@ services:
             - .:/code
         environment:
             PYTHONUNBUFFERED: 1
+        working_dir: /code
