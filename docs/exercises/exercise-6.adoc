@@ -1,22 +1,29 @@
-= Exercise 5
+= Exercise 4
 
-In this exercise you will create a ModelForm and use it in a new view.
+The is the first exercise where you will be using what we have learned to
+create something of your own design. It is far less prescriptive than the
+previous exercises.
 
-== Steps
+== Goal
 
-Use the information in the presentation to create a new ModelForm for one of the
-example Models we have been working with _or_ a Model from your project. You
-will need to edit (either in the example app director or your project app
-directory):
+Design a new view for the `example` app that uses a template and displays
+information that is passed via the context.
 
-. `urls.py` to create a new route for your view
-. `models.py` to create your `ModelForm`
-. `views.py` to create your new view
-. `templates/<app-name>/<template-name>.html` to create your new template
+NOTE: Feel free to `git clone` the class repository to a new directory if you want
+a fresh start with the most current `example` app. You could also stash or
+fetch and merge depending on your knowledge of git, just be sure to preserver
+your project work if you are working in the same directory.
 
-== Submission
+== What needs to be changed
 
-Submit two screen shots for this exercise:
+`example/views.py`:: will need a new view function that uses `render` and passes
+context.
+`example/urls.py`:: will need a new route that points to your view function
+`example/templates/example/<template_name>.html`:: you will need to create a
+template in the `example` app (name it whatever you like,
+replace <template_name>).
 
-. A screen shot of the form you created with the values filled in
-  object.
+== Deliverables
+
+Take a screenshot of your web browser showing your new view. Make sure to
+capture the URL information in the address bar at the top.

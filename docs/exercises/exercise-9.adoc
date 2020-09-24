@@ -1,0 +1,10 @@
+= Exercise 7
+
+For this exercise you are going to be creating a new view that returns a JSON
+object with some information from your database. It is up to you to decided
+how to serve the results of a query. If you finish early and want to expand
+on this, you can also create another view that serves a template which utilizes
+a jQuery AJAX request to retrieve and use the first view that you made.
+
+For this exercise, submit a screen shot of _one_ of the views you created
+running in a web browser.

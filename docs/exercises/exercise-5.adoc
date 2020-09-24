@@ -1,29 +1,114 @@
-= Exercise 4
+= Exercise 3
 
-The is the first exercise where you will be using what we have learned to
-create something of your own design. It is far less prescriptive than the
-previous exercises.
+In this exercise we will be:
 
-== Goal
+. Adding a new model to our app
+. Adding our app to INSTALLED_APPS
+. Migrating our database
+. Creating a new superuser
+. Adding our model to the list of models managed by the admin interface
+. Adding information to the database with the admin interface
 
-Design a new view for the `example` app that uses a template and displays
-information that is passed via the context.
+== Adding a New Model
 
-NOTE: Feel free to `git clone` the class repository to a new directory if you want
-a fresh start with the most current `example` app. You could also stash or
-fetch and merge depending on your knowledge of git, just be sure to preserver
-your project work if you are working in the same directory.
+Model information is stored in the app directory change
+`IS601/django-base/example/models.py` to look like the following:
 
-== What needs to be changed
+.example/models.py
+[source, python]
+----
+from django.db import models
 
-`example/views.py`:: will need a new view function that uses `render` and passes
-context.
-`example/urls.py`:: will need a new route that points to your view function
-`example/templates/example/<template_name>.html`:: you will need to create a
-template in the `example` app (name it whatever you like,
-replace <template_name>).
+class BakedGood(models.Model):
+    name = models.CharField(max_length=64)
+    desc = models.CharField(max_length=256)
+    good_type = models.TextChoices('type', 'BAGEL BREAD COOKIE CAKE PRETZEL') 
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    recipe = models.TextField()
+----
 
-== Deliverables
+== Add our App to INSTALLED_APPS
 
-Take a screenshot of your web browser showing your new view. Make sure to
-capture the URL information in the address bar at the top.
+Migrations will only be created for apps in the INSTALLED_APPS list. _Add_ our
+example app to the list in `IS601/django-base/IS601/settings.py`:
+
+WARNING: Do not edit/delete the entire file, you're changing a _section_ of
+this file as specified below.
+
+.IS601/settings.py (excerpted)
+[source, python]
+----
+...
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'example.apps.ExampleConfig',
+]
+...
+----
+
+== Migrating
+
+Now we need to create a migration and migrate, you can do that with the
+following commands:
+
+[source, console]
+----
+docker-compose run web python manage.py makemigrations
+docker-compose run web python manage.py migrate
+----
+
+== Creating a New Superuser
+
+WARNING: Before you run this, clear make sure you've cleared up any pending
+migrations for your site. You can run
+`docker-compose run web python manage.py migrate` to be sure.
+
+From within the IS601/django-base directory, run the following command:
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py createsuperuser
+Username (leave blank to use 'root'): admin
+Email address: example@example.com
+Password:
+Password (again):
+The password is too similar to the username.
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+Bypass password validation and create user anyway? [y/N]: y
+Superuser created successfully.
+----
+
+WARNING: You're characters won't be echoed as you create the password. Don't be
+alarmed, they are still recorded.
+
+NOTE: Feel free to make the user name/email/password anything you can remember.
+You may be prompted to bypass the in-built security checks, as seen above, if it
+is too simple.
+
+== Add a Model to the Admin Interface
+
+Change the IS601/django-base/example/admin.py file to look like the following:
+
+.example/admin.py
+[source, python]
+----
+from django.contrib import admin
+
+from .models import BakedGood
+
+admin.site.register(BakedGood)
+----
+
+== Adding Information to the Database
+
+Now you should be able to run `docker-compose up` in the `IS601/django-base`
+directory and open http://localhost:8000/admin in a web browser. Sign in with
+the user name/password you created and take a moment to explore the interface.
+Add three BakedGoods to the database (choose whatever options you like) and
+then take a screen shot showing that there are three items in the table.
