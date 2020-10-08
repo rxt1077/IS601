@@ -262,4 +262,4 @@ urlpatterns = [
 * https://docs.djangoproject.com/en/3.0/intro/tutorial01/[Writing your first Django app, part 1]
 * https://docs.djangoproject.com/en/3.0/topics/http/urls/[Django URL dispatcher]
 
-== Now let's try Exercise 2!
+== Now let's try Exercise 4!

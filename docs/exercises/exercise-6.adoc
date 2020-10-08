@@ -1,4 +1,4 @@
-= Exercise 4
+= Exercise 6
 
 The is the first exercise where you will be using what we have learned to
 create something of your own design. It is far less prescriptive than the
