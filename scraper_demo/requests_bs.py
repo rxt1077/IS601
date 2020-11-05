@@ -10,5 +10,5 @@ soup = BeautifulSoup(response.text, 'html.parser')
 for result in soup.select('a.result-title'):
     data_id = result['data-id']
     title = result.string
-    datetime = result.find_previous_sibling('time')['datetime']
+    datetime = result.find_previous('time')['datetime']
     print(f"{data_id},{datetime},{title}")

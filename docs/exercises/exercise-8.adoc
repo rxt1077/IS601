@@ -1,4 +1,4 @@
-= Exercise 6
+= Exercise 8
 
 Tonight's exercise is going to be simple. Using the information from the
 presentations, configure Django to serve static files and then use a static

@@ -169,7 +169,6 @@ def bake(request):
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
-.django-base/example/templates/example/bake.html
 ----
 
 == Rendering Fields Manually

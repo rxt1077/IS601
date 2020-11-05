@@ -1,4 +1,4 @@
-= Exercise 5
+= Exercise 7
 
 In this exercise you will create a ModelForm and use it in a new view.
 
@@ -16,7 +16,4 @@ directory):
 
 == Submission
 
-Submit two screen shots for this exercise:
-
-. A screen shot of the form you created with the values filled in
-  object.
+Submit a screen shot of the form you created.

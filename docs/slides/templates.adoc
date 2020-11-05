@@ -54,7 +54,7 @@
 
 [source, html]
 ----
-<a href="templates.html>Templates Presentation</a>
+<a href="templates.html">Templates Presentation</a>
 ----
 
 === Images

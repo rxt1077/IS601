@@ -8,7 +8,7 @@ admin integration."
 .requirements.txt
 [source, text]
 ----
-Django==3.0.6
+Django==3.1.3
 django-import-export
 ----
 
