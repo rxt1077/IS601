@@ -48,27 +48,24 @@ image::https://upload.wikimedia.org/wikipedia/commons/0/01/Windows_Terminal_Logo
 
 * New, free to download
 * Supports multiple tabs
-* Runs PowerShell
+* Runs PowerShell, Command Prompt, WSL2, or Azure Cloud Shell
 * Much more adaptible and better supported
 
 == MacOS Terminal
 
 image::https://upload.wikimedia.org/wikipedia/commons/b/b3/Terminalicon2.png[width=10%]
 
-* Uses BASH (like Linux)
+* Uses zsh (Linux)
 * Uses the backslash: `/Users/rxt1077`
 * `~` refers to your home directory
 * can use `sudo` to execute as root
 
-== How to run a shell inside a new container
+== What is a path?
 
-[source, console]
-----
-PS C:\Users\rxt1077> docker run -it ubuntu bash <1>
-root@2417eb604422:/# <2>
-----
-<1> The `-it` switch tells it we want to run interactively
-<2> Notice the prompt change
-
-You could do a similar command with `exec` to run a shell inside a running
-container
+* An absolute path references something from the root of the file system:
+  `C:\Users\rxt1077\IS601\README.md`
+* A relative path references something from where you _currently_ are:
+  `README.md` or `./README.md`
+* PATH is also an environment variable that makes executables in certain
+  directories available by just their relative path.
+* `$Env:Path` in PowerShell (Windows) or `echo $PATH` in zsh (Mac)

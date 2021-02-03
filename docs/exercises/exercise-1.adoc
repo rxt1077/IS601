@@ -4,86 +4,63 @@
 
 In this exercise, we will be:
 
-. Installing Docker Desktop (if you don't have it already)
-. Installing git (if you don't have it already)
-. Cloning https://github.com/rxt1077/IS601[the class git repository.]
-. Launching Django
+. Installing Python and/or pip
+. Installing Django
+. Creating/Running a Django site
 
-== Installing Docker
+== Installing Python and pip
 
-Follow https://docs.docker.com/desktop/[these instructions] to install Docker
-Desktop.
+Python is the programming language that Django uses. Pip is the Python package
+management tool and we will be using it to install Django.
 
-WARNING: If you are running an old version of Windows, you may need to update
-to the latest build of Windows 10. You can do this from the start menu by
-typing in "Check for Updates."
+=== Windows
 
-== Installing git
+If you do not already have Python 3 installed, you can use this
+https://www.python.org/ftp/python/3.8.7/python-3.8.7-amd64.exe[Windows
+installer package]. Alternative packages can be found
+https://www.python.org/downloads/release/python-387/[here].
 
-Windows::
-* https://gitforwindows.org/[git for windows]: Installs git, git BASH, and a
-  GUI. The git command can then be run from PowerShell, CMD, or the BASH shell
-  (which it installs).
-MacOS::
-* https://sourceforge.net/projects/git-osx-installer/files/[git for Mac Installer]:
-  Provides an easy installer for git on MacOS. 
-* https://developer.apple.com/xcode/[Xcode]: Xcode installs a command line git
-  and you may have it installed already.
+=== MacOS
 
-== Cloning https://github.com/rxt1077/IS601[the class git repository.]
+MacOS comes with Python 2, which is depreciated. If you do not already have
+Python 3 installed, you can use this
+https://www.python.org/ftp/python/3.8.7/python-3.8.7-macosx10.9.pkg[MacOS
+installer package]. Alternative packages can be found 
+https://www.python.org/downloads/release/python-387/[here].
 
-NOTE: Everything shown after the `>` prompt is the text you need to run in a
-terminal. Lines that do not start with a `>` are the output of the commands.
-Yours should match what is show. The prompt will also usually show you what
-directory you are in.
+Follow the installer directions to install Python 3 for your operating system.
 
-NOTE: In MacOS, you can use the Terminal application, in Windows you can use
-Windows Terminal which can be installed for free from the Microsoft Store.
+== Installing Django
 
-[source, console]
+Now we are ready to install Django via pip. Run `py -m pip install django` from
+a terminal.
+
+NOTE: In Windows, pay attention to the output. You will need to know the path
+that `django-admin.py` is installed in. It should come up as a warning in
+yellow. This shouldn't be an issue in MacOS.
+
+== Creating/Running a Django Project
+
+The `django-admin.py` script is used to create a project. You can see where it
+is installed in the previous step. Here is an example console session where I
+create and run a Django project named `example` in PowerShell:
+
+[source, text]
 ----
-PS C:\Users\rxt1077> git clone https://github.com/rxt1077/IS601.git
-Cloning into 'IS601'...
-remote: Enumerating objects: 43, done.
-remote: Counting objects: 100% (43/43), done.
-remote: Compressing objects: 100% (35/35), done.
-remote: Total 43 (delta 4), reused 43 (delta 4), pack-reused 0
-Unpacking objects: 100% (43/43), done.
-----
+PS C:\Users\rxt1077> py C:\Users\rxt1077\AppData\Local\Programs\Python\Python38\Scripts\django-admin.py startproject example
+PS C:\Users\rxt1077> cd example
+PS C:\Users\rxt1077\example> py -3 manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
 
-== Changing Directories
+System check identified no issues (0 silenced).
 
-You will need to _change directory (cd)_ into the `IS601` directory you just
-cloned _and_ the `django-base` directory within that. You can do that by
-running two `cd` commands:
-
-[source, console]
-----
-PS C:\Users\rxt1077> cd IS601
-PS C:\Users\rxt1077\IS601> cd django-base <1>
-PS C:\Users\rxt1077\IS601\django-base>
-----
-<1> Notice how the prompt changes to show which directory you are in. Yours may
-    look different depending on which terminal you are using.
-
-== Launching Django
-
-[source, console]
-----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose up
-Starting django-base_web_1 ... done
-Attaching to django-base_web_1
-web_1  | Watching for file changes with StatReloader
-web_1  | Performing system checks...
-web_1  |
-web_1  | System check identified no issues (0 silenced).
-web_1  |
-web_1  | You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-web_1  | Run 'python manage.py migrate' to apply them.
-web_1  | September 03, 2020 - 19:33:20
-web_1  | Django version 3.1.1, using settings 'IS601.settings'
-web_1  | Starting development server at http://0.0.0.0:8000/
-web_1  | Quit the server with CONTROL-C.
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+January 20, 2021 - 15:28:16
+Django version 3.1.5, using settings 'example.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
 ----
 
 Now visit http://localhost:8000 in a web browser and you should see a message
@@ -91,5 +68,4 @@ stating, "The install worked successfully! Congratulations!" Take a screen shot
 and submit that as your work for this exercise.
 
 To shut everything down type `Ctrl+C` (hold Control and press C at the same
-time) in your terminal window. This will shutdown Docker Compose and stop
-serving the page.
+time) in your terminal window.

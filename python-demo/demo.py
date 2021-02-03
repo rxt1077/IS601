@@ -1,6 +1,6 @@
-    print("Welcome to the Python Demo!")
+print("Welcome to the Python Demo!")
 print("All the text you see generated was created in Python")
-print("We are using version 3 of Python running inside a container")
+print("We are using Python 3 running natively on your machine.")
 
 ######################################################################
 ####################### Part 1 #######################################
@@ -70,18 +70,52 @@ while item_number < 3:
     item_number = item_number + 1
 
 ######################################################################
-####################### Exercises #####################################
+####################### Part 5 #######################################
+######################################################################
+
+print("Part 5: Dictionaries")
+print("Python has a native type for key value stores called a dictionary")
+print("You store a value and reference it based on a key:")
+dict_example = { "example_key": "example_value",
+                 "name": "Ryan",
+                 "fav_num": 12 }
+print("As you can see dictionary values can have different types")
+print("Django uses dictionaries to pass variables to templates")
+print("You reference a dictionary by putting using the key as an index")
+print(dict_example["example_key"])
+print(dict_example["name"])
+print(dict_example["fav_num"])
+print("It can also be handy to go through all items (key value pairs) in a dictionary")
+for key, value in dict_example.items():
+    print(f"{key}: {value}")
+
+######################################################################
+####################### Exercises ####################################
 ######################################################################
 
 print("LEVEL 0 Exercise:")
 print("Open your text editor an write a Python script that prints your name")
-print("Save it as name.py in _this_ directory")
-print("You can run your script with this command: docker-compose run python python name.py")
-print("NOTE: python is in that command twice, it's both the service _and_ the command")
+print("Save it as name.py in your home directory")
+print("Run your script from the terminal with either the py or python3 command")
+print()
 print("LEVEL 1 Exercise:")
 print("Try writing a Python script that prints out the lyrics to 99 Bottles of Beer on the Wall")
 print("You can see my example in beer.py, but try to do it yourself first!")
+print()
 print("LEVEL 2 Exercise:")
 print("Try writing a Python script that prints out the lyrics to the 12 Days of Christmas")
 print("You can see my example in 12days.py, but try to do it yourself first!")
-
+print()
+print("LEVEL 3 Exercise:")
+print("Uses lists and dictionaries to represent the following invoice data:")
+print("    Service                              Cost")
+print("    -----------------------------------------")
+print("    Current site survey               $100.00")
+print("    Needs Assessment                  $200.00")
+print("    New site development              $300.00")
+print("    TOTAL                             $600.00")
+print("Calculate the total")
+print("Use pprint to print out the dictionary: https://docs.python.org/3/library/pprint.html")
+print()
+print("SUBMISSION:")
+print("Take a screenshot of the output of your exercise and turn that in for your submission")

@@ -3,4 +3,4 @@
 Tonight's exercise is going to be simple. Using the information from the
 presentations, configure Django to serve static files and then use a static
 image in a view from your project or our example app. Take a screenshot of the
-view with the imaging showing and submit that as your work for this exercise.
+view with the image showing and submit that as your work for this exercise.

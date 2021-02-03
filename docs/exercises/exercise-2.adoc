@@ -19,7 +19,7 @@ In Windows we will be using the new Microsoft Terminal. https://aka.ms/terminal[
 Click here to download it for free from the Microsoft Store.] Once you have it
 downloaded you can start it by pressing the Windows key and typing `terminal`.
 
-NOTE: The MacOS terminal will run BASH as its shell and the Microsoft Terminal
+NOTE: The MacOS terminal will run zsh as its shell and the Microsoft Terminal
 will run PowerShell. If there are any differences in the commands that need to
 be run they will be addressed in this exercise.
 

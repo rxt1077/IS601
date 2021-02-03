@@ -1,4 +1,4 @@
-= Exercise 7
+= Exercise 9
 
 For this exercise you are going to be creating a new view that returns a JSON
 object with some information from your database. It is up to you to decided

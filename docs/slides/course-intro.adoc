@@ -4,8 +4,8 @@
 
 [horizontal]
 Instructor:: Ryan Tolboom
-Meeting Dates:: Thursdays 6:00PM - 8:50PM
-Office Hours:: Thursdays 2:00PM - 5:00PM, Webex by appointment
+Meeting Dates:: Wednesdays 6:00PM - 8:50PM
+Office Hours:: Fridays 12:00PM - 4:00PM, Webex by appointment
 
 == What is a web system?
 
@@ -58,3 +58,4 @@ image::django.svg[]
 * Due to their complexity, web systems are often a weak link
 * Due to the stateless nature of HTTP, web systems are often vulnerable to
   session hijacking
+* A web app may be the only attack surface exposed

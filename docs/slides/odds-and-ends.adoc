@@ -1,6 +1,6 @@
 = Odds and Ends
 
-== Svetlana's Awesome Links
+== Editable Table Ideas
 
 * https://www.youtube.com/watch?v=rAGjVuKesW0[Python Django Tutorial Part 12 |
 Live Editable Table Using Jquery Ajax]
@@ -9,7 +9,7 @@ content editable with jquery or JavaScript]
 * https://www.youtube.com/watch?v=KgnPSmrQrXI&feature=youtu.be[Form Submission
 in Django without Page Refresh using AJAX]
 
-== Alexa's https://docs.djangoproject.com/en/3.0/topics/forms/formsets/[Formset] Question
+== https://docs.djangoproject.com/en/3.0/topics/forms/formsets/[Formsets]
 
 Is there a way to show multiple forms for the same thing? Like if somone wanted
 to bake multiple items at the same time?
@@ -64,7 +64,7 @@ def bake_formset(request):
 # ...
 ----
 
-== Maha's Prettier Object Names
+== Prettier Object Names
 
 .example/models.py
 [source, python]
@@ -79,3 +79,20 @@ class Ingredient(models.Model):
 # ...
 ----
 <1> Works in admin interface _and_ ModelForm
+
+
+== Clearing up Static Files Confusion
+
+[.shrink]
+* Django will automatically serve static files in DEBUG mode
+* Django will also look for static files in `<appname>/static`
+* These settings are found in `<project>/settings.py` (IS601/settings.py for us)
+* `MEDIA_ROOT` - where uploaded files go
+* `STATIC_ROOT` - where `collectstatic` puts files
+* `STATICFILES_DIRS` - list of additional folders to search
+
+== Other Python Frameworks
+
+* https://flask.palletsprojects.com/en/1.1.x/[Flask] - Lightweight, lets you
+  choose your components
+* https://bottlepy.org/docs/dev/[Bottle] - very minimalist web framework

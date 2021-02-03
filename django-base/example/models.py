@@ -16,6 +16,11 @@ class BakedGood(models.Model):
     )
     price = models.DecimalField(max_digits=6, decimal_places=2)
     recipe = models.TextField()
+    baked_on = models.DateTimeField(auto_now=True)
+    baked_on.editable = True
+    
+    def __str__(self):
+        return self.name + " " + self.good_type
     
 class BakedGoodForm(ModelForm):
     class Meta:

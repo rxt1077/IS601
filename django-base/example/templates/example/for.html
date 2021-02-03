@@ -1,12 +1,20 @@
 {% extends 'example/base.html' %}
 
-{% block title %}For Example{% endblock %}
+{% block title %}For Example (with Bootstrap!){% endblock %}
 
 {% block content %}
-<h2>Menu</h2>
-<ul>
+
+<div class="row">
+    <div class="col text-center">
+        <h2>Let's see what's for dessert!</h2>
+    </div>
+</div>
 {% for baked_good in baked_goods %}
-    <li>${{ baked_good.price }} - {{ baked_good.name }}: {{ baked_good.desc }}</li>
+<div class="row">
+    <div class="col-2"><h4>${{ baked_good.price }}</h4></div>
+    <div class="col-4"><h4>{{ baked_good.name }}</h4></div>
+    <div class="col-6"><h4>{{ baked_good.desc }}</h4></div>
+</div>
 {% endfor %}
-</ul>
+
 {% endblock %}

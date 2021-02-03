@@ -7,7 +7,7 @@
 * Increase/decrease the indentation level of a block
 * Cut/Copy/Paste
 * Convert between DOS/UNIX line endings.
-** *UNIX: lines end with '\n'*
+** UNIX: lines end with '\n'
 ** DOS: lines end with '\r\n'
 
 === link:https://www.vim.org/download.php[vim]/link:https://neovim.io/[neovim]/link:http://ex-vi.sourceforge.net/[vi]
@@ -20,7 +20,7 @@ The learning curve is steep].
 
 === https://code.visualstudio.com/[Visual Studio Code]
 
-* vscode is more akin to a modern IDE
+* vscode is a modern Integrated Development Environment (IDE)
 * rapidly gaining more adoption and is certainly worth checking out
 
 === https://notepad-plus-plus.org/downloads/[Notepad{plus}{plus}]
@@ -67,6 +67,7 @@ people work on the same file at the same time?
 * https://gitforwindows.org/[git for windows]: Installs git, git BASH, and a
 GUI. The git command can then be run from PowerShell, CMD, or the BASH shell
 (which it installs).
+* Use WSL2 and install it in Linux
 
 .*Mac*
 [.column]
@@ -125,59 +126,15 @@ GUI. The git command can then be run from PowerShell, CMD, or the BASH shell
 * You still need to know how to formulate queries and make a database
 * You can still see the SQL behind it all
 
-== Docker
+== WSL2
 
-image::docker.png[width=25%]
+image::wsl.jpg[width=25%]
 
 * Web servers usually run Linux
 * Web frameworks are usually made for Linux
 * https://hostingtribunal.com/blog/operating-systems-market-share/[Linux is used
   on 1.63% of Desktops]
-* How do we create a Linux environment on our desktop? Containers.
-
-=== What is a Container? (Briefly)
-
-[plantuml, container]
-....
-@startuml
-rectangle host [
-    <b>Host OS
-    ---
-    Windows
-    MacOS
-]
-rectangle vm [
-    <b>Virtual Machine Running Linux
-    ---
-    WSL2
-    HyperKit
-]
-rectangle docker as "Docker"
-rectangle container1 as "Container 1"
-rectangle container2 as "Container 2"
-rectangle container3 as "Container 3"
-
-host --> vm
-vm --> docker
-docker --> container1
-docker --> container2
-docker --> container3
-@enduml
-....
-
-=== Common Docker Problems
-VT-x isn't enabled or BIOS support isn't enabled::
-    Boot into the BIOS and enable VT-x (usually under virtualization)
-It says I need to install WSL2::
-    Click the link and install WSL2
-It says I don't have privileges::
-    Run as admin
-
-=== Common Docker Problems
-Where is Docker?::
-    The docker command should be run from a terminal
-It worked yesterday, but now my containers aren't behaving::
-    Restart Docker (typically from the task bar)
+* How do we create a Linux environment on our desktop? WSL2.
 
 == Putting it all together
 

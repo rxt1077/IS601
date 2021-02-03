@@ -1,0 +1,140 @@
+= Real-world JavaScript: Integrating a Date Picker
+
+image::https://cloud.githubusercontent.com/assets/11352152/14549371/3cbb65da-028d-11e6-976d-a6f63f32061f.PNG[]
+
+== What we will use
+
+* https://flatpickr.js.org/[flatpickr]: a lightweight and powerful datetime
+  picker
+* Requires adding JS to our template
+* We will add a `baked_on` date and time to our `BakedGood` model to give us a reason to
+  use it
+
+== Adding a date to the model
+
+=== Update the model
+
+.example/models.py (excerpted)
+[source, python]
+----
+[...]
+    recipe = models.TextField()
+    baked_on = models.DateTimeField() <1>
+    
+class BakedGoodForm(ModelForm):
+    class Meta:
+        model = BakedGood
+        fields = ['name', 'desc', 'good_type', 'price', 'recipe',
+                  'baked_on'] <2>
+----
+<1> More info can be found
+    https://docs.djangoproject.com/en/3.1/ref/models/fields/#datetimefield[here]
+<2> Be sure to add `baked_on` to the `ModelForm`
+
+=== Make the migrations
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py makemigrations
+Creating django-base_web_run ... done
+You are trying to add a non-nullable field 'baked_on' to bakedgood without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1 <1>
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> timezone.now <2>
+Migrations for 'example':
+  example/migrations/0002_bakedgood_baked_on.py
+    - Add field baked_on to bakedgood
+----
+<1> We have to create a value for the old objects
+<2> `timezone.now` will create a datetime object with the current date and time
+
+=== Apply the migrations
+
+[source, console]
+----
+PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py migrate
+Creating django-base_web_run ... done
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, example, sessions
+Running migrations:
+  Applying example.0002_bakedgood_baked_on... OK
+----
+
+=== Test it out
+
+* Make sure `docker-compose up` is running and
+  http://localhost:8000/example/bake[click here]
+* Notice how the user has to know the
+  https://docs.djangoproject.com/en/3.1/ref/settings/#datetime-input-formats[DATETIME_INPUT_FORMATS]?
+* Let's make it easier
+
+== Adding a datepicker to the template
+
+=== Update the base template
+
+.example/templates/example/base.html
+[source, html]
+----
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <1>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> <2>
+    <link rel="stylesheet" href="{% static 'example/style.css' %}">
+	<title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+	<div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+----
+<1> flatpickr includes some custom CSS
+<2> and of course some JavaScript
+
+=== Update the bake template
+
+.example/templates/example/bake.html
+[source, html]
+----
+{% extends 'example/base.html' %}
+
+{% block title %}Bake Item{% endblock %}
+
+{% block content %}
+<p>Please use the following form to submit items that have been baked.</p>
+<form action="{% url 'bake' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+<script> <1>
+    flatpickr("#id_baked_on", {enableTime: true, dateFormat: "Y-m-d H:i"}); <2>
+</script>
+{% endblock %}
+----
+<1> we need to add some JavaScript
+<2> this example is from https://flatpickr.js.org/examples/#datetime[the
+    documentation], you can find the ID using the inspect tool in your web
+    browser
+
+=== Test it out
+
+* Make sure `docker-compose up` is running and
+  http://localhost:8000/example/bake[click here]
+* Notice how the picker pops up when you click on the input
