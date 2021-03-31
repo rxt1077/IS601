@@ -9,6 +9,6 @@ presents = ["a partridge in a pear tree.", "two turtle doves and",
             "twelve drummers drumming,"]
 
 for day_index in range(0, len(days)):
-    print(f"One the {days[day_index]} day of Christmas my true love game to me...")
+    print(f"One the {days[day_index]} day of Christmas my true love gave to me...")
     for present_index in range(day_index, -1, -1):
         print(f"{presents[present_index]}")

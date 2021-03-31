@@ -9,12 +9,23 @@ In this exercise we will be:
 . Adding our model to the list of models managed by the admin interface
 . Adding information to the database with the admin interface
 
+== Notes on File System Layout
+
+Recall that our project is called `example` and our app is called `app`. This
+means that you should have a directory (typically within your home directory)
+called `example` and _inside_ that directory there should be a project-wide
+settings directory named `example` and an individual application directory
+named `app`. All paths in this tutorial assume you are in the _first_ `example`
+directory.
+
 == Adding a New Model
 
-Model information is stored in the app directory change
-`IS601/django-base/example/models.py` to look like the following:
+Model information is largely stored in individual application directories.
+Recall that our application is named `app` so you would expect the model
+information to be in `app/models.py`. Let's change that file to look like the
+following:
 
-.example/models.py
+.app/models.py
 [source, python]
 ----
 from django.db import models
@@ -38,16 +49,19 @@ class BakedGood(models.Model):
 
 == Add our App to INSTALLED_APPS
 
-Migrations will only be created for apps in the INSTALLED_APPS list. _Add_ our
-example app to the list in `IS601/django-base/IS601/settings.py`:
+Currently Django does not know much about the existence of our application and
+it will not create migrations for it. To fix that we need to _add_ our
+application to the project-wide INSTALLED_APPS list. Recall that project-wide
+information is stored in the `example` directory (the name of our project).
+Let's _add_ our example app to the list in `example/settings.py`:
 
 WARNING: Do not edit/delete the entire file, you're changing a _section_ of
 this file as specified below.
 
-.IS601/settings.py (excerpted)
+.example/settings.py (excerpted)
 [source, python]
 ----
-...
+... <1>
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,10 +69,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'example.apps.ExampleConfig',
+    'app.apps.AppConfig',
 ]
-...
+... <1>
 ----
+<1> These elipses signify that there is more file above and below this edit,
+    which we are not changing.
 
 == Migrating
 
@@ -67,28 +83,51 @@ following commands:
 
 [source, console]
 ----
-docker-compose run web python manage.py makemigrations
-docker-compose run web python manage.py migrate
+PS C:\Users\rxt1077\example> py -3 manage.py makemigrations
+Migrations for 'app':
+  app\migrations\0001_initial.py
+    - Create model BakedGood
+PS C:\Users\rxt1077\example> py -3 manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, app, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying app.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
 ----
 
 == Creating a New Superuser
 
 WARNING: Before you run this, clear make sure you've cleared up any pending
-migrations for your site. You can run
-`docker-compose run web python manage.py migrate` to be sure.
+migrations for your site. You can run `py -3 manage.py migrate` to be sure.
 
-From within the IS601/django-base directory, run the following command:
+The following command will guide you through creating a new Django superuser:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py createsuperuser
-Username (leave blank to use 'root'): admin
-Email address: example@example.com
+PS C:\Users\rxt1077\example> py -3 manage.py createsuperuser
+Username (leave blank to use 'rxt1077'): IS601
+Email address: IS601@IS601.com
 Password:
 Password (again):
 The password is too similar to the username.
 This password is too short. It must contain at least 8 characters.
-This password is too common.
 Bypass password validation and create user anyway? [y/N]: y
 Superuser created successfully.
 ----
@@ -102,9 +141,11 @@ is too simple.
 
 == Add a Model to the Admin Interface
 
-Change the IS601/django-base/example/admin.py file to look like the following:
+In order for the admin interface to allow us to edit our new model, we need to
+create an `admin.py` file that tells it about it. Let's change the
+`app/admin.py` file to look like the following:
 
-.example/admin.py
+.app/admin.py
 [source, python]
 ----
 from django.contrib import admin
@@ -116,8 +157,8 @@ admin.site.register(BakedGood)
 
 == Adding Information to the Database
 
-Now you should be able to run `docker-compose up` in the `IS601/django-base`
-directory and open http://localhost:8000/admin in a web browser. Sign in with
-the user name/password you created and take a moment to explore the interface.
-Add three BakedGoods to the database (choose whatever options you like) and
-then take a screen shot showing that there are three items in the table.
+Now you should be able to run `py -3 manage.py runserver` and open
+http://localhost:8000/admin in a web browser. Sign in with the user
+name/password _you_ created and take a moment to explore the interface. Add
+three BakedGoods to the database (choose whatever options you like) and then
+take a screen shot showing that there are three items in the table.

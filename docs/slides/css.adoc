@@ -73,7 +73,7 @@ https://www.w3.org/MarkUp/Guide/Style[Source]
 
 === Add the framework to the base template
 
-.example/templates/example/base.html
+.app/templates/app/base.html
 [source, html]
 ----
 <!doctype html>
@@ -99,10 +99,10 @@ https://www.w3.org/MarkUp/Guide/Style[Source]
 
 === Use the framework in one of our view templates
 
-.example/templates/example/index.html
+.app/templates/app/index.html
 [source, html]
 ----
-{% extends 'example/base.html' %}
+{% extends 'app/base.html' %}
 
 {% block title %}Welcome!{% endblock %}
 

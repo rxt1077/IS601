@@ -2,44 +2,40 @@
 
 In this exercise you will be:
 
-. Creating a new app named `example`
-. Creating a function named `index` in `example/views.py`
-. Creating the file `example/urls.py` to route URLs for your new app
-. Editing the file `IS601/urls.py` to include the URLs from `example/urls.py`
+. Creating a new app boringly named `app`
+. Creating a function named `index` in `app/views.py`
+. Creating the file `app/urls.py` to route URLs for your new app
+. Editing the file `example/urls.py` to include the URLs from `app/urls.py`
 . Testing your view and creating a screen shot
 
 == Creating a New App
 
-From within your `django-base` directory, run the following commands:
+Using the terminal, from within your `example` directory that you created in
+Exercise 1, run the following commands:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example <1>
-PS C:\Users\rxt1077\IS601\django-base> ls <2>
+PS C:\Users\rxt1077\example> py -3 manage.py startapp app <1>
+PS C:\Users\rxt1077\example> ls <2>
 
 
-    Directory: C:\Users\rxt1077\IS601\django-base
+    Directory: C:\Users\rxt1077\example
 
 
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
-d-----        5/24/2020   1:01 PM                example <3>
-d-----        5/20/2020  12:49 PM                IS601
--a----        5/22/2020  10:33 AM         131072 db.sqlite3
--a----        5/20/2020  12:47 PM            197 docker-compose.yml
--a----        5/20/2020  12:25 PM            153 Dockerfile
--a----        5/20/2020  12:36 PM            625 manage.py
--a----        5/20/2020  12:28 PM             15 requirements.txt
-
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2/10/2021  12:24 PM                app <3>
+d-----         1/20/2021   3:25 PM                example
+-a----         1/20/2021   3:28 PM              0 db.sqlite3
+-a----         1/20/2021   3:23 PM            685 manage.py
 ----
 <1> Here is what each part of this command means:
-* `docker-compose run web` - run the following command on the web container
-* `python manage.py` - use Python (on the container) to execute the manage.py
-  script
-* `startapp example` - use the `startapp` command from `manage.py` to make a
-  new app named `example`
+* `py -3` - use the Python launcher to run version Python version 3. On MacOS
+  this would be `python3`.
+* `manage.py startapp app` - use the `startapp` command from `manage.py` to
+  make a new app named `app`
 <2> If the command succeeds, there is no output. We use `ls` to _list_ the files
-so we can see if our `example` directory was created.
+so we can see if our `app` directory was created.
 <3> The directory was created, so it worked.
 
 WARNING: If you are using MacOS your output may look slightly different from
@@ -50,9 +46,9 @@ differences and the effect will be the same.
 
 === Creating a View Function
 
-Edit `django-base/example/views.py` to look like the following:
+Using your text editor, edit `app/views.py` to look like the following:
 
-.django-base/example/views.py
+.app/views.py
 [source, python]
 ----
 from django.http import HttpResponse
@@ -61,19 +57,26 @@ def index(request):
     return HttpResponse("Hello, world!")
 ----
 
-NOTE: You will need to know where you cloned the class git repository in order
-to load this file in your text editor. For most Windows users it should be
-`C:\Users\<username>\IS601` (where <username> is your user name) for most Mac
-users it should be `IS601` in your home directory.
+NOTE: You will need to know where your `example` directory (created in Exercise
+1) is to load this file in your text editor. For most Windows users it should be
+`C:\Users\<username>\example` (where <username> is your user name) for most Mac
+users it should be `example` in your home directory.
 
 NOTE: View functions don't have to be named `index`. They can be named anything
 that helps you keep track of what they are doing.
 
 === Routing URLs
 
-Create / edit the following files:
+Now that we have a function that returns the HTML we want to present to the
+user, we need to specify which _routes_ will run that function. This is done
+through the `urls.pq` files.
 
-.django-base/example/urls.py
+Using your text editor, Create/edit these files to look like the code blocks.
+Each code blocks _title_ tells you where in your `example` directory the file
+can be found. Note that for the second code block this is the `example`
+directory _within_ your `example` directory:
+
+.app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -85,42 +88,43 @@ urlpatterns = [
 ]
 ----
 
-.django-base/IS601/urls.py
+.example/urls.py
 [source, python]
 ----
 from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('example/', include('example.urls')),
+    path('app/', include('app.urls')),
     path('admin/', admin.site.urls),
 ]
 ----
 
-NOTE: You can keep the comments at the top of `django-base/IS601/urls.py` if you
+NOTE: You can keep the comments at the top of `example/urls.py` if you
 like. They provide basic directions for how to add a URL
 
 == Testing Your View
 
-Lets bring the development server up so we can see if it works. From within the
-`django-base` directory run the following:
+Lets bring the development server up so we can see if it works. Using the
+terminal, From within the `example` directory run the following:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose up
-Starting django-base_web_1 ... done
-Attaching to django-base_web_1
-web_1  | Watching for file changes with StatReloader
-web_1  | Performing system checks...
-web_1  |
-web_1  | System check identified no issues (0 silenced).
-web_1  | May 24, 2020 - 17:30:59
-web_1  | Django version 3.0.6, using settings 'IS601.settings'
-web_1  | Starting development server at http://0.0.0.0:8000/
-web_1  | Quit the server with CONTROL-C.
+PS C:\Users\rxt1077\example> py -3 manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+February 10, 2021 - 12:43:28
+Django version 3.1.5, using settings 'example.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
 ----
 
 Assuming everything started, leave the development server running and visit
-http://localhost:8000/example. You should see the text "Hello, world!". Take a
+http://localhost:8000/app. You should see the text "Hello, world!". Take a
 screen shot and submit that for your assignment. You can stop the development
 server by typing Ctrl+C.

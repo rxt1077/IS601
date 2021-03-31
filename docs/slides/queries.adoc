@@ -9,7 +9,7 @@
 
 [source, python]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py shell <1>
+PS C:\Users\rxt1077\example> py -3 manage.py shell <1>
 Python 3.8.3 (default, Jun  9 2020, 17:39:39)
 [GCC 8.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -31,13 +31,13 @@ directly, forgetting to build a `QuerySet`.
 
 [.shrink]
 * the all() method of a `QuerySet` retrieves all of the objects
-* a `QuerySet` is an iterator and they can then be pared down / used with with
-  plain old Python:
+* a `QuerySet` is an iterator and they can then be pared down/used with plain
+  old Python:
 
 [source, python]
 ----
 >>> yummies = BakedGood.objects.all()
->>> yummies[:2]
+>>> yummies[:2] <1>
 <QuerySet [<BakedGood: BakedGood object (2)>, <BakedGood: BakedGood object (3)>]>
 >>> for yummy in yummies[:2]:
 ...     print(yummy.name)
@@ -45,6 +45,7 @@ directly, forgetting to build a `QuerySet`.
 Chocolate Chip Cookie
 Bagel
 ----
+<1> This is https://stackoverflow.com/questions/509211/understanding-slice-notation[Python slice notation]
 
 === Filters
 
@@ -98,8 +99,9 @@ class BakedGood(models.Model):
     good_type = models.CharField(max_length=2, choices=type_choices)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     recipe = models.TextField()
-    ingredients = models.ManyToManyField(Ingredient)
+    ingredients = models.ManyToManyField(Ingredient) <1>
 ----
+<1> https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/[Django many-to-many relationships]
 
 === Spanning Relationships (continued)
 
@@ -127,11 +129,11 @@ Chocolate Chip Cookie
 == When the ORM won't cut it
 
 [.shrink]
-* Your database is your database, you can still access it with traditional
+* Your database is _your_ database, you can still access it with traditional
   libraries
 * You will need to make note of how Django names things
 * The DBMS _should_ resolve exclusivity issues
-* Django also does support raw SQL queries, but you need to be careful
+* https://docs.djangoproject.com/en/3.1/topics/db/sql/[Django does support raw SQL queries, but you need to be careful]
 
 == Resources
 

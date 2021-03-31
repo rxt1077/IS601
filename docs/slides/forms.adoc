@@ -18,7 +18,7 @@ tools for working with forms.
 
 * generate HTML code for you (with HTML5 client-side validation)
 * provide server-side validation methods 
-* prevent cross-site request forgery
+* https://owasp.org/www-community/attacks/csrf[prevent cross-site request forgery]
 
 .forms.py
 [source, python]
@@ -80,7 +80,7 @@ def get_name(request):
 
 === Form (included in models.py)
 
-.django-base/example/models.py
+.example/app/models.py
 [source, python]
 ----
 from django.db import models
@@ -113,7 +113,7 @@ class BakedGoodForm(ModelForm):
 
 === URLs
 
-.django-base/example/urls.py
+.example/app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -128,7 +128,7 @@ urlpatterns = [
 
 === View
 
-.django-base/example/views.py
+.example/app/views.py
 [source, python]
 ----
 from django.http import HttpResponse, HttpResponseRedirect
@@ -140,7 +140,7 @@ from .models import BakedGood, BakedGoodForm
 def index(request):
     return HttpResponse("Welcome Back!")
     
-def bake(request):
+def bake(request): <1>
     if request.method == 'POST':
         form = BakedGoodForm(request.POST)
         if form.is_valid():
@@ -149,12 +149,13 @@ def bake(request):
     else:
         form = BakedGoodForm()
 
-    return render(request, 'example/bake.html', {'form': form})
+    return render(request, 'app/bake.html', {'form': form})
 ----
+<1> This _one_ view handles _two_ types of requests!
 
 === Template
 
-.django-base/example/bake.html
+.example/app/templates/app/bake.html
 [source, jinja]
 ----
 {% extends 'example/base.html' %}

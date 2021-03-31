@@ -44,7 +44,18 @@ django --> db : SQL
 * Hypertext transfer protocol
 * Developed at the same time as HTML, FTP, and SMTP
 * HTTP is broken into _requests_ and _responses_
-* URL - uniform resource locator: https://web.njit.edu/~rxt1077/web_systems/slides/course-intro.html
+* URL - uniform resource locator:
+  https://web.njit.edu/~rxt1077/web_systems/slides/course-intro.html
+
+=== URI
+
+image::https://upload.wikimedia.org/wikipedia/commons/d/d6/URI_syntax_diagram.svg[]
+
+* https://en.wikipedia.org/wiki/Uniform_Resource_Identifier[A URL is a URI
+(Universal Resource Identifier) that retrieve resources on a network.]
+* https://www.google.com
+* file:///c:/WINDOWS/clock.avi
+* postgresql://user:password@localhost:5432/dbname
 
 === Requests have a _method_ that describes an _action_
 
@@ -191,31 +202,31 @@ rectangle project as "Project: Bakery Website" {
 --
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web django-admin startproject IS601
+PS C:\Users\rxt1077\> py -3 django-admin.py startproject example
 ----
 
-WARNING: This was already done for you. We have a project named `IS601` in the
-`django-base` directory.
+WARNING: We did this already in Exercise 1. We have a project named `example`.
+The location of django-admin varies depending on your installation:
+`C:\Users\rxt1077\AppData\Local\Programs\Python\Python38\Scripts\django-admin.py`
 --
 
 === How do you create an app?
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py startapp example
+PS C:\Users\rxt1077\example> py -3 manage.py startapp app
 ----
 
 [.shrink]
-`docker-compose run web`:: run this on the web container
-`python manage.py`:: run the manage.py script in Python
-`startapp example`:: run the `startapp` Django command which takes your app's
-  name as an argument (ours is `example`)
+`py -3 manage.py`:: run the manage.py script in Python
+`startapp app`:: run the `startapp` Django command which takes your app's
+  name as an argument (ours is `app`)
 
 === How do you create a view?
 
 Part 1: Creating the view function
 
-.example/views.py
+.app/views.py
 [source, python]
 ----
 from django.http import HttpResponse
@@ -226,9 +237,9 @@ def index(request):
 
 === How do you create a view?
 
-Part 2: Routing the URL within `example`
+Part 2: Routing the URL within `app`
 
-.example/urls.py
+.app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -244,14 +255,14 @@ urlpatterns = [
 
 Part 3: Routing the URL from the project
 
-.IS601/urls.py
+.example/urls.py
 [source, python]
 ----
 from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('example/', include('example.urls')),
+    path('app/', include('app.urls')),
     path('admin/', admin.site.urls), <1>
 ]
 ----

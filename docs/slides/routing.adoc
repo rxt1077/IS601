@@ -2,9 +2,13 @@
 
 Django routing allows you to create a _consistent_ and _expandable_ URL scheme.
 
+[.shrink]
+Ask me about NFTs, I dare you :)
+
 == include
 
-* use `include` in site-wide `urls.py` to dispatch certain urls to an app-specific `urls.py`
+* use `include` in site-wide `urls.py` to dispatch certain urls to an
+  app-specific `urls.py`
 * this gives the app full control over URLs that start with certain text
 
 .django-base/IS601/urls.py
@@ -41,7 +45,7 @@ urlpatterns = [
 
 == Getting URLs from parameters
 
-* You want to avoid hard-coding URLs in case something has to change (shoutout to Svetlana)
+* You want to avoid hard-coding URLs in case something has to change
 * In templates the `url` tag will create URLs
 * In Python code the `reverse()` function will create URLs
 
@@ -96,10 +100,10 @@ def redirect_to_year(request):
 == Advanced 
 
 * You can use regular expressions for advanced matching.
-* You can create custom path converters, if you have some special types you want to pass as parameters.
+* You can create custom path converters, if you have some special types you want
+  to pass as parameters.
 
 == Resources
 
 * https://docs.djangoproject.com/en/3.0/topics/http/urls/[URL dispatcher]
 * https://docs.djangoproject.com/en/3.0/ref/urls/[django.urls functions for use in URLconfs]
-
