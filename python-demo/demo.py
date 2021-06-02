@@ -107,7 +107,7 @@ print("Try writing a Python script that prints out the lyrics to the 12 Days of 
 print("You can see my example in 12days.py, but try to do it yourself first!")
 print()
 print("LEVEL 3 Exercise:")
-print("Uses lists and dictionaries to represent the following invoice data:")
+print("Use lists and dictionaries to represent the following invoice data:")
 print("    Service                              Cost")
 print("    -----------------------------------------")
 print("    Current site survey               $100.00")

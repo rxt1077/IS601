@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 def parse_date(get_params, key, default):
     """
-    Try to pull a date out of the get parameters, returning the default value
+    Try to pull a date out of the query parameters, returning the default value
     on any errors.
     """
     if key in get_params:

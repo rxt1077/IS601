@@ -14,7 +14,7 @@ image::https://cloud.githubusercontent.com/assets/11352152/14549371/3cbb65da-028
 
 === Update the model
 
-.example/models.py (excerpted)
+.app/models.py (excerpted)
 [source, python]
 ----
 [...]
@@ -35,7 +35,7 @@ class BakedGoodForm(ModelForm):
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py makemigrations
+PS C:\Users\rxt1077\example> py -3 manage.py makemigrations
 Creating django-base_web_run ... done
 You are trying to add a non-nullable field 'baked_on' to bakedgood without a default; we can't do that (the database needs something to populate existing rows).
 Please select a fix:
@@ -46,8 +46,8 @@ Please enter the default value now, as valid Python
 The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
 Type 'exit' to exit this prompt
 >>> timezone.now <2>
-Migrations for 'example':
-  example/migrations/0002_bakedgood_baked_on.py
+Migrations for 'app':
+  app/migrations/0002_bakedgood_baked_on.py
     - Add field baked_on to bakedgood
 ----
 <1> We have to create a value for the old objects
@@ -57,17 +57,17 @@ Migrations for 'example':
 
 [source, console]
 ----
-PS C:\Users\rxt1077\IS601\django-base> docker-compose run web python manage.py migrate
+PS C:\Users\rxt1077\example> py -3 manage.py migrate
 Creating django-base_web_run ... done
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, example, sessions
 Running migrations:
-  Applying example.0002_bakedgood_baked_on... OK
+  Applying app.0002_bakedgood_baked_on... OK
 ----
 
 === Test it out
 
-* Make sure `docker-compose up` is running and
+* Make sure `py -3 manage.py runserver` is running and
   http://localhost:8000/example/bake[click here]
 * Notice how the user has to know the
   https://docs.djangoproject.com/en/3.1/ref/settings/#datetime-input-formats[DATETIME_INPUT_FORMATS]?
@@ -77,7 +77,7 @@ Running migrations:
 
 === Update the base template
 
-.example/templates/example/base.html
+.app/templates/app/base.html
 [source, html]
 ----
 {% load static %}
@@ -90,7 +90,7 @@ Running migrations:
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <1>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> <2>
-    <link rel="stylesheet" href="{% static 'example/style.css' %}">
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
 	<title>
         {% block title %}
         {% endblock %}
@@ -109,10 +109,10 @@ Running migrations:
 
 === Update the bake template
 
-.example/templates/example/bake.html
+.app/templates/app/bake.html
 [source, html]
 ----
-{% extends 'example/base.html' %}
+{% extends 'app/base.html' %}
 
 {% block title %}Bake Item{% endblock %}
 
@@ -135,6 +135,6 @@ Running migrations:
 
 === Test it out
 
-* Make sure `docker-compose up` is running and
+* Make sure `py -3 manage.py runserver` is running and
   http://localhost:8000/example/bake[click here]
 * Notice how the picker pops up when you click on the input

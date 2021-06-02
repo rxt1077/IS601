@@ -4,66 +4,139 @@
 
 In this exercise, we will be:
 
-. Installing Python and/or pip
+. Installing Python
+. Setting up a Virtual Environment
 . Installing Django
 . Creating/Running a Django site
 
 == Installing Python and pip
 
-Python is the programming language that Django uses. Pip is the Python package
-management tool and we will be using it to install Django.
+Python is the programming language that Django uses.
 
 === Windows
 
+You can test to see if you have Python installed by running `py --version` in a
+terminal. You should see something > 3.8.
+
 If you do not already have Python 3 installed, you can use this
-https://www.python.org/ftp/python/3.8.7/python-3.8.7-amd64.exe[Windows
-installer package]. Alternative packages can be found
-https://www.python.org/downloads/release/python-387/[here].
+https://www.python.org/ftp/python/3.9.5/python-3.9.5-amd64.exe[Windows installer package].
+Alternative packages can be found
+https://www.python.org/downloads/release/python-395/[here].
 
 === MacOS
 
-MacOS comes with Python 2, which is depreciated. If you do not already have
-Python 3 installed, you can use this
-https://www.python.org/ftp/python/3.8.7/python-3.8.7-macosx10.9.pkg[MacOS
-installer package]. Alternative packages can be found 
-https://www.python.org/downloads/release/python-387/[here].
+MacOS comes with Python 2, which is depreciated. You can test to see if you
+have Python 3 installed by running `python3 --version` in a terminal. You
+should see something > 3.8.
 
-Follow the installer directions to install Python 3 for your operating system.
+If you do not already have Python 3 installed, you can use this
+https://www.python.org/ftp/python/3.9.5/python-3.9.5-macos11.pkg[MacOS installer package].
+Alternative packages can be found 
+https://www.python.org/downloads/release/python-395/[here].
 
-== Installing Django
+== Creating an Example Project Directory
 
-Now we are ready to install Django via pip. Run `py -m pip install django` from
-a terminal.
-
-NOTE: In Windows, pay attention to the output. You will need to know the path
-that `django-admin.py` is installed in. It should come up as a warning in
-yellow. This shouldn't be an issue in MacOS.
-
-== Creating/Running a Django Project
-
-The `django-admin.py` script is used to create a project. You can see where it
-is installed in the previous step. Here is an example console session where I
-create and run a Django project named `example` in PowerShell:
+Change to your home directory, create a directory named
+`is601_example_project`, and create a virtual environment within it:
 
 [source, text]
 ----
-PS C:\Users\rxt1077> py C:\Users\rxt1077\AppData\Local\Programs\Python\Python38\Scripts\django-admin.py startproject example
-PS C:\Users\rxt1077> cd example
-PS C:\Users\rxt1077\example> py -3 manage.py runserver
+PS C:\Users\rxt1077\IS601> cd ~
+PS C:\Users\rxt1077> mkdir is601_example_project
+
+
+    Directory: C:\Users\rxt1077
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         5/26/2021   3:33 PM                is601_example_project
+
+
+PS C:\Users\rxt1077> cd is601_example_project
+PS C:\Users\rxt1077\is601_example_project> py -m venv virtual_env
+----
+
+NOTE: Everything after the prompt (`>` in my case) are the commands that you
+will type in. You can see the standard responses after each command.
+
+NOTE: Output and prompt may look slightly different on MacOS. Also Mac users
+may need to use the `python3` command instead of the `py` launcher.
+
+== Activating a Virtual Environment
+
+You now have a directory with a virtual environment in it. Whenever you open a
+new terminal to work on your project, you will need to _activate_ this
+environment. Here is how that looks from PowerShell in Windows:
+
+[source, text]
+----
+PS C:\Users\rxt1077\is601_example_project> virtual_env\Scripts\activate.ps1
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> <1>
+----
+<1> Notice how the prompt has changed to show you are _inside_ the virtual
+environment
+
+NOTE: On MacOS you can activate your environment with
+`source virtual_env/bin/activate`.
+
+NOTE: If you get the error "execution of scripts is disabled on this system"
+try running `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted`
+
+== Installing Django
+
+pip is the package manager for Python. Django is distributed as a pip package,
+making it very easy to install in our new virtual environment:
+
+[source, text]
+----
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> pip install django
+Collecting django
+  Downloading Django-3.2.3-py3-none-any.whl (7.9 MB)
+     |████████████████████████████████| 7.9 MB 6.4 MB/s
+Collecting asgiref<4,>=3.3.2
+  Downloading asgiref-3.3.4-py3-none-any.whl (22 kB)
+Collecting sqlparse>=0.2.2
+  Using cached sqlparse-0.4.1-py3-none-any.whl (42 kB)
+Collecting pytz
+  Downloading pytz-2021.1-py2.py3-none-any.whl (510 kB)
+     |████████████████████████████████| 510 kB 6.8 MB/s
+Installing collected packages: sqlparse, pytz, asgiref, django
+Successfully installed asgiref-3.3.4 django-3.2.3 pytz-2021.1 sqlparse-0.4.1
+WARNING: You are using pip version 21.1.1; however, version 21.1.2 is available.
+You should consider upgrading via the 'c:\users\rxt1077\is601_example_project\virtual_env\scripts\python.exe -m pip install --upgrade pip' command.
+----
+
+== Creating/Running a Django Project
+
+The `django-admin` script is used to create a project. We will create one named
+`is601_example_project` _inside the current directory_:
+
+[source, text]
+----
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> django-admin startproject is601_example_project . <1>
+----
+<1> No output means everything worked!
+
+Now we will run the development server:
+
+[source, text]
+----
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> py manage.py runserver
 Watching for file changes with StatReloader
 Performing system checks...
 
 System check identified no issues (0 silenced).
-
-You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, conten
+ttypes, sessions.
 Run 'python manage.py migrate' to apply them.
-January 20, 2021 - 15:28:16
-Django version 3.1.5, using settings 'example.settings'
+May 26, 2021 - 15:54:14
+Django version 3.2.3, using settings 'is601_example_project.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ----
 
-Now visit http://localhost:8000 in a web browser and you should see a message
+Lastly visit http://localhost:8000 in a web browser and you should see a message
 stating, "The install worked successfully! Congratulations!" Take a screen shot
 and submit that as your work for this exercise.
 

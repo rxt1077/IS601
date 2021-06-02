@@ -113,7 +113,7 @@ for (i = 0; i < elements.length; i++) {
 
 === Example - Template
 
-.example/templates/example/ajax.html
+.app/templates/app/ajax.html
 [source, html]
 ----
 <!DOCTYPE html>
@@ -143,7 +143,7 @@ for (i = 0; i < elements.length; i++) {
 
 === Example - Views
 
-.example/views.py
+.app/views.py
 [source, python]
 ----
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -151,7 +151,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 # ...
 
 def ajax(request):
-    return render(request, 'example/ajax.html')
+    return render(request, 'app/ajax.html')
 
 def ajax_demo(request):
     data = {
@@ -165,6 +165,7 @@ def ajax_demo(request):
 
 === Example - URLs
 
+.app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -200,4 +201,3 @@ urlpatterns = [
 * https://www.w3schools.com/jquery/jquery_examples.asp[jQuery Examples]
 * https://www.w3schools.com/xml/ajax_intro.asp[w3schools AJAX Introduction]
 * https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html[How to Return a JSON-Encoded Response in Django]
-

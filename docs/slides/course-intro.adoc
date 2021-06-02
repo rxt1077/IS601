@@ -4,8 +4,8 @@
 
 [horizontal]
 Instructor:: Ryan Tolboom
-Meeting Dates:: Wednesdays 6:00PM - 8:50PM
-Office Hours:: Fridays 12:00PM - 4:00PM, Webex by appointment
+Meeting Dates:: Wednesdays 5:30PM - 10:00PM
+Office Hours:: Webex by appointment (email)
 
 == What is a web system?
 
