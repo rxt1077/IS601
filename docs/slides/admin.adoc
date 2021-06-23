@@ -13,7 +13,7 @@
 
 == Create an Admin User
 
-* The `py -3 manage.py createsuperuser` command will prompt you for a username,
+* The `py manage.py createsuperuser` command will prompt you for a username,
   email, and password.
 * The `changepassword` command will let you change it. For our purposes the
   password does not have to be something super intricate as these sites won't
@@ -24,7 +24,7 @@
 The Django admin interface needs to be turned on for each model you want it to
 manage. These settings are in the `admin.py` file in the app directory.
 
-.app/admin.py
+.example_app/admin.py
 [source, python]
 ----
 from django.contrib import admin
@@ -36,7 +36,7 @@ admin.site.register(BakedGood)
 
 == Testing it Out
 
-* Now we can run the development server `py -3 manage.py runserver`
+* Now we can run the development server `py manage.py runserver`
 * If you visit http://localhost:8000/admin/ you should see the admin interface
   as long as the development server is running.
 

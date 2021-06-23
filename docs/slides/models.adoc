@@ -62,7 +62,7 @@ for delivery in Deliveries(due=datetime.date.today()):
 
 == Model Example
 
-.example/models.py
+.example_app/models.py
 [source, python]
 ----
 from django.db import models <1>
@@ -76,8 +76,8 @@ class BakedGood(models.Model): <2>
             ('BG',"Bagel"),
             ('BR',"Bread"),
             ('CO',"Cookie"),
-            ('CA',"CAKE"),
-            ('PR',"PRETZEL")
+            ('CA',"Cake"),
+            ('PR',"Pretzel")
         ]
     )
     price = models.DecimalField(max_digits=6, decimal_places=2) <3>

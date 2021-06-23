@@ -6,16 +6,16 @@ previous exercises.
 
 == Goal
 
-Design a new view for the `app` app that uses a template and displays
+Design a new view for the `example_app` app that uses a template and displays
 information that is passed via the context.
 
 == What needs to be changed
 
-`app/views.py`:: will need a new view function that uses `render` and passes
+`example_app/views.py`:: will need a new view function that uses `render` and passes
 context.
-`app/urls.py`:: will need a new route that points to your view function
-`app/templates/app/<template_name>.html`:: you will need to create a template
-in the `app` app (name it whatever you like, replace <template_name>).
+`example_app/urls.py`:: will need a new route that points to your view function
+`example_app/templates/example_app/<template_name>.html`:: you will need to create a template
+in the `example_app` app (name it whatever you like, replace <template_name>).
 
 NOTE: The information you pass in the context does not have to be important. At
 this point the goal is to learn _how_ to pass variables into your templates.

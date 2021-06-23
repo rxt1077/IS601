@@ -11,21 +11,21 @@ In this exercise we will be:
 
 == Notes on File System Layout
 
-Recall that our project is called `example` and our app is called `app`. This
-means that you should have a directory (typically within your home directory)
-called `example` and _inside_ that directory there should be a project-wide
-settings directory named `example` and an individual application directory
-named `app`. All paths in this tutorial assume you are in the _first_ `example`
-directory.
+Recall that our project is called `is601_example_project` and our app is called
+`example_app`. This means that you should have a directory (typically within
+your home directory) called `is601_example_project` and _inside_ that directory
+there should be a project-wide settings directory named `is601_example_project`
+and an individual application directory named `example_app`. All paths in this
+tutorial assume you are in the _first_ `is601_example_project` directory.
 
 == Adding a New Model
 
 Model information is largely stored in individual application directories.
-Recall that our application is named `app` so you would expect the model
-information to be in `app/models.py`. Let's change that file to look like the
-following:
+Recall that our application is named `example_app` so you would expect the model
+information to be in `example_app/models.py`. Let's change that file to look
+like the following:
 
-.app/models.py
+.example_app/models.py
 [source, python]
 ----
 from django.db import models
@@ -39,8 +39,8 @@ class BakedGood(models.Model):
             ('BG',"Bagel"),
             ('BR',"Bread"),
             ('CO',"Cookie"),
-            ('CA',"CAKE"),
-            ('PR',"PRETZEL")
+            ('CA',"Cake"),
+            ('PR',"Pretzel")
         ]
     )
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -52,13 +52,14 @@ class BakedGood(models.Model):
 Currently Django does not know much about the existence of our application and
 it will not create migrations for it. To fix that we need to _add_ our
 application to the project-wide INSTALLED_APPS list. Recall that project-wide
-information is stored in the `example` directory (the name of our project).
-Let's _add_ our example app to the list in `example/settings.py`:
+information is stored in the `is601_example_project` directory (the name of our
+project). Let's _add_ our example app to the list in
+`is601_example_project/settings.py`:
 
-WARNING: Do not edit/delete the entire file, you're changing a _section_ of
+WARNING: Do not edit/delete the _entire_ file, you're changing a _section_ of
 this file as specified below.
 
-.example/settings.py (excerpted)
+.is601_example_project/settings.py (excerpted)
 [source, python]
 ----
 ... <1>
@@ -69,12 +70,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.apps.AppConfig',
+    'example_app',
 ]
 ... <1>
 ----
 <1> These elipses signify that there is more file above and below this edit,
     which we are not changing.
+
+== Activate the Virtual Environment
+
+Now since we are going to begin issuing `manage.py` commands we have to be sure
+to activate the virtual environment:
+
+[source, console]
+----
+PS C:\Users\rxt1077\is601_example_project> .\virtual_env\Scripts\activate
+(virtual_env) PS C:\Users\rxt1077\is601_example_project>  <1>
+----
+<1> Notice how the prompt changes to show we are in the virtual environment
 
 == Migrating
 
@@ -83,22 +96,21 @@ following commands:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py makemigrations
-Migrations for 'app':
-  app\migrations\0001_initial.py
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> py manage.py makemigrations
+Migrations for 'example_app':
+  example_app\migrations\0001_initial.py
     - Create model BakedGood
-PS C:\Users\rxt1077\example> py -3 manage.py migrate
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> py manage.py migrate
 Operations to perform:
-  Apply all migrations: admin, app, auth, contenttypes, sessions
+  Apply all migrations: admin, auth, contenttypes, example_app, sessions
 Running migrations:
   Applying contenttypes.0001_initial... OK
   Applying auth.0001_initial... OK
   Applying admin.0001_initial... OK
   Applying admin.0002_logentry_remove_auto_add... OK
   Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying app.0001_initial... OK
   Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0002_alter_permission_name_max_length...OK
   Applying auth.0003_alter_user_email_max_length... OK
   Applying auth.0004_alter_user_username_opts... OK
   Applying auth.0005_alter_user_last_login_null... OK
@@ -109,21 +121,22 @@ Running migrations:
   Applying auth.0010_alter_group_name_max_length... OK
   Applying auth.0011_update_proxy_permissions... OK
   Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying example_app.0001_initial... OK
   Applying sessions.0001_initial... OK
 ----
 
 == Creating a New Superuser
 
 WARNING: Before you run this, clear make sure you've cleared up any pending
-migrations for your site. You can run `py -3 manage.py migrate` to be sure.
+migrations for your site. You can run `py manage.py migrate` again to be sure.
 
 The following command will guide you through creating a new Django superuser:
 
 [source, console]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py createsuperuser
-Username (leave blank to use 'rxt1077'): IS601
-Email address: IS601@IS601.com
+(virtual_env) PS C:\Users\rxt1077\is601_example_project> py manage.py createsuperuser
+Username (leave blank to use 'rxt1077'): is601
+Email address: is601@njit.edu
 Password:
 Password (again):
 The password is too similar to the username.
@@ -142,10 +155,10 @@ is too simple.
 == Add a Model to the Admin Interface
 
 In order for the admin interface to allow us to edit our new model, we need to
-create an `admin.py` file that tells it about it. Let's change the
-`app/admin.py` file to look like the following:
+create an `admin.py` file that tells the admin interface about the model. Let's
+change the `example_app/admin.py` file to look like the following:
 
-.app/admin.py
+.example_app/admin.py
 [source, python]
 ----
 from django.contrib import admin
@@ -157,7 +170,7 @@ admin.site.register(BakedGood)
 
 == Adding Information to the Database
 
-Now you should be able to run `py -3 manage.py runserver` and open
+Now you should be able to run `py manage.py runserver` and open
 http://localhost:8000/admin in a web browser. Sign in with the user
 name/password _you_ created and take a moment to explore the interface. Add
 three BakedGoods to the database (choose whatever options you like) and then

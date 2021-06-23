@@ -202,31 +202,30 @@ rectangle project as "Project: Bakery Website" {
 --
 [source, console]
 ----
-PS C:\Users\rxt1077\> py -3 django-admin.py startproject example
+PS C:\Users\rxt1077\> django-admin startproject is601_example_project
 ----
 
-WARNING: We did this already in Exercise 1. We have a project named `example`.
-The location of django-admin varies depending on your installation:
-`C:\Users\rxt1077\AppData\Local\Programs\Python\Python38\Scripts\django-admin.py`
+WARNING: We did this already in Exercise 1. We have a project named
+`is601_example_project`. 
 --
 
 === How do you create an app?
 
 [source, console]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py startapp app
+PS C:\Users\rxt1077\example> py manage.py startapp example_app
 ----
 
 [.shrink]
-`py -3 manage.py`:: run the manage.py script in Python
-`startapp app`:: run the `startapp` Django command which takes your app's
-  name as an argument (ours is `app`)
+`py manage.py`:: run the manage.py script in Python
+`startapp example_app`:: run the `startapp` Django command which takes your app's
+  name as an argument (ours is `example_app`)
 
 === How do you create a view?
 
 Part 1: Creating the view function
 
-.app/views.py
+.example_app/views.py
 [source, python]
 ----
 from django.http import HttpResponse
@@ -237,9 +236,9 @@ def index(request):
 
 === How do you create a view?
 
-Part 2: Routing the URL within `app`
+Part 2: Routing the URL within `example_app`
 
-.app/urls.py
+.example_app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -255,18 +254,20 @@ urlpatterns = [
 
 Part 3: Routing the URL from the project
 
-.example/urls.py
+.is601_example_project/urls.py
 [source, python]
 ----
 from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('app/', include('app.urls')),
-    path('admin/', admin.site.urls), <1>
+    path('example_app/', include('example_app.urls')), <1>
+    path('admin/', admin.site.urls), <2>
 ]
 ----
-<1> more on this later!
+<1> https://docs.djangoproject.com/en/3.2/ref/urls/#path[path] is a function in
+    `django.urls`
+<2> more on this later!
 
 === Additional Resources
 
