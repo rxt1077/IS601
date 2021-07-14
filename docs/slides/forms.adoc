@@ -80,7 +80,7 @@ def get_name(request):
 
 === Form (included in models.py)
 
-.example/app/models.py
+.example_app/models.py
 [source, python]
 ----
 from django.db import models
@@ -93,14 +93,13 @@ class Ingredient(models.Model):
 class BakedGood(models.Model):
     name = models.CharField(max_length=64)
     desc = models.CharField(max_length=256)
-    type_choices = [
+    choices = [
         ('BA', 'Bagel'),
         ('BR', 'Bread'),
         ('CO', 'Cookie'),
         ('CA', 'Cake'),
         ('PR', 'Pretzel'),
     ]
-    good_type = models.CharField(max_length=2, choices=type_choices)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     recipe = models.TextField()
     ingredients = models.ManyToManyField(Ingredient)
@@ -113,7 +112,7 @@ class BakedGoodForm(ModelForm):
 
 === URLs
 
-.example/app/urls.py
+.example_app/urls.py
 [source, python]
 ----
 from django.urls import path
@@ -128,7 +127,7 @@ urlpatterns = [
 
 === View
 
-.example/app/views.py
+.example_app/views.py
 [source, python]
 ----
 from django.http import HttpResponse, HttpResponseRedirect
@@ -149,16 +148,16 @@ def bake(request): <1>
     else:
         form = BakedGoodForm()
 
-    return render(request, 'app/bake.html', {'form': form})
+    return render(request, 'example_app/bake.html', {'form': form})
 ----
 <1> This _one_ view handles _two_ types of requests!
 
 === Template
 
-.example/app/templates/app/bake.html
+.example_app/templates/example_app/bake.html
 [source, jinja]
 ----
-{% extends 'example/base.html' %}
+{% extends 'example_app/base.html' %}
 
 {% block title %}Bake Item{% endblock %}
 

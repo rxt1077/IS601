@@ -11,7 +11,7 @@ Ask me about NFTs, I dare you :)
   app-specific `urls.py`
 * this gives the app full control over URLs that start with certain text
 
-.django-base/IS601/urls.py
+.is601_example_project/urls.py
 [source, python]
 ----
 from django.contrib import admin
@@ -19,7 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('example/', include('example.urls')),
+    path('example_app/', include('example_app.urls')),
 ]
 ----
 

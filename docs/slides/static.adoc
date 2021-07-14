@@ -24,9 +24,9 @@
 [source, jinja]
 ----
 {% load static %}
-<img src="{% static 'app/brownies.jpg' %}" alt="brownies"> <1>
+<img src="{% static 'example_app/brownies.jpg' %}" alt="brownies"> <1>
 ----
-<1> This will serve `brownies.jpg` from `app/static/app/brownies.jpg`.
+<1> This will serve `brownies.jpg` from `example_app/static/example_app/brownies.jpg`.
     Yes, it seems awfully nested, but this will allow us to use images with the
     same names in multiple applications and not get mixed up. 
 

@@ -77,7 +77,7 @@ Bagel
 A new model was created, the migrations were applied, and data was added via
 the admin interface:
 
-.example/models.py
+.example_app/models.py
 [source, python]
 ----
 from django.db import models
@@ -105,7 +105,7 @@ class BakedGood(models.Model):
 
 === Spanning Relationships (continued)
 
-.example/admin.py
+.example_app/admin.py
 [source, python]
 ----
 from django.contrib import admin
