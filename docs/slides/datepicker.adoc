@@ -14,7 +14,7 @@ image::https://cloud.githubusercontent.com/assets/11352152/14549371/3cbb65da-028
 
 === Update the model
 
-.app/models.py (excerpted)
+.example_app/models.py (excerpted)
 [source, python]
 ----
 [...]
@@ -35,7 +35,7 @@ class BakedGoodForm(ModelForm):
 
 [source, console]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py makemigrations
+PS C:\Users\rxt1077\example> py manage.py makemigrations
 Creating django-base_web_run ... done
 You are trying to add a non-nullable field 'baked_on' to bakedgood without a default; we can't do that (the database needs something to populate existing rows).
 Please select a fix:
@@ -57,7 +57,7 @@ Migrations for 'app':
 
 [source, console]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py migrate
+PS C:\Users\rxt1077\example> py manage.py migrate
 Creating django-base_web_run ... done
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, example, sessions
@@ -67,7 +67,7 @@ Running migrations:
 
 === Test it out
 
-* Make sure `py -3 manage.py runserver` is running and
+* Make sure `py manage.py runserver` is running and
   http://localhost:8000/example/bake[click here]
 * Notice how the user has to know the
   https://docs.djangoproject.com/en/3.1/ref/settings/#datetime-input-formats[DATETIME_INPUT_FORMATS]?
@@ -77,7 +77,7 @@ Running migrations:
 
 === Update the base template
 
-.app/templates/app/base.html
+.example_app/templates/example_app/base.html
 [source, html]
 ----
 {% load static %}
@@ -109,10 +109,10 @@ Running migrations:
 
 === Update the bake template
 
-.app/templates/app/bake.html
+.example_app/templates/example_app/bake.html
 [source, html]
 ----
-{% extends 'app/base.html' %}
+{% extends 'example_app/base.html' %}
 
 {% block title %}Bake Item{% endblock %}
 
@@ -135,6 +135,6 @@ Running migrations:
 
 === Test it out
 
-* Make sure `py -3 manage.py runserver` is running and
+* Make sure `py manage.py runserver` is running and
   http://localhost:8000/example/bake[click here]
 * Notice how the picker pops up when you click on the input
