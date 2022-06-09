@@ -4,8 +4,8 @@
 
 [horizontal]
 Instructor:: Ryan Tolboom
-Meeting Dates:: Wednesdays 5:30PM - 10:00PM
-Office Hours:: Webex by appointment (email)
+Meeting Dates:: Jersey City Thursdays 5:30PM - 9:30PM
+Office Hours:: Jersey City Thursdays 4:30 - 5:30PM, Webex (email for appt)
 
 == What is a web system?
 
@@ -46,6 +46,12 @@ image::django.svg[]
 * How to design views for users and present them as HTML
 * How to design models for our data and store them in a database
 * How to accept user input from forms and act on it
+
+== Why Django?
+
+* Well documented
+* Can cover front-end and back-end in one course
+* Great springboard for more advanced topics
 
 == How does this apply to Data Science?
 

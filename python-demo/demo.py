@@ -65,7 +65,7 @@ print("Part 4: Loops")
 print("As you saw above, for loops are very useful.")
 print("Python also supports while loops which does something while a condition is met:")
 item_number = 0
-while item_number < 3:
+while item_number <= 3:
     print(my_list[item_number])
     item_number = item_number + 1
 

@@ -67,7 +67,7 @@ sql --> table2
 
 [.column]
 --
-.example_app/settings.py (excerpted)
+.is601_example_project/settings.py (excerpted)
 [source, python]
 ----
 ...

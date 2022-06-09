@@ -1,0 +1,108 @@
+= Authentication
+
+== What is a authentication?
+
+[quote, SearchSecurity]
+Authentication is the process of determining whether someone or something is, in fact, who or what is says it is.
+
+== How can we handle it?
+
+* Do it yourself
+* Use Django auth
+* Use a 3rd party auth with Django-allauth
+
+== DIY
+
+* create a User model and store information about them in the DB
+* store _hashed_ passwords
+* need to https://docs.djangoproject.com/en/3.2/topics/http/sessions/[use sessions], stored as cookies
+* have to check session in view or template
+
+== https://docs.djangoproject.com/en/3.2/topics/auth/[Django authentication]
+
+* Django has built in auth, it is used in the admin interface
+* It can handle: users, permissions, groups, and user sessions
+* _Hashed_ passwords are stored
+
+=== What does it look like?
+
+* Users can be set up in the admin interface
+* A login view is created
+* Views are protected with decorators to redirect to the login view if needed
+
+=== Login View
+
+[source, python]
+----
+from django.contrib.auth import authenticate, login
+
+def my_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
+----
+
+=== Protected View
+
+[source, python]
+----
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/accounts/login/')
+def my_view(request):
+    ...
+----
+
+=== Pros
+
+* Highly customizable
+* Secure by default
+* Already built-in
+
+=== Cons
+
+* A lot left to be implemented (password resets, etc.)
+* Supports authentication providers, but requires additional work
+
+== Django-allauth
+
+* Uses Django default authentication with common options set
+* Designed to work with OAUTH workflows for common authorization servers
+* Easy to set up
+* Includes common ways to reset passwords, etc.
+
+=== https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2[OAuth2]
+
+* Grants limited access to information about user accounts on another service (ie. what is your email on Facebook?)
+* _Applications must be registered_
+
+=== Abstract Protocol Flow
+
+image::oauth_abstract.png[]
+
+=== Authorization Grant types
+
+Authorization Code::
+    used with server-side Applications
+Client credentials::
+    used with Applications that have API access
+Device Code::
+    used for devices that lack browsers or have input limitations
+
+=== Authorization Code Flow
+
+image::oauth_authcode.png[]
+
+== Additional Resources
+
+* https://docs.djangoproject.com/en/3.2/topics/http/sessions/[Django Sessions]
+* https://docs.djangoproject.com/en/3.2/topics/auth/[Django Authentication]
+* https://django-allauth.readthedocs.io/en/latest/overview.html[Django-allauth Documentation] 
+* https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2[Digital Ocean: An Introduction to OAuth 2]

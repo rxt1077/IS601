@@ -9,7 +9,7 @@
 
 [source, python]
 ----
-PS C:\Users\rxt1077\example> py -3 manage.py shell <1>
+PS C:\Users\rxt1077\example> py manage.py shell <1>
 Python 3.8.3 (default, Jun  9 2020, 17:39:39)
 [GCC 8.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.

@@ -151,7 +151,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 # ...
 
 def ajax(request):
-    return render(request, 'app/ajax.html')
+    return render(request, 'example_app/ajax.html')
 
 def ajax_demo(request):
     data = {

@@ -1,0 +1,132 @@
+= REST APIs
+
+REpresentation State Transfer (REST)
+
+[plantuml, rest, svg, width=85%]
+....
+@startuml
+actor client as "Client"
+cloud restapi as "Rest API"
+database db as "Database"
+
+client -> restapi: HTTP Request (GET/PUT/POST/DELETE)
+restapi -> client: HTTP Response (JSON)
+restapi -> db
+db -> restapi
+@enduml
+....
+
+== What is REST?
+
+* architectural style designed for web APIs
+* scalable, uniform, component based
+
+== REST constraints
+
+* client-server
+* stateless
+* cacheable
+* layered
+* uniform
+
+=== Client-server
+
+* separation of concerns
+* API could be used for web app, mobile app, desktop app
+* classic architecture for which services are optimized
+
+=== Stateless
+
+* server can understand everything in isolation
+* clients provide session info
+* makes for more light-weight servers
+
+=== Cacheable
+
+* typically same input yields same output
+* non-cacheable responses are explicit
+* https://redis.io/[caching proxies] can be used with a REST API to great effect
+
+=== Layered
+
+* intermediary services are possible
+* client may connect through proxy (load balancer) without knowing
+* single app can be serviced by multiple servers
+* allows for scalability
+
+=== Uniform
+
+* resource ID in requests
+* resource manipulation through representations
+* self-descriptive messages
+* hypermeida as the engine of application state (HATEOAS)
+** server provides links to dynamically discover resources
+
+[.shrink]
+== HTTP Methods Used
+
+GET::
+    get a representation of the target resource's state
+POST::
+    let the target resource process the representation in the enclosed request
+PUT::
+    create or replace the state of the target resource with the state defined by the representation enclosed in the request
+DELETE::
+    delete the target resources state
+    
+== What does it look like?
+
+Get all the BakedGoods:
+
+[source, text]
+----
+Request: GET http://localhost:8000/baked_goods
+Response: HTTP/1.1 OK 200
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "name": "Chocolate Chip",
+            "desc": "chewy and delicious",
+            "good_type": "CO",
+            "price": 2.0,
+            "baked_on": "2021-11-24Z10:47",
+            "url": "http://localhost:8000/baked_goods/1/",
+        },
+        {
+            "name": "Brownie",
+            "desc": "super-delicious",
+            "good_type": "BR",
+            "price": 1.0,
+            "baked_on": "2021-11-24Z10:47",
+            "url": "http://localhost:8000/baked_goods/2/",
+        }
+    ]
+}
+----
+
+== What does it look like? (part 2)
+
+[source, text]
+----
+Request: PUT http://localhost:8000/baked_goods/1
+{
+    "name": "Chocolate Chip",
+    "desc": "Now bigger!",
+    "good_type": "CO",
+    "price": 3.0,
+    "baked_on": "2021-11-24Z11:00",
+    "url": "http://localhost:8000/baked_goods/1/",
+}
+Response: HTTP/1.1 OK 200
+----
+
+== How do we implement it?
+
+* You could make every view and serialized response by hand (don't)
+* https://www.django-rest-framework.org[Django REST Framework]
+* Creates base classes for serializers
+* Creates URL routers
+* Let's see if we can use the https://www.django-rest-framework.org/tutorial/quickstart/[Quickstart Tutorial] with our project
