@@ -10,6 +10,14 @@ image::https://cloud.githubusercontent.com/assets/11352152/14549371/3cbb65da-028
 * We will add a `baked_on` date and time to our `BakedGood` model to give us a reason to
   use it
 
+== Why not an HTML5 datetime-local?
+
+* HTML5 has support for a date picker
+* <input type="datetime-local">
+* Not the same across browsers
+* Output/Input format can be tricky
+* Not as easily styled
+
 == Adding a date to the model
 
 === Update the model

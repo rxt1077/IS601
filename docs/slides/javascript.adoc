@@ -186,6 +186,14 @@ urlpatterns = [
 ]
 ----
 
+== Compiling to JS
+
+* Many languages take advantage of how ubiquitous JS is
+* TypeScript: adds types to JS
+* Kotlin: JVM or JS, supports Android Development
+* ReasonML: OCaml like type-safety. Comes from Facebook (React)
+* ClojureScript: functional programming, LISP
+
 == Further Topics
 
 * JavaScript rendering libraries: https://reactjs.org/[React], https://vuejs.org/[Vue.js], https://angularjs.org/[AngularJS]
