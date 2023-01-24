@@ -12,27 +12,18 @@ In this exercise, we will be:
 == Installing Python and pip
 
 Python is the programming language that Django uses.
+You can download the https://www.python.org/downloads/[latest version here].
 
 === Windows
 
 You can test to see if you have Python installed by running `py --version` in a
 terminal. You should see something > 3.8.
 
-If you do not already have Python 3 installed, you can use this
-https://www.python.org/ftp/python/3.10.7/python-3.10.7-amd64.exe[Windows installer package].
-Alternative packages can be found
-https://www.python.org/downloads/release/python-3107/[here].
-
 === MacOS
 
 MacOS comes with Python 2, which is depreciated. You can test to see if you
 have Python 3 installed by running `python3 --version` in a terminal. You
 should see something > 3.8.
-
-If you do not already have Python 3 installed, you can use this
-https://www.python.org/ftp/python/3.9.7/python-3.9.7-macos11.pkg[MacOS installer package].
-Alternative packages can be found 
-https://www.python.org/downloads/release/python-397/[here].
 
 == Creating an Example Project Directory
 
