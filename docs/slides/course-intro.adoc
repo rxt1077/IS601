@@ -4,8 +4,8 @@
 
 [horizontal]
 Instructor:: Ryan Tolboom
-Meeting Dates:: Jersey City Mondays 6:00PM - 8:50PM
-Office Hours:: Jersey City Mondays 5:00PM - 6:00PM, Webex (email for appt)
+Meeting Dates:: Jersey City Fridays 6:00PM - 8:50PM
+Office Hours:: Jersey City Fridays 5:00PM - 6:00PM, Webex (email for appt)
 
 == What is a web system?
 
