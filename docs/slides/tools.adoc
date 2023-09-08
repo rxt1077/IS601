@@ -21,15 +21,16 @@ The learning curve is steep].
 === https://code.visualstudio.com/[Visual Studio Code]
 
 * vscode is a modern Integrated Development Environment (IDE)
-* rapidly gaining adoption and is certainly worth checking out
+* many integrations, certainly worth checking out
 * runs on multiple platforms
 
 === https://notepad-plus-plus.org/downloads/[Notepad{plus}{plus}]
 
 * popular Windows GUI text editor
-* starts quickly, and many things work right out of the box.
+* starts quickly, and many things work right out of the box
 * if you want something like notepad, but a little more versatile, then this is
-  for you.
+  for you
+* https://www.bleepingcomputer.com/news/security/notepad-plus-plus-857-released-with-fixes-for-four-security-vulnerabilities/[big security breach recently!]
 
 === https://macromates.com/[TextMate]
 
@@ -148,3 +149,4 @@ image::docker.png[width=25%]
 
 * We will be running Python natively with Django installed in a virtual environment.
 * I will demonstrate using VSCode, but it is important to note that any editor/terminal combination can be used.
+* Virtualization solutions like Docker and WSL2 can become really important when you talk about deployment
