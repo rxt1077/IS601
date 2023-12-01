@@ -58,9 +58,9 @@ task :exercises => [:exercisesdirs] do
   end
 end
 
-desc 'Deploys the output directory to https://web.njit.edu/~rxt1077/web_systems'
+desc 'Deploys the output directory to https://web.njit.edu/~rt494/web_systems'
 task :deploy do
-  sh "rsync --delete -av #{outputdir}/ rxt1077@afs22.njit.edu:public_html/web_systems/"
+  sh "rsync --delete -av #{outputdir}/ rt494@afs22.njit.edu:public_html/web_systems/"
 end
 
 desc 'Builds all documents'
