@@ -1,3 +1,4 @@
 docs/output
-meshmap/virtual_env
 __pycache__
+venv
+exercise_1/exercise_1.py

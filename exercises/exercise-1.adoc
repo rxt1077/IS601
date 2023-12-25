@@ -1,0 +1,16 @@
+= Exercise 1
+
+Write a Python script that gives a user up to three attempts to input the phrase "Hello world".
+If the phrase is input correctly, print "Good job" and end the program.
+Each time the phrase is input incorrectly, print "Please try again".
+After three incorrect attempts print "Attempts exceeded" and end the program.
+
+Submit your Python script for this assignment with the filename <FirstName_LastName>.py, where <FirstName> is your first name and <LastName> is your last name
+Remember, this will be automatically tested so capitalization, punctuation, and spelling matters!
+
+In case you're curious, here's the Python script that will be used to test your program:
+
+[source,python]
+----
+include::../exercise_1/test_exercise_1.py[]
+----
