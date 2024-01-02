@@ -51,3 +51,8 @@
 .reveal code {
     background: #E0E0E0;
 }
+
+/* hide certain things from view */
+.hidden {
+    display: none;
+}

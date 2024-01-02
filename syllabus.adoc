@@ -174,8 +174,8 @@ a|* Python Conventions
 * Lists, Dictionaries and Iteration
 * Strings
 * Functions
-* Version Control and git
 * Python Modules, Packages, and Virtual Environments
+* Version Control and git
 * Pytest
 a|* <<algorithm>>
 * <<write_script>>

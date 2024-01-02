@@ -2,3 +2,4 @@ docs/output
 __pycache__
 venv
 exercise_1/exercise_1.py
+exercise_2/count_caps.py
