@@ -185,12 +185,11 @@ a|* <<algorithm>>
 * <<use_modules>>
 
 |Week {counter:week}
-a|* GitHub
-* Test Driven Development
+a|* Classes
 * Exceptions
 * File Operations
-* Classes
 * JSON
+* GitHub
 a|* <<algorithm>>
 * <<write_script>>
 * <<conventions>>
@@ -202,7 +201,6 @@ a|* Namespaces and Scope
 * Elements of Pythonic Style
 * Linters and Formatters
 * Project Structure
-* Inheritance
 a|* <<algorithm>>
 * <<write_script>>
 * <<conventions>>

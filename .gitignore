@@ -1,4 +1,4 @@
-docs/output
+output
 __pycache__
 venv
 exercise_1/exercise_1.py

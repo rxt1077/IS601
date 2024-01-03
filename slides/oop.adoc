@@ -1,0 +1,165 @@
+= Object Oriented Programming in Python
+:figure-caption!:
+
+== Terminology
+
+.Source: https://medium.com/future-vision/intro-to-oop-with-python-39ba63967e45[Intro to Object Oriented Programming in Python by Winston Robson]
+image::oop.webp[]
+
+[.columns]
+== Classes
+
+[.column]
+[source,python]
+----
+class Pokemon:
+    def __init__(self, name, ptype, health):
+        self.name = name
+        self.ptype = ptype
+        self.health = health
+
+    def attack(self):
+        # do attack stuff
+
+    def dodge(self):
+        # do dodge stuff
+
+    def evolve(self):
+        # do evolve stuff
+----
+
+[.column.shrink]
+* classes are defined with the `class` keyword
+* they have a reference to their object: `self`
+* they store attributes (name, type, health) _and_ methods (attack, dodge, evolve)
+* `\\__init__()` is called when an object is made
+* https://peps.python.org/pep-0008/#class-names[class names should be CapWords]
+
+== Creating Objects
+
+[source,python]
+----
+pikachu = Pokemon("Pikachu", "Electric", 70)
+print(pikachu.name)
+----
+
+* you create an instance of a class by passing `\\__init__()` arguments to it
+* now you have an object that represents a single Pokemon
+* this way you can reuse code and still have many different Pokemon
+* instances should be snake_case
+
+== OOP Concepts
+
+[plantuml,target=oop_concepts.svg,format=svg]
+----
+@startuml
+
+rectangle object [
+Object
+--
+code blocks that
+make up the app
+]
+
+rectangle class [
+Class
+--
+an object with 
+attributes and
+methods
+]
+
+rectangle pillars as "Pillars of OOP" {
+    rectangle inherit [
+        Inheritance
+        --
+        reusing classes as
+        the basis for other
+        classes
+    ]
+
+    rectangle poly [
+        Polymorphism
+        --
+        classes have the
+        same "shape"
+        (ways of doing
+        things, method
+        names)
+    ]
+
+    rectangle abs [
+        Abstraction
+        --
+        details of how a
+        class works are
+        hidden
+    ]
+
+    rectangle enc [
+        Encapsulation
+        --
+        classes hold
+        methods and
+        attributes
+    ]
+}
+
+object -> class
+class -> inherit
+inherit -> poly
+poly -> abs
+abs -> enc
+
+@enduml
+----
+
+=== Abstraction
+
+* To use our `Pokemon` class, you don't need to know much about how it works
+* We could put it in a Python package, distribute it, and with a little documentation others could start using it
+* This allows more complex apps to be built without having to worry about the details
+* It's a _huge_ selling point for the Python ecosystem 
+
+=== Inheritance
+
+[source,python]
+----
+class LegendaryPokemon(Pokemon):
+    def __init__(self, name, ptype, health, legendary_group):
+        super().__init__(name, ptype, health)
+        self.legendary_group = legendary_group
+
+    def legendary_attack(self):
+        # do legendary attack stuff
+----
+
+* you can build classes based off other classes
+* this allows you to add new methods or attributes and _inherit_ the existing methods and attributes 
+* it allows for more DRY (don't repeat yourself) code
+* `super()` accesses the parent class
+
+=== Encapsulation
+
+* Our `Pokemon` class keeps all the data we need about a Pokemon in one place
+* It provides access to methods for working with that data
+* This makes it easy to "wrap up" a concept and keep control over how it changes in the application
+
+=== Polymorphism
+
+* By designing our classes with similar methods and attributes we can make them "look" the same
+* Perhaps every character has a health attribute, trainers _and_ Pokemon
+* This makes it easier to work with the classes we create
+* It makes code more consistent and predictable
+* Inheritance can definitely help achieve this
+
+== Try it Out
+
+[IMPORTANT]
+====
+. Open VSCode and create a Python file named _trainer.py_.
+. In that file, create a class called Trainer that has a `name` attribute and a `health` attribute.
+. Add a `print_info()` method to your class that prints _My name is <name> and I have <health> health_ (where <name> and <health> are the trainer's name and health).
+. In an interactive Python shell import that file and create a instance of `Trainer` with the name _Ash_ and _100_ health.
+. While you have the shell open, test to see that `print_info()` works. 
+====

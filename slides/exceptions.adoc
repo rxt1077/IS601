@@ -1,0 +1,69 @@
+= Exceptions
+
+image::error.jpg[width=50%]
+
+== Runtime Errors
+
+* Because Python is interpreted, many errors are caught when things execute
+* These errors _raise_ exceptions: `ZeroDivisionError`, `NameError`, `TypeError`, etc.
+* Exceptions are Python classes that extend `BaseException`
+* https://docs.python.org/3/library/exceptions.html#bltin-exceptions[You can find all the built-in exceptions here.]
+
+== Handling Exceptions
+
+[source,python]
+----
+while True:
+    try:
+        print("Can't stop, won't stop, never intend to.")
+    except KeyboardInterrupt:
+        print("Control-C can't help you now my friend.")
+----
+
+* Unhandled exceptions cause the program to stop
+* But exceptions in a `try` statement _can_ be handled
+
+== Handling Multiple Exceptions
+
+[source,python]
+----
+try:
+    # some code
+except OSError as err:
+    print(f"OS error: {err}")
+except ValueError as err:
+    print(f"Value error: {err}")
+except Exception as err:
+    print(f"Unexpected: {err}, {type(err)}")
+----
+
+== `else` and `finally`
+
+[source,python]
+----
+try:
+    # some code
+except Exception:
+    print("There was an exception")
+else:
+    print("There wasn't an exception")
+finally:
+    print("This gets run no matter what")
+----
+
+== Raising User-Defined Exceptions
+
+[source,python]
+----
+class TooManyPuppiesError(Exception):
+    pass <1>
+
+if puppies > 3:
+    raise TooManyPuppiesError("No way you can care for that many puppies!")
+----
+<1> `pass` is just a way of saying "do nothing" when you still need to define a block
+
+[.shrink]
+* You can raise exceptions on demand with the `raise` keyword: `raise NameError("Testing")`
+* The Exception class takes a string message when the instance is created (in it's constructor)
+* It is more common to raise a user-defined exception which can easily be created from the `Exception` class:

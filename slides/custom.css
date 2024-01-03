@@ -56,3 +56,8 @@
 .hidden {
     display: none;
 }
+
+/* admonition icons should be in the middle */
+td.icon {
+    vertical-align: middle;
+}
