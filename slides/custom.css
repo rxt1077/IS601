@@ -61,3 +61,8 @@
 td.icon {
     vertical-align: middle;
 }
+
+/* make syntax highlighted whitespace the same color as the code block background */
+pre.rouge .w {
+    background-color: #E0E0E0;
+}
