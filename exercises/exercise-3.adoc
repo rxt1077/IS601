@@ -1,0 +1,38 @@
+= Exercise 3
+
+In https://github.com/rxt1077/is601[the class git repo] that you cloned last week you will find a folder named _exercise_3_.
+Open that folder in VSCode, create a virtual environment, activate it, and install `pytest`.
+
+Your job is to create a file named _exercise_3.py_ with a class named _Exercise3_.
+Your class will have a constructor (`__init__()`) that takes a file name as an argument.
+That file will be a JSON file with the following structure:
+
+.exercise_3/example.json
+[source,json]
+----
+include::../exercise_3/example.json[]
+----
+
+Your class should read this file, parse the contents, and expose the following methods:
+
+[cols="1,4"]
+|===
+|Method Name|Description
+
+|`get_username()`
+|returns the username
+
+|`get_time_remaining()`
+|returns the time remaining
+
+|`add_hour()`
+|adds 60 to the time remaining
+
+|`get_items()`
+|returns a list of the names of the items in the cart
+
+|`get_total()`
+|returns the total cost of the items in the shopping cart
+|===
+
+You can test your file using the tests and sample data provided.

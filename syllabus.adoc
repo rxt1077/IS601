@@ -189,7 +189,6 @@ a|* Classes
 * Exceptions
 * File Operations
 * JSON
-* GitHub
 a|* <<algorithm>>
 * <<write_script>>
 * <<conventions>>
@@ -201,6 +200,7 @@ a|* Namespaces and Scope
 * Elements of Pythonic Style
 * Linters and Formatters
 * Project Structure
+* GitHub
 a|* <<algorithm>>
 * <<write_script>>
 * <<conventions>>
