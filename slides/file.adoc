@@ -1,0 +1,113 @@
+= File Operations
+
+image::file.png[width=50%]
+
+== `open()`
+
+* file operations in Python start with `open()`
+* the open function takes a _filename_ and a _mode_
+
+=== Modes
+
+[.shrink]
+[cols="1,1,5"]
+|===
+|Flag|Name|Description
+
+|"r"|Read|Opens a file for reading, error if it does not exist
+|"a"|Append|Opens a file for appending, creates the file if it does not exist
+|"w"|Write|Opens a file for writing, creates the file if it does not exist
+|"x"|Create|Creates the file, error if it already exists
+|"t"|Text|Text mode (default)
+|"b"|Binary|Binary mode
+
+|===
+
+=== Examples
+
+[source,python]
+----
+file_object = open('workfile.txt', 'w')
+file_object = open('workfile.txt', 'wt')
+file_object = open('image.jpg', 'b')
+----
+
+== `read()`
+
+* a method of a file object
+* calling it without any arguments will read the whole file
+* you can also specify how many characters you want to read in the argument
+
+== `readline()`
+
+* another file object method that reads one line at a time
+* fall it multiple times to read multiple lines
+
+=== Examples
+
+[source,python]
+----
+file_object = open('workfile.txt', 'r')
+print(file_object.read()) <1>
+file_object.close()
+
+file_object = open('workfile.txt', 'r')
+print(file_object.read(10)) <2>
+file_object.close()
+
+file_object = open('workfile.txt', 'r')
+print(file_object.readline()) <3>
+file_object.close()
+
+file_object = open('workfile.txt', 'r')
+for line in file_object: <4>
+    print(line)
+file_object.close()
+----
+<1> prints _all_ of the file
+<2> prints the first 10 characters of the file
+<3> prints the first line of the file
+<4> iterates through the file, printing _lines_ one-by-one
+
+== `with`
+
+[source,python]
+----
+with open('workfile.txt', 'r') as file_object:
+    for line in file_object:
+        print(line)
+----
+
+* Notice how we had to close the file at the end in the examples?
+* We can use a `with` statement to make sure we don't forget to close the file
+* This will automatically close the file when we leave the `with` block
+
+== `write()`
+
+[source,python]
+----
+with open('workfile.txt', 'w') as file_object:
+    file_object.write("This line will replace the content in the file")
+----
+
+* The `write()` member allows you to write to a file
+* Depending on the mode ("a", "w", "x"), the contents will be overwritten or appended to
+
+== File Helpers in the `os` Module
+
+[source,python]
+----
+import os
+
+os.remove('workfile.txt') <1>
+
+if os.path.exists('workfile2.txt'): <2>
+    print("The second file still exists")
+
+os.mkdir('work_folder') <3>
+os.rmdir('work_folder') <4>
+----
+<1> remove a file
+<2> check if a file exists
+<3> make a directory
+<4> remove a directory
