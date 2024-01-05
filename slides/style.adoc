@@ -1,0 +1,66 @@
+= Elements of Pythonic Style
+
+== The Importance of Style
+
+* Because Python supports so many different ways of doing things, developers try to enforce a particular style
+* You may hear something called _pythonic_ or _idiomatic_, basically meaning the way things are usually done in Python
+* We touched on https://peps.python.org/pep-0008/[PEP 8] earlier, but now we'll go into more practical detail
+
+== Write for Humans
+
+[source,python]
+----
+value1, value2, value3 = ["item1", "item2", "item3"]
+
+my_list = [name.title() for name in ['billy', 'terrance', 'divesh', 'Monica']]`
+
+for i, item in my_list.enumerate():
+    print(f"Item number {i} is {item}")
+
+merged_dict = my_dict1 | my_dict2
+----
+
+* Code is read more than it's written
+* multiple assignments, list comprehensions, `enumerate()`, and the union operator
+* list comprehensions
+
+== Test things Interactively
+
+* One of the advantages of an interpreted language is that you can run it interactively
+* Get used to importing your code a trying things out
+
+IMPORTANT: Use the Python interactive mode to examine what the union operator on the previous slide does. Create two dictionaries and see what the result of a union between the two of them is.
+
+== Linters and Formatters
+
+* Since there's a modern emphasis on automation, why not automate style?
+* That's exactly what these next tools do.
+
+== Pylint
+
+[source,text]
+----
+(venv) PS C:\Users\rxt1077\is601\exercise_1> pylint .\exercise_1.py
+************* Module exercise_1
+exercise_1.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+exercise_1.py:6:0: C0103: Constant name "attempts" doesn't conform to UPPER_CASE naming style (invalid-name)
+exercise_1.py:9:4: R1723: Unnecessary "else" after "break", remove the "else" and de-indent the code inside it (no-else-break)
+
+-----------------------------------
+Your code has been rated at 7.00/10
+----
+
+* Static code analyser
+* `pip install pylint`
+* Checks for errors, enforces coding standards, looks for code smells, and can make suggestions about how the code could be refactored
+
+== [.hidden]#Black#
+
+image::black.png[width=50%]
+
+* “Any color the customer wants, as long as it’s black.” --Henry Ford
+* Uncompromising code formatter
+* `pip install black`
+* Automatically reformats your code, no questions asked (and no compromises possible)
+
+== Project Structure

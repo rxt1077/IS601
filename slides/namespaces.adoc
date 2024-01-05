@@ -1,4 +1,4 @@
-= Namespaces
+= Namespaces and Scope
 
 [plantuml,target=namespace.svg,format=svg]
 ....
