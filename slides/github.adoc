@@ -1,0 +1,17 @@
+= GitHub
+
+image::github.svg[width=50%]
+
+== What is GitHub?
+
+* provides a remote git repo with a web interface
+* continuous integration/continuous deployment via GitHub Actions (things can be automatically tested and deployed)
+* bug tracking via GitHub issues
+* collaboration via fork-and-PR model
+
+== Try it Out
+
+IMPORTANT: Follow the https://docs.github.com/en/get-started/quickstart[Quickstart Guide] at least up to _Hello World_. Be sure to use your NJIT UCID email address.
+
+* You can now use GitHub to host your project
+* If you host it as a private repo, be sure to add my GitHub account, rxt1077, as a collaborator so I can see it

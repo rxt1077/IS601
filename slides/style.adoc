@@ -64,3 +64,10 @@ image::black.png[width=50%]
 * Automatically reformats your code, no questions asked (and no compromises possible)
 
 == Project Structure
+
+[.shrink]
+* Typically the whole project is one git repo.
+* Make a `README.md` file. Everyone has opinions on text formats, but https://www.markdownguide.org/[Markdown] seems to have one the day. GitHub will render this when someone views your repo.
+* If you're working in a virtual environment, `pip freeze` will provide output to make a `requirements.txt` file. This will allow anyone who has cloned your repo to get started easily (`pip -r requirements.txt`).
+* A `pyproject.toml` file can be used create a Python package
+* A `.gitignore` file can be useful for excluding your virtual environment and byte-compiled Python
