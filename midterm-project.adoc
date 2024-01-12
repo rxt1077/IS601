@@ -1,0 +1,63 @@
+= Midterm Project
+
+image::https://upload.wikimedia.org/wikipedia/commons/6/67/Dosa_Sambar_Chutney.jpg[Dosa,480,360,float="right"]
+
+The owner of a new https://en.wikipedia.org/wiki/Dosa_(food)[Dosa] restaurant wants you to take a look at the orders they've received in the past year and see if you can help them design a better system.
+So far all they have kept track of are the individual orders that have come in.
+
+Inside the _midterm_project_ directory in the https://github.com/rxt1077/is601.git[class git repo] you will find a file called _example_orders.json_ that contains sample data for you to work with.
+You can practice with this data but please note that a new set of orders will be generated (using the same format) to evaluate your project.
+
+Your goals are to write a Python script that:
+
+. Reads the JSON orders from a file whose https://docs.python.org/3/library/argparse.html[name is passed as the first positional argument]
+. Creates a new JSON file named _customers.json_ that contains an object with phone numbers as keys and customers names as values. The phone number and customer name should both be strings and the phone number should be of the form _xxx-xxx-xxxx_
++
+[source,json]
+----
+{
+    "609-555-0124": "Karl",
+    "732-555-1234": "Mike",
+    ...
+----
+. Create a new JSON file named _items.json_ that contains an object with item names (string) as keys and an object with price (key=price, number) and number of times it has been ordered (key=orders, number) as a value:
++
+[source,json]
+----
+{
+    "Butter Masala Dosa": {
+        "price": 12.95,
+        "orders": 52
+    }
+    "Butter Mysore Masala Dosa": {
+        "price": 11.95,
+        "orders": 12
+    }
+    ...
+----
+
+The following rubric will be used to evaluate your project:
+
+[cols="1,1,4"]
+|===
+|Category|Points Available|Description
+
+|Version Control
+|5
+a|Your project should be hosted in a git repository on GitHub.
+Private repositories are fine, just make sure that _rxt1077_ is invited as a collaborator.
+Your repository should have a commit log with at least three commits demonstrating _your_ progress in working on this project.
+
+|Python Conventions
+|5
+a|Your project should follow Python conventions for programming style and use idiomatic Python approaches to solving problems.
+
+|Documentation
+|5
+a|Your project should include a _README.md_ file in the root of the project explaining what it does, how it is designed, and how to use it.
+
+|Functionality
+|10
+a|Your project should implement the core functionality as described in the goals above.
+|===
+

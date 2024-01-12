@@ -69,10 +69,21 @@ task :syllabus do
   )
 end
 
+desc 'Converts midterm-project.adoc into HTML5'
+task :midterm_project do
+  puts 'Converting midterm-project.adoc...'
+  Asciidoctor.convert_file(
+    'midterm-project.adoc',
+    to_dir: "#{outputdir}",
+    backend: 'html5',
+    safe: :unsafe,
+  )
+end
+
 desc 'Deploys the output directory to https://web.njit.edu/~rt494/python_web_api'
 task :deploy do
   sh "rsync --delete -av #{outputdir}/ rt494@afs22.njit.edu:public_html/python_web_api/"
 end
 
 desc 'Builds all documents'
-task :default => [:slides, :exercises, :syllabus]
+task :default => [:slides, :exercises, :syllabus, :midterm_project]

@@ -1,0 +1,83 @@
+= Python Part 3
+
+image::python_meme_2.jpg[width=33%]
+
+== Lambda
+
+* Python supports anonymous functions through the `lambda` keyword
+* Python's first-class functions mean you can pass functions as arguments
+* Sometimes this can make your life a little bit easier
+* Fun Fact: The lambda keyword is named after Lambda Calculus which was invented by Alonzo Church in Princeton NJ in 1936!
+
+=== sorted
+
+[source,python]
+----
+list_of_dicts = [
+    {'student_id': 8675309, 'grade': 80},
+    {'student_id': 8770909, 'grade': 70},
+    {'student_id': 8553210, 'grade': 60},
+]
+
+by_grade = sorted(list_of_dicts, key=lambda element: element['grade'])
+----
+
+* built-in function that returns a new sorted list
+* has an optional argument `key` which specifies a function used to extract a comparison key from each element 
+
+== Sets
+
+* a type for when you need multiple things with no duplicates
+* does _not_ preserve order
+* uses curly braces: `{}` (like Dictionaries)
+* you can add and remove items but can't change an item in a set
+* supports intersection, `&`, union, `|`, and difference, `-` 
+
+== Set Example
+
+[source,python]
+----
+set_1 = {0, 2, 4, 6}
+set_2 = {1, 2, 3, 4, 5, 6}
+
+set_1.add(8)
+print(set_1)
+
+set_1.add(8)
+print(set_1)
+
+set_1.remove(8)
+print(set_1)
+
+print(set_1 & set_2)
+print(set_1 | set_2)
+print(set_2 - set 1)
+----
+
+IMPORTANT: Try this in interactive Python. What does each print statement print?
+
+== Tuples
+
+* built-in data type for storing collections of data
+* not used nearly as much as Lists or Dictionaries, but still worth knowing
+* uses parentheses
+* ordered, unchangeable, and allows duplicates
+
+== Tuple Example
+
+[source,python]
+----
+my_tuple = ("abc", 1, "def", 2)
+
+print(my_tuple[3])
+
+one_item_tuple = ("abc",)
+----
+
+IMPORTANT: Try this out in interactive Python. What does it print? Why do you need to trailing comma for a tuple with one item? What type do you get if you leave it off?
+
+== Casting
+
+== Optional Typing
+
+== Dates
