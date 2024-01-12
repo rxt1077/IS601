@@ -1,4 +1,4 @@
-= IS601: Introduction to Python and Web API Development
+= IS601: Web API Development in Python
 
 == Description
 
@@ -124,9 +124,9 @@ The course grade is weighted based on five assignment categories:
 |===
 |20%|Exercises
 |20%|Midterm
-|20%|Midterm Project Deliverables
+|20%|Midterm Project
 |20%|Final
-|20%|Final Project Deliverables
+|20%|Final Project
 |===
 
 == Exams
@@ -140,9 +140,7 @@ Exams and quizzes will be closed book and must be taken in the classroom if the 
 
 == Project
 
-This course will include an individual, semester-long project with midterm and final deliverables.
-Each student will create a proposal for their project.
-The proposals will be reviewed and deliverables corresponding to the material covered in the course will be assigned.
+This course will include an individual, midterm and final project.
 
 == Course Schedule
 
