@@ -140,7 +140,9 @@ Exams and quizzes will be closed book and must be taken in the classroom if the 
 
 == Project
 
-This course will include an individual, midterm and final project.
+This course will include a midterm and final project to be completed individually.
+The goal of the project is to give students a more long-term development experience than is possible with the weekly exercises.
+In order to maintain academic integrity, students will be asked to use a version control system so they can demonstrate through their commit log that they completed the project individually over the course of several weeks.
 
 == Course Schedule
 

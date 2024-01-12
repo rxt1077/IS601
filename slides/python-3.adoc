@@ -29,9 +29,10 @@ by_grade = sorted(list_of_dicts, key=lambda element: element['grade'])
 
 * a type for when you need multiple things with no duplicates
 * does _not_ preserve order
-* uses curly braces: `{}` (like Dictionaries)
+* items must be _hashable_ (no dicts)
+* uses curly braces: `{}` (like dicts)
 * you can add and remove items but can't change an item in a set
-* supports intersection, `&`, union, `|`, and difference, `-` 
+* supports intersection, `&`, union, `|`, and difference, `-`
 
 == Set Example
 
@@ -78,6 +79,52 @@ IMPORTANT: Try this out in interactive Python. What does it print? Why do you ne
 
 == Casting
 
+[source,python]
+----
+user_input = input()
+my_number = int(user_input)
+----
+
+* occasionally you may want to force something to have a type
+* you can do this with the above syntax
+* if an exception is a possiblity (such as `ValueError`), use `try/except` statements
+
 == Optional Typing
 
+[source,python]
+----
+def greeting(name: str) -> str:
+    return 'Hello ' + name
+----
+
+* https://mypy-lang.org/[mypy] is an optional static type checker for Python
+* you use it the same way you use linters
+* https://peps.python.org/pep-0484/[PEP 484] - describes how type hints can be put in Python
+
+IMPORTANT: What type of errors could you avoid by using typed Python?
+
 == Dates
+
+image::https://www.explainxkcd.com/wiki/images/thumb/9/9f/datetime_2x.png/679px-datetime_2x.png[comic,679,478,link="https://www.explainxkcd.com/wiki/index.php/2867:_DateTime" Write down/type your answer.]
+
+=== Python Datetime
+
+* Python includes classes for amniuplating dates and times in the `datetime` module
+* Traditionally Python has had issues with timezones (prompting Django to develop their own Date objects)
+* I advise you to stick to UTC as much as possible
+* Timestamps from the UNIX tradition sometimes use a monotonic clock counting seconds since the UNIX _epoch_: January 1st, 1970
+
+=== Datetime Examples
+
+[source,python]
+----
+from datetime import datetime
+import time
+
+todays_date = datetime.now()
+date_string = todays_date.isoformat()
+timestamp = time.time()
+also_todays_date = datetime.fromtimestamp(timestamp)
+----
+
+IMPORTANT: In an interactive Python shell try running the above code. What does ISO format look like? What does a timestamp look like?

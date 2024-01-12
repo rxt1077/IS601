@@ -1,0 +1,13 @@
+= Exercise 5
+
+In this exercise you will gain some practice using Python's `datetime` and `time` modules.
+Use VSCode to open up the _exercise_5_ directory in your copy of https://github.com/~rt494/is601.git[the class git repo] and add a new file named _dates.py_.
+You need to create the following functions in your _dates.py_ file:
+
+* A function named `my_datetime()` that takes a `DateTime` and returns a string in the form "YYYY MM DD HH mm SS" where Y represents a year digit, M represents a month digit, D represents a day digit, H represents and hour digit, m represents a minute digit, and S represents and second digit.
+* A function named `saturdays()` that returns a list of `Date` objects representing every Saturday from now until January 1st of next year. This list should be in chronological order.
+* A function named `first_or_fifteenth()` that returns True if a `Date` passed to it has a day that is the first or fifteenth of the month _and_ is not a Saturday or Sunday. It should return `False` otherwise.
+
+Be sure to test your project with the provided pytest tests.
+They will be used in grading your project.
+For this assignment, please submit your _dates.py_ file.
