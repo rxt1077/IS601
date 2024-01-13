@@ -1,0 +1,8 @@
+= Exercise 4
+
+In the _exercise_4_ directory, create a file named _triangle.py_ that can pass the tests in _test_triangle.py_.
+
+This description is purposefully vague as part of the exercise is to see if you can read and interpret pytest tests.
+One of the tests will also require you to https://www.digitalocean.com/community/tutorials/python-str-repr-functions[learn about the `\__str__()` method for Python classes].
+
+Submit the _triangle.py_ file that you create. 

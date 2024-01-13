@@ -1,0 +1,130 @@
+= Python Part 3
+
+image::python_meme_2.jpg[width=33%]
+
+== Lambda
+
+* Python supports anonymous functions through the `lambda` keyword
+* Python's first-class functions mean you can pass functions as arguments
+* Sometimes this can make your life a little bit easier
+* Fun Fact: The lambda keyword is named after Lambda Calculus which was invented by Alonzo Church in Princeton NJ in 1936!
+
+=== sorted
+
+[source,python]
+----
+list_of_dicts = [
+    {'student_id': 8675309, 'grade': 80},
+    {'student_id': 8770909, 'grade': 70},
+    {'student_id': 8553210, 'grade': 60},
+]
+
+by_grade = sorted(list_of_dicts, key=lambda element: element['grade'])
+----
+
+* built-in function that returns a new sorted list
+* has an optional argument `key` which specifies a function used to extract a comparison key from each element 
+
+== Sets
+
+* a type for when you need multiple things with no duplicates
+* does _not_ preserve order
+* items must be _hashable_ (no dicts)
+* uses curly braces: `{}` (like dicts)
+* you can add and remove items but can't change an item in a set
+* supports intersection, `&`, union, `|`, and difference, `-`
+
+== Set Example
+
+[source,python]
+----
+set_1 = {0, 2, 4, 6}
+set_2 = {1, 2, 3, 4, 5, 6}
+
+set_1.add(8)
+print(set_1)
+
+set_1.add(8)
+print(set_1)
+
+set_1.remove(8)
+print(set_1)
+
+print(set_1 & set_2)
+print(set_1 | set_2)
+print(set_2 - set 1)
+----
+
+IMPORTANT: Try this in interactive Python. What does each print statement print?
+
+== Tuples
+
+* built-in data type for storing collections of data
+* not used nearly as much as Lists or Dictionaries, but still worth knowing
+* uses parentheses
+* ordered, unchangeable, and allows duplicates
+
+== Tuple Example
+
+[source,python]
+----
+my_tuple = ("abc", 1, "def", 2)
+
+print(my_tuple[3])
+
+one_item_tuple = ("abc",)
+----
+
+IMPORTANT: Try this out in interactive Python. What does it print? Why do you need to trailing comma for a tuple with one item? What type do you get if you leave it off?
+
+== Casting
+
+[source,python]
+----
+user_input = input()
+my_number = int(user_input)
+----
+
+* occasionally you may want to force something to have a type
+* you can do this with the above syntax
+* if an exception is a possiblity (such as `ValueError`), use `try/except` statements
+
+== Optional Typing
+
+[source,python]
+----
+def greeting(name: str) -> str:
+    return 'Hello ' + name
+----
+
+* https://mypy-lang.org/[mypy] is an optional static type checker for Python
+* you use it the same way you use linters
+* https://peps.python.org/pep-0484/[PEP 484] - describes how type hints can be put in Python
+
+IMPORTANT: What type of errors could you avoid by using typed Python?
+
+== Dates
+
+image::https://www.explainxkcd.com/wiki/images/thumb/9/9f/datetime_2x.png/679px-datetime_2x.png[comic,679,478,link="https://www.explainxkcd.com/wiki/index.php/2867:_DateTime" Write down/type your answer.]
+
+=== Python Datetime
+
+* Python includes classes for amniuplating dates and times in the `datetime` module
+* Traditionally Python has had issues with timezones (prompting Django to develop their own Date objects)
+* I advise you to stick to UTC as much as possible
+* Timestamps from the UNIX tradition sometimes use a monotonic clock counting seconds since the UNIX _epoch_: January 1st, 1970
+
+=== Datetime Examples
+
+[source,python]
+----
+from datetime import datetime
+import time
+
+todays_date = datetime.now()
+date_string = todays_date.isoformat()
+timestamp = time.time()
+also_todays_date = datetime.fromtimestamp(timestamp)
+----
+
+IMPORTANT: In an interactive Python shell try running the above code. What does ISO format look like? What does a timestamp look like?

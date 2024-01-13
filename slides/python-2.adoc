@@ -1,0 +1,274 @@
+= Even More Python
+
+image::python_meme.jpg[width=33%]
+
+== Conventions
+
+* Because Python is so loosely defined, it has a lot of _conventions_ to make things more consistent
+* Following these conventions makes code readable and debuggable
+* Many of these conventions are found in the https://peps.python.org[Python Enhanced Proposals (PEPs)]
+* Most of the following advice can be found in https://peps.python.org/pep-0008[PEP 8 - Style Guide for Python Code]
+
+=== Layout
+
+* Use spaces, not tabs. Your editor should handle this for you
+* Limit lines to 79 characters
+* Avoid too much whitespace
+
+=== String Quotes
+
+* Single-quotes and double-quotes are the same in Python
+* Pick a rule and stick to it
+* My rule is, "double quotes if a user will see the text, otherwise single"
+
+=== Trailing Commas
+
+[source,python]
+----
+my_list = [
+    "one string",
+    "two string",
+    "red string",
+    "blue string",
+    ]
+----
+
+* Some types use commas to separate elements
+* Sometimes these elements are on multiple lines
+* Adding a comma at the end prevents errors when you add more things
+
+=== Naming
+
+* variables have snake_case names: `this_is_a_variable`
+* classes use CapWords names: `ThisIsAClass`
+* constants (which really don't exist in Python) use all caps: `THIS_IS_A_CONSTANT` 
+* functions use snake_case: `this_is_a_function()`
+
+== Lists
+
+[source,Python]
+----
+my_list = ["a", "b", "c"]
+----
+
+* Lists are used to store multiple things in a single variable
+* They use square brackets
+* Lists preserve order and can have different data types
+
+=== Lists (continued)
+
+[source,Python]
+----
+my_list = ["a", "b", "c"]
+print(len(my_list))
+print(my_list[0])
+print(my_list[1])
+print(my_list[2])
+----
+
+* List length can be found with the `len()` function
+* Lists can be indexed with square brackets `[]`
+
+IMPORTANT: Open Python in interactive mode and type in the above statements. What output do you get?
+
+== Dictionaries
+
+[source,Python]
+----
+my_dict = {
+  'name': "Ryan",
+  'born': 1981,
+  'fav_color': "orange",
+}
+----
+
+* uses curly brackets and stores data in key:value pairs
+* can't use the same key twice
+* can reference data by key with square brackets: `my_dict['name']`
+
+== Iteration
+
+[source,Python]
+----
+my_list = ["a", "b", "c"]
+for item in my_list:
+    print(item)
+----
+
+* Now that we have Lists and Dictionaries it can be helpful to be able to go through each of the items
+* A `for` loop allows you to do exactly that
+
+IMPORTANT: Open Python in interactive mode and run the above statements. What output do you get?
+
+=== range()
+
+[source,python]
+----
+for i in range(0, 10):
+    print(i)
+----
+
+* sometimes you want something to iterate over a range of numbers
+* `range()` does this for you
+* the first argument is where to start (inclusive)
+* the last argument is where to end (exclusive)
+
+=== Iterating over a Dictionary
+
+[source,python]
+----
+my_dict = {
+  'name': "Ryan",
+  'born': 1981,
+  'fav_color': "orange",
+}
+for key, value in my_dict.items():
+    print(key, value)
+----
+
+* sometimes you want to iterate over a dictionary
+* in this case the `items()` method of a dictionary is your friend 
+
+== Strings
+
+* we've already used them, but things in single or double-quotes are strings
+* a string can be indexed like a list: `my_string[0]`
+* you can iterate through characters in a string with a for loop: `for character in my_string:`
+
+=== Multiline Strings
+
+[source,python]
+----
+"""
+You can use multiple lines for strings
+if you start with three single or double-quotes
+"""
+----
+
+=== Docstrings
+
+[source,python]
+----
+def a_function():
+"""An example function"""
+----
+
+* You may see strings as the first statement in a module, function, class or method.
+* These are Docstrings and they're used to document the code.
+* Their usage is detailed in https://peps.python.org/pep-0257[PEP-257]
+
+=== Format Strings
+
+[source,python]
+----
+variable_1 = "Ryan"
+variable_2 = 1981
+format_string = f"My name is {variable_1} and I was born in {variable_2}."
+print(format_string)
+----
+
+* A string that has an `f` before the first quote is a format string
+* It allows you to subsitute variables _into_ the string
+
+IMPORTANT: Open Python in interactive mode and create a variable with your name and the year you were born. Use a format string to make a string that states your name an age and then print it out to make sure it worked.
+
+== Functions
+
+[source,python]
+----
+def my_function(x, y): <1> <2> <3>
+    print(f"The arguments are {x} and {y}")
+    return x + y <4>
+----
+<1> The `def` keyword defines a function
+<2> This function takes two arguments and puts them in the variables `x` and `y`
+<3> The `:` means the next indented area is our function code
+<4> A return statement give the result back to whatever called the function
+
+=== Functions (continued)
+
+* Functions are useful when you need to do something over and over again
+* You can return more than one thing in a dictionary
+* Functions are typically defined _before_ they are called
+
+=== Calling Functions
+
+[source,python]
+----
+def my_function(x, y):
+    print(f"The arguments are {x} and {y}")
+    return x + y
+
+print(my_function(1, 2)) <1>
+----
+<1> The function is called here
+
+== Modules
+
+* A Python module is code that you can load from another Python script
+* To make a Python module, just save a file with the `.py` extension
+* To use a Python module, use the `import` statement
+
+[.columns]
+=== Modules Example
+
+[.column]
+--
+.my_module.py
+[source,python]
+----
+def my_function(x, y):
+    return x + y
+----
+--
+
+[.column]
+--
+.using_a_module.py
+[source,python]
+----
+import my_module
+
+print(my_module.my_function(1, 2))
+----
+--
+
+=== Modules Practice
+
+IMPORTANT: Using VSCode create a Python module with a function. Use Python in interactive mode to import your Python module and run the function.
+
+== Packages
+
+* Python packages are distributions of modules that anyone can use
+* The Python package manager, PIP, can be used to install packages
+* Once you have a package installed, the import statement can be used to use its module
+
+=== Using PIP
+
+[.shrink]
+* Packages can be installed with the `pip install` command (or `py -m pip install` if `pip` isn't in your PATH on Windows)
+* Packages can be uninstalled with the `pip uninstall` command (or `py -m pip uninstall`)
+* Packages installed this way will be available to all your Python scripts
+* Unfortunately different scripts may call for different versions of packages
+* This can get out of hand _quickly_
+* So what do we do?
+
+[.columns]
+== Virtual Environments
+
+[.column]
+image::venv.webp[link=https://medium.com/@TejasEkawade/installing-python-virtual-environments-cb865c3147a7]
+
+[.column.shrink]
+* Virtual environments can have individual versions of packages and the Python interpreter itself
+* In this way each app can have it's own, individual dependency packages
+* The venv module (built in) supports creating virtual environments
+* `py -m venv venv` would create a virtual environment in the current directory with the name `venv`
+
+=== Activating Virtual Environments
+
+* Once you have a virtual environment, you need to activate it before you can use it
+* In Windows this is done via the `venv/Scripts/activate` command
+* From then on any packages you install will be installed in the virtual environment
+
+IMPORTANT: In a terminal, create a new directory and make a virtual environment inside it. Activate the virtual environment. How do you know it's active? Install the `pytest` package. How do you know it's installed? 

@@ -1,0 +1,74 @@
+= JSON
+
+image::json.webp[width=50%]
+
+== JSON
+
+* stands for JavaScript Object Notation
+* plaintext format commonly used to exchange information
+* _very_ simple, only has a few types (corresponding to JavaScript): `Object`, `Array`, `String`, `Number`, `true`, `false`, and `null`.
+* does not support comments or type information by default
+* _very_ popular
+
+== JSON Objects
+
+[source,json]
+----
+{
+    "key": "value",
+    "key2": "value2" <1>
+}
+----
+<1> no trailing comma in JSON!
+
+* Objects are enclosed in curly braces ({})
+* they are a list of key value pairs
+* they can be nested
+
+== JSON Arrays
+
+[source,json]
+----
+["one", "two", "three", "four"]
+----
+
+* Arrays are enclosed in square braces ([])
+* they can be nested
+
+== Python `json`
+
+* Python has a module for dealing with JSON: `json`
+* It converts JSON objects to Python dicts and vice versa
+* It can work with Strings or file objects:
+
+== Examples
+
+[source,python]
+----
+import json
+
+EXAMPLE_JSON_STRING = '{ "eggs": 2.25, "milk": 2.50, "cheese": 3.00 }'
+EXAMPLE_PYTHON_DICT = {
+  "waffles": 5.00,
+  "cereal": 6.00,
+  "oatmeal": 3.00,
+}
+
+dict_result = json.loads(EXAMPLE_JSON_STRING) <1>
+print(dict_result)
+
+json_result = json.dumps(EXAMPLE_PYTHON_DICT) <2>
+print(json_result)
+
+with open("example.json") as f: <3>
+    dict_result = json.load(f)
+
+with open("example.json") as f: <4>
+    json.dump(EXAMPLE_PYTHON_DICT, f)
+----
+<1> reading JSON from a string
+<2> writing JSON to a string
+<3> reading JSON from a file
+<4> writing JSON to a file
+
+

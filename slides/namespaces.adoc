@@ -1,0 +1,82 @@
+= Namespaces and Scope
+
+[plantuml,target=namespace.svg,format=svg]
+....
+rectangle "Built-in" {
+    rectangle "Global" {
+        rectangle "Local"
+    }
+}
+....
+
+== What are namespaces?
+
+* When objects are created Python store information about their names
+* These namespaces help determine the scope of an object and what names can be used
+* It's important not to _pollute_ a namespace or use too general a namespace for a short-lived object
+
+== Built-in
+
+* These functions/variables are always available in Python
+* `print` would be an example
+* You can't use the same name as a Python built-in
+* Remember how we used `ptype` for Pokemon type in the `Class` example instead of just `type`?
+
+== Global
+
+[source,python]
+----
+my_global_variable = 42
+
+def print_answer():
+    print(my_global_variable)
+----
+
+* When you create a module you have a global namespace
+* Things in the global namespace are available anywhere within the module
+
+== Global (continued)
+
+[source,python]
+----
+my_global_variable = 42
+
+def increment_answer():
+    global my_global_variable
+    my_global_variable += 1
+----
+
+* If you don't want Python confusing the global and local namespaces, you have to let Python know that you're going to be using the global namespace for that variable with the `global` keyword
+* Globals can get out-of-hand quickly so try not to rely on them
+
+== Local
+
+[source,python]
+----
+def my_function(var1):
+    var2 = 13
+    return var1 + var2
+
+print(my_function(13))
+----
+
+[.shrink]
+* The local namespace exists within a function, for loop, or other code block
+* In this case `var2` is a local variable
+* This is probably where you want to operate and explicitly pass variables between functions to avoid confusion
+* Local variables can also be garbage collected (cleaned up) when nothing references them. This helps the program use less memory
+
+== Try it Out
+
+[source,python]
+----
+counter = 0
+
+def set_to_three():
+    counter = 3
+
+set_to_three()
+print(counter)
+----
+
+IMPORTANT: What would the above code print? Why?

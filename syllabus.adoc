@@ -1,0 +1,421 @@
+= IS601: Web API Development in Python
+
+== Description
+
+This course is meant as an introduction to the Python programming language through the lens of transferring data on the web.
+Students will learn the general structures and syntax of Python programs and be able to generate their own programs to move data via HTTP.
+Students will work with common web interchange formats to both make requests and provide responses.
+By the conclusion of the course, students will have built a backend web program that supports creating, reading, updating, and deleting objects stored on a database.
+
+== Prerequisites
+
+While this is an introductory course, students are still expected to have some computing background.
+Students should be familiar with file system structure, running programs from the command line, installing programs, editing text files, and basic networking concepts.
+
+If you are not well versed in these subjects, here are some resources that may help you get up to speed:
+
+* https://edu.gcfglobal.org/en/basic-computer-skills/[GCFGlobal - Basic Computer Skills]
+* https://www.amazon.com/Debugging-Indispensable-Software-Hardware-Problems/dp/0814474578[Debugging: The 9 Indispensable Rules for Finding Even the Most Elusive Software and Hardware Problems]
+* https://www.codecademy.com/learn/operating-systems-filesystems[codeacademy - Operating Systems: Filesystems]
+* https://tutorial.djangogirls.org/en/intro_to_command_line/[djangogirls - Introduction to the command-line interface]
+* https://code.visualstudio.com/docs/introvideos/basics[Visual Studio Code - Getting started with Visual Studio Code]
+* https://www.simplilearn.com/what-is-client-server-architecture-article[simplilearn - What is Client-Server Architecture? Everything You Should Know]
+
+== Instructor Information
+
+Instructor:: Ryan Tolboom
+Office Location & Hours:: Jersey City Offices, 4:30PM to 6:00PM (virtual by appointment)
+Email:: Ryan.Tolboom@njit.edu
+Responses to emails:: Within 48 hours
+
+== Class Meetings and Modality
+
+This class meets in-person from 6:00PM to 8:50PM on Fridays at NJIT Jersey City.
+
+== Course Learning Outcomes
+// since the sub-outcomes are used in xreftext AND in this list, we define
+// attributes for them so we only have to change the text in one spot
+// unfortunately this means that if we need to reorder things, we have to do it
+// in two places
+
+// Python
+:install_python_desc: Students can install and run Python
+:algorithm_desc: Students can design an algorithm to solve a problem
+:write_script_desc: Students can write and run a Python script
+:conventions_desc: Students can follow standard conventions for software development
+
+// Python packages
+:install_package_desc: Students can install a Python package
+:make_modules_desc: Students can use Python modules to break a project into components
+:use_modules_desc: Students can utilize the modules provided by a Python package in a Python script
+
+// HTTP
+:http_request_desc: Students can use a Python package to make an HTTP request
+:http_response_desc: Students can use a Python package to parse an HTTP response
+:listen_http_request_desc: Students can use a Python package to listen for an HTTP request
+:send_http_response_desc: Students can use a Python package to send an HTTP response for a received request
+
+// SQL
+:sql_read_desc: Students can construct a SQL query to read a rows from a table
+:sql_insert_desc: Students can construct a SQL query to add rows to a table
+:sql_create_desc: Students can construct a SQL query to create a table
+:sql_update_desc: Students can construct a SQL query to update rows in a table
+
+// Python and SQL
+:python_sql_send_desc: Students can use Python to send a SQL query to a database
+:python_sql_read_desc: Students can use Python to read a SQL query response from a database
+
+// API
+:api_create_desc: Students can use Python to create an object in a database in response to an HTTP request
+:api_read_desc: Students can use Python to read an object in a database in response to an HTTP request and return it in an HTTP response
+:api_update_desc: Students can use Python to update an object in a database in response to an HTTP request
+:api_delete_desc: Students can use Python to delete an object in a database in response to an HTTP request
+:api_security_desc: Students can utilize security best practices when creating a backend web API
+
+. Students can use Python as a general purpose programming language
+.. [[install_python,{install_python_desc}]]{install_python_desc}
+.. [[algorithm,{algorithm_desc}]]{algorithm_desc}
+.. [[write_script,{write_script_desc}]]{write_script_desc}
+.. [[conventions,{conventions_desc}]]{conventions_desc}
+. Students can utilize Python packages
+.. [[install_package,{install_package_desc}]]{install_package_desc}
+.. [[make_modules,{make_modules_desc}]]{make_modules_desc}
+.. [[use_modules,{use_modules_desc}]]{use_modules_desc}
+. Students can use Python to send and receive HTTP traffic.
+.. [[http_request,{http_request_desc}]]{http_request_desc}
+.. [[http_response,{http_response_desc}]]{http_response_desc}
+.. [[listen_http_request,{listen_http_request_desc}]]{listen_http_request_desc}
+.. [[send_http_response,{send_http_response_desc}]]{send_http_response_desc}
+. Students can use SQL for general database operations.
+.. [[sql_create,{sql_create_desc}]]{sql_create_desc}
+.. [[sql_read,{sql_read_desc}]]{sql_read_desc}
+.. [[sql_insert,{sql_insert_desc}]]{sql_insert_desc}
+.. [[sql_update,{sql_update_desc}]]{sql_update_desc}
+. Students can use Python to interface with a database via SQL.
+.. [[python_sql_send,{python_sql_send_desc}]]{python_sql_send_desc}
+.. [[python_sql_read,{python_sql_read_desc}]]{python_sql_read_desc}
+. Students can use Python to create a basic backend web API
+.. [[api_create,{api_create_desc}]]{api_create_desc}
+.. [[api_read,{api_read_desc}]]{api_read_desc}
+.. [[api_update,{api_update_desc}]]{api_update_desc}
+.. [[api_delete,{api_delete_desc}]]{api_delete_desc}
+.. [[api_security,{api_security_desc}]]{api_security_desc}
+
+== Resources
+
+* To better match industry trends and standards, this class will utilize online resources in lei of a traditional textbook. Resources will be provided as the course progresses, but some primary resources are listed here:
+** https://www.w3schools.com/python/default.asp[w3schools - Python Tutorial]
+** https://docs.python.org/3/tutorial/[Python - The Python Tutorial]
+** https://https://www.w3schools.com/sql/default.asp[w3schools - SQL Tutorial]
+** https://fastapi.tiangolo.com/learn/[FastAPI - Introductory Sections and Tutorials] 
+* This class utilizes the https://canvas.njit.edu[Canvas learning management system]. You can find assignments, assessments, and learning resources there.
+* This class will utilize the Respondus proctoring system for the midterm and final.
+* This class also has a https://github.com/rxt1077/is601[GitHub page] where you can find out how the course materials are built and have changed over time.
+* Students are required to have a device that meets the https://ist.njit.edu/student-computers-recommended-specs[YWCC minimum specifications]. They will need administrative access to this device to install software. The device should be functional (charged, working) and brought to class.
+
+== Grading
+
+Assignments and assessments are graded via SpeedGrader with comments left using the same system. 
+Feedback on assignments, midterms, finals, and project deliverables will be delivered within two weeks of their due date.
+
+The course grade is weighted based on five assignment categories:
+
+[cols="1,2"]
+|===
+|20%|Exercises
+|20%|Midterm
+|20%|Midterm Project
+|20%|Final
+|20%|Final Project
+|===
+
+== Exams
+
+All exams and quizzes will use Respondus, so be sure to bring a compatible device with you on the day of the assessment.
+The midterm will take place during a regular class period and will cover the material from weeks one to six.
+The final exam will be during finals week.
+The final is not strictly cumulative and largely covers the material from the midterm until the end of the course.
+That being said, a complete understanding of the second half topics will require using some knowledge from the beginning of the course.
+Exams and quizzes will be closed book and must be taken in the classroom if the class is meeting face-to-face.
+
+== Project
+
+This course will include a midterm and final project to be completed individually.
+The goal of the project is to give students a more long-term development experience than is possible with the weekly exercises.
+In order to maintain academic integrity, students will be asked to use a version control system so they can demonstrate through their commit log that they completed the project individually over the course of several weeks.
+
+== Course Schedule
+
+Each class, students will receive a class lecture and perform an exercise
+Students are expected to use the lessons learned in class to continue their project work between each class session.
+
+[cols="1,2,3"]
+|===
+|Date|Topics|Learning Outcomes
+
+|Week {counter:week}
+a|* Python's Purpose, Usage, and History
+* Installing Python
+* Basic Input and Output
+* Interactive Mode
+* Indentation and Basic Syntax
+* Variables and Types
+* Conditionals
+* Loops
+* Problem Solving in Steps
+* Installing/Using VSCode
+* Writing a Python Script
+a|* <<install_python>>
+* <<algorithm>>
+* <<write_script>>
+
+|Week {counter:week}
+a|* Python Conventions
+* Lists, Dictionaries and Iteration
+* Strings
+* Functions
+* Python Modules, Packages, and Virtual Environments
+* Version Control and git
+* Pytest
+a|* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<install_package>>
+* <<make_modules>>
+* <<use_modules>>
+
+|Week {counter:week}
+a|* Classes
+* Exceptions
+* File Operations
+* JSON
+a|* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<install_package>>
+* <<use_modules>>
+
+|Week {counter:week}
+a|* Namespaces and Scope
+* Elements of Pythonic Style
+* Linters and Formatters
+* Project Structure
+* GitHub
+a|* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<install_package>>
+* <<make_modules>>
+* <<use_modules>>
+
+|Week {counter:week}
+a|* Lambda
+* Dates
+* Sets and Tuples 
+* Casting
+a|* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<use_modules>>
+
+|Week {counter:week}
+|Midterm Review
+a|* <<install_python>>
+* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<install_package>>
+* <<make_modules>>
+* <<use_modules>>
+
+|Week {counter:week}
+|Midterm
+a|* <<install_python>>
+* <<algorithm>>
+* <<write_script>>
+* <<conventions>>
+* <<install_package>>
+* <<make_modules>>
+* <<use_modules>>
+
+|Week {counter:week}
+a|* The 9 Indispensable Rules for Debugging
+* https://www.debuggingbook.org/[Python Debugging]
+* How to Google Error Messages
+a|* <<algorithm>>
+* <<conventions>>
+
+|Week {counter:week}
+a|* Structured Query Language
+* Data Schema
+* SQLite
+* Python sqlite3
+a|* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<sql_create>>
+* <<sql_read>>
+* <<sql_insert>>
+* <<sql_update>>
+* <<python_sql_send>>
+* <<python_sql_read>>
+
+|Week {counter:week}
+a|* The Hypertext Transport Protocol
+* URIs
+* HTTP Headers
+* Cookies
+* Python Requests Package
+a|* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<http_request>>
+* <<http_response>>
+
+|Week {counter:week}
+a|* REST APIs
+* OpenAPI Schema
+* JSON Schema
+* Python FastAPI
+* FastAPI Tests
+a|* <<conventions>>
+* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<listen_http_request>>
+* <<send_http_response>>
+
+|Week {counter:week}
+a|* Web Security
+* OAuth2 and Bearer Tokens
+* Injection Attacks
+* CORS
+a|* <<conventions>>
+* <<api_security>>
+
+|Week {counter:week}
+a|* Integration
+* Project Organization
+* Documentation
+* FastAPI and sqlite
+a|* <<conventions>>
+* <<write_script>>
+* <<use_modules>>
+* <<sql_create>>
+* <<sql_read>>
+* <<sql_insert>>
+* <<sql_update>>
+* <<python_sql_send>>
+* <<python_sql_read>>
+* <<listen_http_request>>
+* <<send_http_response>>
+* <<api_create>>
+* <<api_read>>
+* <<api_update>>
+* <<api_delete>>
+* <<api_security>>
+
+|Week {counter:week}
+| Troubleshooting / Work Session
+a|* <<algorithm>>
+* <<conventions>>
+* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<sql_create>>
+* <<sql_read>>
+* <<sql_insert>>
+* <<sql_update>>
+* <<python_sql_send>>
+* <<python_sql_read>>
+* <<listen_http_request>>
+* <<send_http_response>>
+* <<api_create>>
+* <<api_read>>
+* <<api_update>>
+* <<api_delete>>
+* <<api_security>>
+
+|Week {counter:week}
+|Final Review
+a|* <<algorithm>>
+* <<conventions>>
+* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<sql_create>>
+* <<sql_read>>
+* <<sql_insert>>
+* <<sql_update>>
+* <<python_sql_send>>
+* <<python_sql_read>>
+* <<listen_http_request>>
+* <<send_http_response>>
+* <<api_create>>
+* <<api_read>>
+* <<api_update>>
+* <<api_delete>>
+* <<api_security>>
+
+|Final (Date TBD)
+|Final Exam
+a|* <<algorithm>>
+* <<conventions>>
+* <<write_script>>
+* <<install_package>>
+* <<use_modules>>
+* <<sql_create>>
+* <<sql_read>>
+* <<sql_insert>>
+* <<sql_update>>
+* <<python_sql_send>>
+* <<python_sql_read>>
+* <<listen_http_request>>
+* <<send_http_response>>
+* <<api_create>>
+* <<api_read>>
+* <<api_update>>
+* <<api_delete>>
+* <<api_security>>
+
+|===
+
+== Policies
+
+=== Academic Integrity
+
+Academic Integrity is the cornerstone of higher education and is central to the ideals of this course and the university.
+Cheating is strictly prohibited and devalues the degree that you are working on.
+As a member of the NJIT community, it is your responsibility to protect your educational investment by knowing and following the http://www5.njit.edu/policies/sites/policies/files/academic-integrity-code.pdf[academic code of integrity policy.]
+
+Please note that it is my professional obligation and responsibility to report any academic misconduct to the Dean of Students Office.
+Any student found in violation of the code by cheating, plagiarizing or using any online software inappropriately will result in disciplinary action.
+This may include a failing grade of F, and/or suspension or dismissal from the university.
+If you have any questions about the code of Academic Integrity, please contact the Dean of Students Office at dos@njit.edu.
+
+=== Requesting Accommodations
+
+If you are in need of accommodations due to a disability please contact the https://www.njit.edu/studentsuccess/accessibility[Office of Accessibility Resources & Services (OARS)], Fenster Hall Room 260 to discuss your specific needs.
+A Letter of Accommodation Eligibility from the OARS authorizing your accommodations will be required.
+
+=== Resources for NJIT Students
+
+https://docs.google.com/document/d/1xGO2qcVEF1tsOgZn-_W1LjSOKn_jhEVs9IWI_6jeuPs/edit?usp=sharing[NJIT Service for Students], including Technical Support.
+
+=== Class Etiquette
+
+Students who are the most successful attend and participate in class.
+If you have questions, please ask them. This makes the class more dynamic and interesting for everyone.
+
+=== Proctoring
+
+NJIT policy requires that all midterm and final exams must be proctored, regardless of delivery mode, in order to increase academic integrity.
+Note that this does not apply to essay or authentic based assessments.
+Effective beginning Fall semester 2019, students registered for a fully online course section (e.g., online or Hyflex mode) must be given the option to take their exam in a completely online format, with appropriate proctoring.
+
+Exams will be given in-person using https://njit.instructure.com/courses/21706/pages/respondus-lockdown-browser-and-monitor[Respondus].
+Be sure to bring your charged laptop and charger on the day of exams.
+
+=== Late Work/Makeups
+
+Late work can be turned in before the end of the semester for half credit.

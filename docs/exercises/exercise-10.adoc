@@ -1,7 +1,0 @@
-= Exercise 10
-
-For this exercise you will be integrating a https://flatpickr.js.org/[
-flatpickr] date picker either into your project or into the exmple as was
-shown in class. Once you have it up and running take a screenshot of the
-date picker on the screen of your form and submit that as your work for this
-assignment.
