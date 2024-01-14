@@ -11,7 +11,7 @@ rectangle "Built-in" {
 
 == What are namespaces?
 
-* When objects are created Python store information about their names
+* When objects are created Python stores information about their names
 * These namespaces help determine the scope of an object and what names can be used
 * It's important not to _pollute_ a namespace or use too general a namespace for a short-lived object
 

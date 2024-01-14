@@ -41,7 +41,7 @@ file_object = open('image.jpg', 'b')
 == `readline()`
 
 * another file object method that reads one line at a time
-* fall it multiple times to read multiple lines
+* call it multiple times to read multiple lines
 
 === Examples
 
