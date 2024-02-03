@@ -103,7 +103,7 @@ This class meets in-person from 6:00PM to 8:50PM on Fridays at NJIT Jersey City.
 
 == Resources
 
-* To better match industry trends and standards, this class will utilize online resources in lei of a traditional textbook. Resources will be provided as the course progresses, but some primary resources are listed here:
+* To better match industry trends and standards, this class will utilize online resources in lieu of a traditional textbook. Resources will be provided as the course progresses, but some primary resources are listed here:
 ** https://www.w3schools.com/python/default.asp[w3schools - Python Tutorial]
 ** https://docs.python.org/3/tutorial/[Python - The Python Tutorial]
 ** https://https://www.w3schools.com/sql/default.asp[w3schools - SQL Tutorial]

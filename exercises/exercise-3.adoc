@@ -4,7 +4,7 @@ In https://github.com/rxt1077/is601[the class git repo] that you cloned last wee
 Open that folder in VSCode, create a virtual environment, activate it, and install `pytest`.
 
 Your job is to create a file named _exercise_3.py_ with a class named _Exercise3_.
-Your class will have a constructor (`__init__()`) that takes a file name as an argument.
+Your class will have a constructor (`\\__init__()`) that takes a file name as an argument.
 That file will be a JSON file with the following structure:
 
 .exercise_3/example.json
