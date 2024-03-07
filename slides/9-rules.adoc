@@ -1,0 +1,134 @@
+= The Nine Indispensable Rules for Debugging
+
+== Credits
+
+* Based on the David J. Agans Book, _The 9 Indispensable Rules for Finding Even the Most Elusive Software and Hardware Problems_
+* A _very_ short book, I highly suggest you check it out
+* Warrants a re-read ever few years
+
+== When do we start debugging?
+
+[plantuml, format=svg]
+....
+@startuml
+rectangle good [
+All Good
+]
+rectangle bug [
+Introduce a Bug
+]
+rectangle break [
+Something Breaks
+]
+rectangle problem [
+Detect the Problem
+]
+cloud debug [
+Debugging!
+]
+
+good --> bug
+good --> break
+bug --> problem
+break --> problem
+problem --> debug
+debug --> good
+
+@enduml
+....
+
+== Debugging vs. Troubleshooting
+
+* Troubleshooting is often what I do with your code:
+** How does it differ from the example?
+** What have you changed?
+* Debugging is deeper:
+** What's wrong with the design?
+** Do I need to change the way I think about the problem?
+** Can I avoid this in the future?
+
+[.columns]
+== The Rules
+
+[.column]
+. Understand the system
+. Make it fail
+. Quit thinking and look
+. Divide and conquer
+. Change on thing at a time
+
+[.column,start=6]
+. Keep an audit trail
+. Check the plug
+. Get a fresh view
+. If you didn't fix it, it ain't fixed
+
+== Understand the System
+
+* Read the manual
+* Now read it again
+* Know what's reasonable
+* Nothing is "magic"
+* Know your tools
+* Look it up
+
+== Make it Fail
+
+* Can you replicate the bug?
+* Stimulate don't _simulate_ the failure
+* Intermittent failures are the worst!
+** Why is it intermittent?
+** Is it fixed?
+
+== Quit Thinking and Look
+
+* See the failure, make sure it _is_ the failure
+* Worry about the details
+* Build alerts in and turn them on!
+* Use version control and get your hands dirty.
+
+== Divide and Conquer
+
+* Binary search
+* Isolate a range
+* Bugs within the range you're working on
+* Start with the easy stuff
+
+== Change One Thing at a Time
+
+* Isolate the key factor
+* What have you changed recently?
+* One test at a time
+
+== Keep an Audit Trail
+
+* What did you do, what happened? These are rarely git commits but they're typically notes.
+* Gather and write down information. What _exactly_ happened? For how long? When?
+* Use git!
+* Add info to your commit message when you fix it
+
+== Check the Plug
+
+* Question your assumptions
+** Is the file you're editing the one you're running?
+** Have you saved the file you're editing?
+* Start at the beginning
+** Does this code need some initialization?
+* Test the tool
+** Is it running?
+** Are you using the right interpreter?
+
+== Get a Fresh View
+
+* Rubber Duck it
+* Check in with other people
+** Report symptoms not theories
+* Take a walk
+
+== If You Didn't Fix it, It Ain't Fixed
+
+* Check that it's really fixed
+* Check that it's really your fix that fixed it
+* Know that it _never_ just goes away by itself
+* Fix the cause
+* Fix the process

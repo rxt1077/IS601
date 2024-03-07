@@ -1,0 +1,89 @@
+= How to Google Error Messages
+
+[.columns]
+== Intro
+
+[.column]
+image::really.gif[]
+
+[.column]
+* A presentation about using Google, really?
+* It's often the first stop on the debugging train, so why not talk about it?
+
+== Verbosity
+
+* Some languages don't shy away from giving you lots of information
+* Java and Python are like this
+* While it can be overwhelming, a great deal of time has been devoted to useful error messages:
+** problem identification
+** cause details
+** possible solutions
+
+== Traceback
+
+* often the most overwhelming part of a Python error message
+* a listing of all functions that were called to get to where the error occured
+* sometimes called a backtrace or a stacktrace (because of how arguments are passed to functions)
+* if you call too many functions you have a... https://stackoverflow.com/[Stack Overflow!]
+* typically you care about the top or the bottom
+
+=== https://realpython.com/python-traceback[Traceback Example Code]
+
+[source,python]
+----
+# greetings.py
+def who_to_greet(person):
+    return person if person else input('Greet who? ')
+
+def greet(someone, greeting='Hello'):
+    print(greeting + ', ' + who_to_greet(someone))
+
+def greet_many(people):
+    for person in people:
+        try:
+            greet(person)
+        except Exception:
+            print('hi, ' + person)
+
+greet_many(['Chad', 'Dan', 1])
+----
+
+=== https://realpython.com/python-traceback[Traceback Example Error]
+
+[source,text]
+----
+$ python greetings.py
+Hello, Chad
+Hello, Dan
+Traceback (most recent call last):
+  File "greetings.py", line 10, in greet_many
+    greet(person)
+  File "greetings.py", line 5, in greet
+    print(greeting + ', ' + who_to_greet(someone))
+TypeError: must be str, not int
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "greetings.py", line 14, in <module>
+    greet_many(['Chad', 'Dan', 1])
+  File "greetings.py", line 12, in greet_many
+    print('hi, ' + person)
+TypeError: must be str, not int
+----
+
+== Reproduce the Error
+
+* Can you make it fail on command? This will help you nail down the error message.
+* Can you create a minimal version of the code that causes the error? This will help you if you need to ask someone else.
+* Sometimes just Googling the error message won't help you, you need context, "When I do X, Y happens."
+
+== Docs Provide Context
+
+* Even greater context comes from the docs
+* Try just searching within the docs
+* Include the package/framework you're using in your query: Django, FastAPI, Pandas, etc.
+
+== Sometimes it's your job to keep digging
+
+image::https://www.commitstrip.com/wp-content/uploads/2016/04/Strip-Depart-en-weekend-650-finalenglish.jpg[]
