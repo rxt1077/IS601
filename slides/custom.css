@@ -66,3 +66,14 @@ td.icon {
 pre.rouge .w {
     background-color: #E0E0E0;
 }
+
+/* tighten up table spacing */
+p.tableblock {
+    margin: 0px;
+}
+
+/* make table titles bold and add margin at top */
+table > caption.title {
+    font-weight: bold;
+    margin-top: 1.5rem;
+}

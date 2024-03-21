@@ -1,0 +1,122 @@
+= Databases
+:table-caption!:
+
+image::db.webp[]
+
+== Purpose
+
+* Store data reliably
+* Retrieve relevant data easily
+* Update data easily
+
+== Relational Databases
+
+* Most popular type of database
+* Data is stored as rows in tables
+* Tables have specific columns
+* Each row will have the same columns
+* Rules define what can go in a column
+
+[.shrink]
+[.columns]
+== Example
+
+[.column]
+--
+
+.customers
+[cols="1,2,2"]
+|===
+|id|name|phone
+
+|0|Damodhar|732-555-5509
+|1|Tom|609-555-2301
+|2|Kunal|609-555-5508
+
+|===
+
+.items
+[cols="1,3,1"]
+|===
+|id|name|price
+
+|0|Cheese Madurai Masala Dosa|13.95
+|1|Onion Chilli Masala Dosa|11.95
+|2|Cheese & Onion Chilli Masala Dosa|12.95
+
+|===
+
+--
+
+[.column]
+--
+
+.orders
+[cols="1,2,1,2"]
+|===
+|id|timestamp|cust_id|notes
+
+|0|1702219784|2|extra spicy
+|1|1684443264|0|
+|2|1695305624|1|
+
+|===
+
+.item_list
+[cols="1,1"]
+|===
+|order_id|item_id
+
+|0|1
+|1|1
+|1|2
+|2|0
+
+|===
+
+--
+
+[.columns]
+== Integrity
+
+[.column]
+* Relational DBs follow rules
+* Ex: If you say a column can be used to lookup a row in another table, that _must_ be true
+* Invalid operations aren't allowed
+* Avoids invalid states
+
+[.column]
+image::integrity.jpg[]
+
+=== Foreign Key Constraint
+
+* Let's assume our `item_list` table has a foreign key constraint that says `order_id` _must_ point to a valid `id` in the `orders` table
+* What happens if we try to add a row to `item_list` with an `order_id` of `3`?
+* What happens if we try to remove the row with `id=0` in the `orders` table?
+
+=== Primary Key Constraint
+
+* Each row must have a unique way of identifying themselves within a table
+* For most of our tables this is covered by the `id` column.
+* What can the _primary key_ be for the `item_list` table?
+
+== Designing a Schema
+
+* Try to avoid the _one big table_ school of design
+* Think about the models that are interacting in your application
+* Lean on the capabilities of the RDBMS, they're quick!
+* Explicit is often better than clever (primary keys)
+
+[.columns]
+== Implementations
+
+[.column]
+* Oracle
+* MySQL
+* MariaDB
+* Postgres
+
+[.column]
+* Microsoft SQL Server
+* sqlite
+* Apache Derby

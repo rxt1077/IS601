@@ -56,7 +56,7 @@ This class meets in-person from 6:00PM to 8:50PM on Fridays at NJIT Jersey City.
 :send_http_response_desc: Students can use a Python package to send an HTTP response for a received request
 
 // SQL
-:sql_read_desc: Students can construct a SQL query to read a rows from a table
+:sql_read_desc: Students can construct a SQL query to read rows from a table
 :sql_insert_desc: Students can construct a SQL query to add rows to a table
 :sql_create_desc: Students can construct a SQL query to create a table
 :sql_update_desc: Students can construct a SQL query to update rows in a table

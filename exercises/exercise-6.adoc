@@ -37,5 +37,6 @@ Run Alice's program and answer the following questions:
 . What is the type of error you're getting?
 . Is the error a problem with the parser or it's input?
 . If it's an input problem, how would you fix the input?
+. If it's a parser problem, how would you fix the parser?
 . How could you make the parser raise a ParserError if this happens again in the future?
 . How many arguments does the addition operation in Alice's machine take?
