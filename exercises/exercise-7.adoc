@@ -1,0 +1,7 @@
+= Exercise 7
+
+For this exercise, take a look at the https://github.com/rxt1077/IS601/tree/master/exercise_7[`exercise_7` directory in the class git repo].
+You will need to add a `count_customers()` function to the `dosa.py` package that returns the number of customers that are currently in the database.
+There's a pytest for it in `test_dosa.py` so you can check your work.
+Please submit your modified `dosa.py` file with the added function.
+I will be running the same test on the file you submit.
