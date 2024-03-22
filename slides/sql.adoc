@@ -1,13 +1,99 @@
-= SQL
+= [.hidden]#sql#
 
+image::sql.svg[]
+
+[.columns]
 == CREATE
 
+[.column]
+[source,sql]
+----
+CREATE TABLE customers(
+	id INT PRIMARY KEY NOT NULL,
+	name CHAR(64) NOT NULL,
+	phone CHAR(10) NOT NULL
+);
+----
+
+[.column]
+* creates a table
+* Typically run once at initialization
+* `IF NOT EXISTS` can make it idempotent
+* What constraints did I use? Why?
+* SQL statements end with a `;`
+
+[.columns]
 == SELECT
 
+[.column]
+* Retrieves rows from the DB
+* lot's of options, but `WHERE` is almost always present
+
+[.column]
+[source,sql]
+----
+SELECT name FROM customers
+WHERE phone='6095550124';
+----
+
+[.columns]
 == INSERT
 
+[.column]
+[source,sql]
+----
+INSERT INTO customers (name, phone)
+VALUES ('Ryan', '6095550124');
+----
+
+[.column]
+* Adds rows to a table
+* in sqlite a column that is `INTEGER PRIMARY KEY` is a `ROWID` column and will automatically be set
+
+[.columns]
 == UPDATE
 
+[.column]
+* modifies a row in a table
+* uses `WHERE` just like `SELECT`
+
+[.column]
+[source,sql]
+----
+UPDATE customers
+SET name='BANNED: DO NOT SERVE'
+WHERE id=1;
+----
+
+[.columns]
 == DELETE
 
+[.column]
+[source,sql]
+----
+DELETE FROM customers
+WHERE id=1;
+----
+
+[.column]
+* removes a row from a table
+
+[.columns]
 == SELECT from Multiple Tables
+
+[.column]
+* Aggregate operator `SUM` adds up a column
+* Must have a `WHERE` clause linking the tables (`item_id` in `order_list` must equal `id` in `items`)
+
+[.column]
+[source,sql]
+----
+SELECT SUM(price)
+FROM order_list, items
+WHERE order_id=1 AND item_id=id;
+----
+
+== Tips
+
+* The https://sqlite.org/cli.html[sqlite command line shell] can be a great way to play with these commands in a low-stakes environment
+* Don't forget your `WHERE` clauses otherwise it will apply to _everything_
