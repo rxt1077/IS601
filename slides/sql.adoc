@@ -9,7 +9,7 @@ image::sql.svg[]
 [source,sql]
 ----
 CREATE TABLE customers(
-	id INT PRIMARY KEY NOT NULL,
+	id INTEGER PRIMARY KEY,
 	name CHAR(64) NOT NULL,
 	phone CHAR(10) NOT NULL
 );

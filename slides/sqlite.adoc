@@ -1,0 +1,70 @@
+= Databases in Python with SQLite
+
+== Getting Started
+
+[source,python]
+----
+import sqlite3
+
+connection = sqlite3.connect("dosa.db")
+cursor = connection.cursor()
+----
+
+* sqlite DBs are stored in one file
+* we'll be using the sqlite3 package
+* the cursor provides access to your DB
+
+== Creating Tables
+
+[source,python]
+----
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS customers(
+	id INT PRIMARY KEY,
+	name CHAR(64) NOT NULL,
+	phone CHAR(10) NOT NULL
+);
+""")
+----
+
+* `"""` may make formating easier
+* only creates if the table doesn't exist
+
+== Adding Data
+
+[source,python]
+----
+def add_customer(name, phone):
+    cursor.execute("INSERT INTO customers (name, phone) VALUES (?, ?);",
+                   (name, phone))
+----
+
+* note we pass values in as a tuple, we don't make our own query string!
+
+== Getting Data
+
+[source,python]
+----
+def list_customers():
+    rows = cursor.execute("SELECT id, name, phone FROM customers;").fetchall()
+    return rows
+----
+
+* `fetchall` returns all the rows as a list of tuples
+
+== Putting it All Together
+
+[source,python]
+----
+def print_customers():
+    for customer in list_customers():
+        print(f"ID: {customer[0]} Name: {customer[1]} Phone: {customer[2]}")
+
+# add some customers (repeats won't happen if you run this more than once we never save our DB)
+add_customer("Ryan", "6095550124")
+add_customer("Bill", "6095551024")
+add_customer("Divesh", "6095551204")
+----
+
+* this is all from `exercise_7/dosa.py`
+* your exercise is to modify it to add new functionality
