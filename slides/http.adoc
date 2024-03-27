@@ -1,0 +1,131 @@
+= HTTP
+
+Hypertext Transport Protocol
+
+== Basics
+
+* Application layer
+* Client server design
+* ASCII (American Standard Code for Information Interchange)
+* Request/Response
+* Standardized status codes
+* Adaptable
+* Stateless
+
+== Example
+
+[plantuml,target=http.svg,format=svg]
+....
+Client -> Server: GET index.html HTTP/1.1\nHost: njit.edu
+Server -> Client: HTTP/1.1 200 OK\n\n<!DOCTYPE html>\n...
+....
+
+[.columns]
+== Parts of a Request
+
+[.column]
+. HTTP version type
+. URL
+. HTTP method
+. request headers
+. body (optional)
+
+[.column]
+image::http_request.png[]
+
+[.columns.shrink]
+=== HTTP methods
+
+[.column]
+* verb that indicates the action you want to take
+* GET and POST are most common
+
+[.column]
+GET:: requests resource
+POST:: creates a resource
+HEAD:: GET _without_ the data
+PUT:: replace resource
+DELETE:: remove resource
+PATCH:: partially modify a resource
+
+=== Request headers
+
+* Key value pairs on individual lines
+* There are common request headers, but new ones can be created and old ones may stop being used
+* In our first example we have a Host header, which tells the server the name of the host website you want. This allows one IP address to host multiple websites.
+
+=== Request headers example
+
+[source,http]
+----
+GET /home.html HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/testpage.html
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMT
+If-None-Match: "c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"
+Cache-Control: max-age=0
+----
+
+=== Request body
+
+[source,http]
+----
+POST /test/demo_form.php HTTP/1.1
+Host: w3schools.com
+
+name1=value1&name2=value2
+----
+
+* Not always required
+* Could be form data for a POST request
+
+== Parts of a response
+
+. status code
+. response headers
+. body (optional)
+
+[.columns]
+=== Status codes
+
+[.column]
+* 100s informational
+* 200s success
+* 300s redirects
+* 400s client error (you messed up)
+* 500s server error (I messed up)
+
+[.column]
+* 200 - Success
+* 302 - Found (Location header has new URL) 
+* 404 - Not Found
+* 502 - Bad Gateway
+* Lot's of options and still expandable!
+
+=== Response headers
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Date: Mon, 27 Jul 2009 12:28:53 GMT
+Server: Apache/2.2.14 (Win32)
+Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+Content-Length: 88
+Content-Type: text/html
+Connection: Closed
+----
+
+* Similar to request headers
+* they may do things like notify the client of the content encoding or type 
+
+=== Response body
+
+* Typically the data for the resource requested
+* Could be an image, HTML, JSON, or something else
+* The Content-Type header will tell you how to interpret it
