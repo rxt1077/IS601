@@ -1,0 +1,10 @@
+= Exercise 8
+
+This exercise is designed make you read documentation and create a program that solves a problem.
+While this is less explicit than some of the other exercises, it more closely mimics the process of someone utilizing a web API in the real world.
+
+Create a Python script named `joke.py` that utilizes the https://requests.readthedocs.io/en/latest/[Requests Python package] and the https://sv443.net/jokeapi/v2/[Sv433 JokeAPI] to print out a joke in plain text when it is run.
+I will be grading these by hand, so please make sure that the joke is in the _Programming_ category, in english, is _not_ NSFW, religious, political, racists, sexist, or explicit, and contains the word _python_ in it.
+
+For this exercise all you need to submit for this is your `joke.py` file.
+I'll have the requests package installed already.
