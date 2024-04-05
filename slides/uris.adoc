@@ -1,0 +1,34 @@
+= Universal Resource Identifiers
+
+== URIs vs URLs
+
+* Universal Resource Locators are a subset of URIs
+* URLs are meant for resources on the Internet
+* URIs can refer to any resource
+* Some documentation will use them interchangeably
+
+[.columns]
+== URL Components
+
+[.column]
+image::url.webp[]
+
+[.column]
+* protocol (https://)
+* subdomain (www)
+* domain (website.com)
+* path (/view/page-one)
+* query params (?search=keyword)
+* fragment identifier (#section1)
+
+== URL encoding
+
+* Not all characters are supported!
+* URL encoding replaces unsupported characters with a `%` representation
+* Spaces are replaced with `+`
+* `Hello World!©` becomes `Hello+World%21%C2%A9`
+
+== Uses
+
+* We use URLs to request resources (Python requests)
+* We establish endpoints (URLs) to respond to requests (Python FastAPI)
