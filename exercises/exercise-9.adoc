@@ -1,0 +1,26 @@
+= Exercise 9
+
+For this Exercise we are going to begin working with FastAPI for your final project.
+Create a new directory with a virtual environment.
+Activate your virtual environment and install FastAPI by following the directions in the https://fastapi.tiangolo.com/tutorial/first-steps/[First Steps] portion of the tutorial.
+
+Create a `/customers` endpoint that takes a single path parameter, `id`, and returns customer information as JSON.
+You can hardcode the following customers list for now:
+
+[source, python]
+----
+customers = [
+    (0, "609-555-0124", "Karl"), 
+    (1, "609-555-1234", "Mike"), 
+    (3, "609-555-4302", "Ryan"),
+]
+----
+
+Practice running your code with uvicorn and testing it using the http://127.0.0.1:8000/docs[automatic API docs].
+
+Once you've gotten things working and had a chance to experiment, answer the following questions for this exercise:
+
+. What is a schema?
+. What is the OpenAPI schema created for this project so far?
+. How does FastAPI make sure your REST API is uniform?
+. What was the hardest part of getting FastAPI to work?
