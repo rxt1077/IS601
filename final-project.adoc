@@ -1,0 +1,93 @@
+= Final Project
+
+image::https://blog.postman.com/wp-content/uploads/2020/07/API-101-What-Is-a-REST-API-scaled.jpg[REST,400,211,float="left"]
+
+For our final project we will be creating a REST API backend for our dosa restaurant.
+Your project will need to use an https://docs.python.org/3/library/sqlite3.html[SQLite] database and https://fastapi.tiangolo.com/[FastAPI] to provide access to three objects: _customers_, _items_, and _orders_.
+https://github.com/rxt1077/IS601/blob/master/midterm_project/example_orders.json[_example_orders.json_ file from the midterm project].
+
+You will be making an API that supports CRUD (create, read, update, delete) for your three objects.
+Your must write a script named _init_db.py_ that will initialize an empty database using relational constraints (primary keys and foreign keys) from the https://github.com/rxt1077/IS601/blob/master/midterm_project/example_orders.json[_example_orders.json_ file] we used in the midterm project.
+Your SQLite database should be in a file named _db.sqlite_.
+Your FastAPI backend must read and write from _db.sqlite_ and should be called _main.py_.
+
+You will need to create the following endpoints:
+
+[cols="1,1,2"]
+|===
+|Method|Path|Description
+
+|POST
+|/customers
+|creates a customer in the DB given a JSON representation
+
+|GET
+|/customers/{id}
+|retrieves a JSON representation of a customer in the DB
+
+|DELETE
+|/customers/{id}
+|deletes a customer in the DB
+
+|PUT
+|/customers/{id}
+|updates a customer in the DB given a JSON representation
+
+|POST
+|/items
+|creates an item in the DB given a JSON representation
+
+|GET
+|/items/{id}
+|retrieves a JSON representation of an item in the DB
+
+|DELETE
+|/items/{id}
+|deletes an item in the DB
+
+|PUT
+|/items/{id}
+|updates an item in the DB given a JSON representation
+
+|POST
+|/orders
+|creates an order in the DB given a JSON representation
+
+|GET
+|/orders/{id}
+|retrieves a JSON representation of an order in the DB
+
+|DELETE
+|/orders/{id}
+|deletes an order in the DB
+
+|PUT
+|/orders/{id}
+|updates an order in the DB given a JSON representation
+|===
+
+The following rubric will be used to grade your project:
+
+[cols="1,1,4"]
+|===
+|Category|Points Available|Description
+
+|Version Control
+|5
+a|Your project should be hosted in a git repository on GitHub.
+Private repositories are fine, just make sure that _rxt1077_ is invited as a collaborator.
+Your repository should have a commit log with at least three commits demonstrating _your_ progress in working on this project.
+
+|Python Conventions
+|5
+a|Your project should follow Python conventions for programming style and use idiomatic Python approaches to solving problems.
+
+|Documentation
+|5
+a|Your project should include a _README.md_ file in the root of the project explaining what it does, how it is designed, and how to use it.
+
+|Functionality
+|10
+a|Your project should implement the core functionality as described in the above.
+|===
+
