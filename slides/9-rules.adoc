@@ -4,7 +4,7 @@
 
 * Based on the David J. Agans Book, _The 9 Indispensable Rules for Finding Even the Most Elusive Software and Hardware Problems_
 * A _very_ short book, I highly suggest you check it out
-* Warrants a re-read ever few years
+* Warrants a re-read every few years
 
 == When do we start debugging?
 
@@ -55,7 +55,7 @@ debug --> good
 . Make it fail
 . Quit thinking and look
 . Divide and conquer
-. Change on thing at a time
+. Change one thing at a time
 
 [.column,start=6]
 . Keep an audit trail
