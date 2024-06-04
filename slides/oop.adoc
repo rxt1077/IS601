@@ -12,7 +12,7 @@ image::oop.webp[]
 [.column]
 [source,python]
 ----
-class Pokemon:
+class Pokemon():
     def __init__(self, name, ptype, health):
         self.name = name
         self.ptype = ptype
