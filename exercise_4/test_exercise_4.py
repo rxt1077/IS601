@@ -19,6 +19,6 @@ def test_area():
     my_triangle = Triangle(base,height)
     assert my_triangle.area() == (1/2)*(base*height)
 
-def test_str():
+def test_string_representation_of_a_class():
     my_triangle = Triangle(base,height)
     assert f"{my_triangle}" == f"Triangle: base={base}, height={height}"
