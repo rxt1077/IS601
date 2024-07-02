@@ -4,7 +4,7 @@ Since we have been discussing debugging, today we're going to analyze some code 
 Here's our case study:
 
 ====
-Alice is designing a postfix notation adding machine.
+Alice is designing a prefix notation adding machine.
 This machine uses parenthesis and the plus sign to designate two arguments to add together.
 Arguments must either be integers or another addition operation.
 
@@ -16,8 +16,8 @@ For example:
 (+ 1 2) <2>
 (+ 2 (+ 3 3)) <3>
 ----
-<1> this would yield 1
-<2> this would yield 2
+<1> this would yield 2
+<2> this would yield 3
 <3> this would yield 8
 
 You can find Alice's code in the class git repo `exercise_6` directory.
