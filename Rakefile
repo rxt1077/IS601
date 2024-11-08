@@ -93,7 +93,7 @@ end
 
 desc 'Deploys the output directory to https://web.njit.edu/~rt494/python_web_api'
 task :deploy do
-  sh "rsync --delete -av #{outputdir}/ rt494@afs22.njit.edu:public_html/python_web_api/"
+  sh "rsync --delete -av #{outputdir}/ rt494@afslogin0.njit.edu:public_html/python_web_api/"
 end
 
 desc 'Builds all documents'
