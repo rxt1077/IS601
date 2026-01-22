@@ -44,7 +44,11 @@ def list_customers():
 def print_customers():
     for customer in list_customers():
         print(f"ID: {customer[0]} Name: {customer[1]} Phone: {customer[2]}")
-    
+
+def count_customers():
+    result = cursor.execute("SELECT COUNT(id) FROM customers;").fetchone()
+    return result [0]
+
 # add some customers (repeats won't happen if you run this more than once we never save our DB)
 add_customer("Ryan", "6095550124")
 add_customer("Bill", "6095551024")

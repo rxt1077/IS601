@@ -24,13 +24,13 @@ If you are not well versed in these subjects, here are some resources that may h
 == Instructor Information
 
 Instructor:: Ryan Tolboom
-Office Location & Hours:: Jersey City Offices, Fridays 4:30PM to 6:00PM (virtual by appointment)
+Office Location & Hours:: Jersey City Offices, Thursdays 4:30PM to 6:00PM (virtual by appointment)
 Email:: Ryan.Tolboom@njit.edu
 Responses to emails:: Within 48 hours
 
 == Class Meetings and Modality
 
-This class meets in-person from 6:00PM to 8:50PM on Fridays at NJIT Jersey City.
+This class meets in-person from 6:00PM to 8:50PM on Thursdays at NJIT Jersey City.
 
 == Course Learning Outcomes
 // since the sub-outcomes are used in xreftext AND in this list, we define
